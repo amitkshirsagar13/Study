@@ -8,18 +8,18 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-public class DBConnection {
+public class OracleDBConnection {
 
 	private static Logger _log = null;
 
-	private DBConnection() {
+	private OracleDBConnection() {
 		super();
 		if (_log == null) {
 			_log = Logger.getLogger(OracleDBConnection.class);
 		}
 	}
 
-	private static DBConnection oracleDBConnection = null;
+	private static OracleDBConnection oracleDBConnection = null;
 	private static Connection dbConnection = null;
 
 	public static Connection getDBConnection() {
@@ -27,14 +27,14 @@ public class DBConnection {
 			return dbConnection;
 		}
 		if (oracleDBConnection == null) {
-			oracleDBConnection = new DBConnection();
+			oracleDBConnection = new OracleDBConnection();
 		}
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver");
-			String dbUrl = "jdbc:mysql://localhost:3306/test";
-			String username = "root";
-			String password = "amogh123";
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			String dbUrl = "jdbc:oracle:thin:@ldap://cporaldap:389/CPCDBII,cn=OracleContext,dc=lexisnexis,dc=com";
+			String username = "kshirsac";
+			String password = "end8world";
 			dbConnection = DriverManager.getConnection(dbUrl, username,
 					password);
 

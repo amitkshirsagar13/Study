@@ -31,7 +31,7 @@ import org.apache.log4j.Logger;
 
 import com.JTutor.store.JTutorConst;
 
-public class JTutorMainFrame extends JFrame implements JTutorConst{
+public class JTutorMainFrame extends JFrame implements JTutorConst {
 
 	static {
 		try {
@@ -111,7 +111,7 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 		String app_icon = System.getProperty("APP_ICON");
 		setIconImage(Toolkit.getDefaultToolkit().createImage(app_icon));
 		setTitle("JTutor Application");
-		this.setSize(new Dimension(800, 600));
+		this.setSize(new Dimension(800, 589));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -228,14 +228,12 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 		toolbar.setBorder(null);
 		toolbar.setBorderPainted(false);
 
-		JButton userActionButton = new JButton(new ImageIcon(
-				_properties.getProperty("IMAGES_DIR") + "/sign007.gif"));
+		JButton userActionButton = new JButton("UserAction");
 		userActionButton.setToolTipText("UserAction");
 		userActionButton.setMinimumSize(new Dimension(27, 27));
 		userActionButton.setMaximumSize(new Dimension(27, 27));
 		userActionButton.setPreferredSize(new Dimension(27, 27));
 		userActionButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonUserAction(e);
 			}
@@ -251,7 +249,6 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 		helpButton.setMaximumSize(new Dimension(27, 27));
 		helpButton.setPreferredSize(new Dimension(27, 27));
 		helpButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				buttonHelp(e);
 			}
@@ -272,7 +269,6 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 		JMenuItem menuFileSendLog = new JMenuItem();
 		menuFileSendLog.setText("Send Log File");
 		menuFileSendLog.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				sendLogFile(e);
 			}
@@ -341,7 +337,11 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 
 		UserEntryTab userEntryTab = new UserEntryTab(this);
 		userEntryTab.buildUserEntryForm();
-		_tabPanel.add(userEntryTab.getMainPanel(), "User Entry");
+		_tabPanel.add(userEntryTab.getUserEntryTab(), "User Entry");
+
+		ReportTab reportTab = new ReportTab(this);
+		reportTab.buildUserEntryForm();
+		_tabPanel.add(reportTab.getReportTab(), "User Report");
 	}
 
 	// -------------------------------------------------------------------
@@ -371,7 +371,6 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 	}
 
 	// -------------------------------------------------------------------
-	// -------------------------------------------------------------------
 
 	private void slowDownASecond() {
 
@@ -382,7 +381,5 @@ public class JTutorMainFrame extends JFrame implements JTutorConst{
 			e.printStackTrace();
 		}
 	}
-	// -------------------------------------------------------------------
-
 
 }

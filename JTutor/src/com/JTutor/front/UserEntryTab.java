@@ -38,7 +38,7 @@ public class UserEntryTab extends JFrame implements JTutorConst, FocusListener {
 	 * 
 	 * @returns JPanel the content pane
 	 */
-	public JPanel getMainPanel() {
+	public JPanel getUserEntryTab() {
 		if (_userEntryTab == null)
 			_userEntryTab = (JPanel) this.getContentPane();
 		return _userEntryTab;
@@ -65,9 +65,13 @@ public class UserEntryTab extends JFrame implements JTutorConst, FocusListener {
 			c.gridwidth = GridBagConstraints.REMAINDER;
 			c.fill = GridBagConstraints.HORIZONTAL;
 
+			JPanel centerPanel = new JPanel();
+			centerPanel.setBounds(0, 0, 700, 500);
+			centerPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+
 			JPanel entryLabels = new JPanel();
 			entryLabels.setLayout(new GridBagLayout());
-
+			// entryLabels.setBorder(BorderFactory.createLoweredBevelBorder());
 			JLabel userNameLabel = new JLabel("User Name");
 			userNameLabel.setText("            User Name: ");
 			// entryLabels.add(userNameLabel);
@@ -85,11 +89,11 @@ public class UserEntryTab extends JFrame implements JTutorConst, FocusListener {
 			entryLabels.add(earningLabel, c);
 			entryLabels.add(getEmptyLabel(), c);
 
-			_userEntryTab.add(entryLabels, BorderLayout.WEST);
+			centerPanel.add(entryLabels, BorderLayout.WEST);
 
 			JPanel entryText = new JPanel();
 			entryText.setLayout(new GridBagLayout());
-
+			// entryText.setBorder(BorderFactory.createLoweredBevelBorder());
 			userNameText.setText("NAME");
 			userNameText.setActionCommand("Name");
 			userNameText.addFocusListener(this);
@@ -109,7 +113,9 @@ public class UserEntryTab extends JFrame implements JTutorConst, FocusListener {
 			c.weightx = 1.0;
 			c.weighty = 1.0;
 
-			_userEntryTab.add(entryText, BorderLayout.EAST);
+			centerPanel.add(entryText, BorderLayout.EAST);
+
+			_userEntryTab.add(centerPanel, BorderLayout.CENTER);
 
 			JPanel buttonPanel = new JPanel();
 			buttonPanel.setBorder(BorderFactory.createLoweredBevelBorder());
