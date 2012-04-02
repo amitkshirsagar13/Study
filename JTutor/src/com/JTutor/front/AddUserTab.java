@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import org.apache.log4j.Logger;
 
 import com.JTutor.dao.UserDAO;
+import com.JTutor.data.User;
 import com.JTutor.store.JTutorConst;
 
 public class AddUserTab extends JFrame implements JTutorConst, FocusListener {
@@ -201,6 +202,10 @@ public class AddUserTab extends JFrame implements JTutorConst, FocusListener {
 		_parent.statusBarMsg(" ID:" + userIDText.getText() + "/Name:"
 				+ userNameText.getText() + "/ROLE:"
 				+ userRoleList.getSelectedItem());
+		User user = UserDAO.addUser(userNameText.getText(),
+				userRoleList.getSelectedItem() + "");
+		userNameText.setText(user.getUserName());
+		userIDText.setText(user.getUserId());
 	}
 
 	// -------------------------------------------------------------------
