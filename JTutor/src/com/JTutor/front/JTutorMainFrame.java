@@ -99,7 +99,7 @@ public class JTutorMainFrame extends JFrame implements JTutorConst {
 	private final JTabbedPane _tabPanel = new JTabbedPane();
 
 	private final JPanel _statusPanel = new JPanel();
-	private final JLabel _statusBar = new JLabel();
+	private static final JLabel _statusBar = new JLabel();
 
 	private final JPanel _infoPanel = new JPanel();
 	private final JLabel _r3Label = new JLabel();
@@ -291,7 +291,7 @@ public class JTutorMainFrame extends JFrame implements JTutorConst {
 	 *            String holding the message
 	 */
 
-	public void statusBarMsg(String msg) {
+	public static void statusBarMsg(String msg) {
 		try {
 			if (msg == null || msg.equals("")) {
 				msg = "    ";
@@ -329,11 +329,15 @@ public class JTutorMainFrame extends JFrame implements JTutorConst {
 			_statusBar.setText(" " + msg);
 			// push it out
 			_statusBar.paint(_statusBar.getGraphics());
+
 		} catch (Exception e) {
 		}
 	}
 
 	private void populateWorkTabs() {
+		AddUserTab addUserTab = new AddUserTab(this);
+		addUserTab.buildUserEntryForm();
+		_tabPanel.add(addUserTab.getAddUserTab(), "Add User");
 
 		UserEntryTab userEntryTab = new UserEntryTab(this);
 		userEntryTab.buildUserEntryForm();
