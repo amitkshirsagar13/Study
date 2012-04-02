@@ -84,4 +84,33 @@ public class UserDAO {
 		}
 		return roleList;
 	}
+
+	public static User addUser(String name, String role) {
+		Connection dbConnection = OracleDBConnection.getDBConnection();
+		logMessage("Adding User" + name + "/" + role + "...");
+		String query = "select max(userid) from users order by 1";
+		User user = new User(null, name, role);
+		Statement stmt;
+		try {
+			stmt = dbConnection.createStatement();
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				int nextID = Integer.parseInt(rs.getString(1)) + 1;
+				user.setUserId(nextID + "");
+			} // end while
+
+			query = "insert into users values(" + user.getUserId() + ",'"
+					+ user.getUserName() + "'," + user.getRole() + ")";
+
+			stmt.execute(query);
+
+		} catch (SQLException e) {
+			_log.error("Error Adding User" + name + "/" + role + "...", e);
+		}
+		logMessage("Added User " + user.getUserId() + "/" + name + "/" + role
+				+ "...");
+		return user;
+	}
 }
