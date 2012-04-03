@@ -44,7 +44,7 @@ public class UserDAO {
 
 		List<User> userList = new ArrayList<User>();
 		logMessage("Getting user list...");
-		String query = "select * from users";
+		String query = "select * from users order by 1";
 		Statement stmt;
 		try {
 			stmt = dbConnection.createStatement();
