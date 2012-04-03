@@ -55,17 +55,17 @@ public class DBConnection {
 
 	public static void main(String[] args) {
 		String dbtime;
-		String dbUrl = "jdbc:oracle:thin:@ldap://cporaldap:389/CPCDBII,cn=OracleContext,dc=lexisnexis,dc=com";
 		String query = "Select * FROM users";
 
 		try {
-
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String username = "kshirsac";
-			String password = "end8world";
-			Connection con = DriverManager.getConnection(dbUrl, username,
+			Class.forName("com.mysql.jdbc.Driver");
+			String dbUrl = "jdbc:mysql://localhost:3306/test";
+			String username = "root";
+			String password = "amogh123";
+			dbConnection = DriverManager.getConnection(dbUrl, username,
 					password);
-			Statement stmt = con.createStatement();
+
+			Statement stmt = dbConnection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
@@ -73,7 +73,7 @@ public class DBConnection {
 				System.out.println(dbtime);
 			} // end while
 
-			con.close();
+			dbConnection.close();
 		} // end try
 
 		catch (ClassNotFoundException e) {
