@@ -8,6 +8,8 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
+import com.JTutor.dao.UserDAO;
+
 public class DBConnection {
 
 	private static Logger _log = null;
@@ -43,8 +45,12 @@ public class DBConnection {
 		} catch (SQLException e) {
 			_log.error("Error while connection", e);
 		}
-
+		initDAO();
 		return dbConnection;
+	}
+
+	public static void initDAO() {
+		UserDAO.initiateUserDAO();
 	}
 
 	public static void main(String[] args) {

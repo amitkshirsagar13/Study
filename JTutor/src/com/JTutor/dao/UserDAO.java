@@ -10,7 +10,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.JTutor.data.User;
-import com.JTutor.dbConnection.OracleDBConnection;
+import com.JTutor.dbConnection.DBConnection;
 import com.JTutor.front.JTutorMainFrame;
 
 public class UserDAO {
@@ -40,7 +40,7 @@ public class UserDAO {
 
 	public static List<User> getUserList() {
 
-		Connection dbConnection = OracleDBConnection.getDBConnection();
+		Connection dbConnection = DBConnection.getDBConnection();
 
 		List<User> userList = new ArrayList<User>();
 		logMessage("Getting user list...");
@@ -64,7 +64,7 @@ public class UserDAO {
 	}
 
 	public static List<String> getRoleList() {
-		Connection dbConnection = OracleDBConnection.getDBConnection();
+		Connection dbConnection = DBConnection.getDBConnection();
 		logMessage("Getting role list...");
 		String query = "select distinct role from users order by 1";
 		List<String> roleList = new ArrayList<String>();
@@ -86,7 +86,7 @@ public class UserDAO {
 	}
 
 	public static User addUser(String name, String role) {
-		Connection dbConnection = OracleDBConnection.getDBConnection();
+		Connection dbConnection = DBConnection.getDBConnection();
 		logMessage("Adding User" + name + "/" + role + "...");
 		String query = "select max(userid) from users order by 1";
 		User user = new User(null, name, role);

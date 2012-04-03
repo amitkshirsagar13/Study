@@ -157,7 +157,7 @@ public class AddUserTab extends JFrame implements JTutorConst, FocusListener {
 			_addUserTab.add(buttonPanel, BorderLayout.SOUTH);
 
 		} catch (Exception e) {
-			_log.error("buildUserEntryForm", e);
+			_log.error("buildAddUserForm", e);
 
 		}
 
