@@ -182,8 +182,7 @@ public class ReportTab extends JFrame implements JTutorConst, FocusListener {
 	protected void submitForm() {
 		_parent.statusBarMsg("Name:Get User Report");
 
-		UserDAO userDAO = new UserDAO();
-		Vector<User> userList = new Vector(userDAO.getUserList());
+		Vector<User> userList = new Vector(UserDAO.getUserList());
 		_userTableModel.setUserList(userList);
 	}
 
