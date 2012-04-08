@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.JTutor.data.User;
+import com.JTutor.data.UserData;
 import com.JTutor.dbConnection.DBConnection;
 import com.JTutor.front.JTutorMainFrame;
 
@@ -112,5 +113,40 @@ public class UserDAO {
 		logMessage("Added User " + user.getUserId() + "/" + name + "/" + role
 				+ "...");
 		return user;
+	}
+
+	public static UserData getUserData(String userID) {
+
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			logMessage("Getting User Data" + userID + "...");
+			String query = "select * from userdata where id = " + userID
+					+ " order by 1";
+			Statement stmt;
+			stmt = dbConnection.createStatement();
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			int columnCount = rs.getMetaData().getColumnCount() + 1;
+			String[] columnIdentifiers = new String[columnCount - 1];
+			for (int index = 1; index < columnCount; index++) {
+				columnIdentifiers[index - 1] = rs.getMetaData().getColumnName(
+						index);
+			}
+
+			UserData userData = new UserData();
+			String[] rowData = new String[columnCount - 1];
+			while (rs.next()) {
+				for (int index = 1; index < columnCount; index++) {
+					rowData[index - 1] = rs.getString(index);
+				}
+			} // end while
+			userData.setColumnIdentifiers(columnIdentifiers);
+			userData.setRowData(rowData);
+			return userData;
+		} catch (SQLException e) {
+			_log.error("Error Getting User Data " + userID + "...", e);
+		}
+		return null;
 	}
 }

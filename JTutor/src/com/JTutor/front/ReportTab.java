@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 
 import com.JTutor.dao.UserDAO;
 import com.JTutor.data.User;
-import com.JTutor.data.tableModel.UserTableModel;
+import com.JTutor.data.model.UserTableModel;
 import com.JTutor.data.tableRenderer.ReportTableRenderer;
 import com.JTutor.store.JTutorConst;
 
@@ -181,7 +181,6 @@ public class ReportTab extends JFrame implements JTutorConst, FocusListener {
 	// -------------------------------------------------------------------
 	protected void submitForm() {
 		_parent.statusBarMsg("Name:Get User Report");
-
 		Vector<User> userList = new Vector(UserDAO.getUserList());
 		_userTableModel.setUserList(userList);
 	}

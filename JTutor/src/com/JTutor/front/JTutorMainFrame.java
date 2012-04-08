@@ -346,6 +346,10 @@ public class JTutorMainFrame extends JFrame implements JTutorConst {
 		ReportTab reportTab = new ReportTab(this);
 		reportTab.buildUserEntryForm();
 		_tabPanel.add(reportTab.getReportTab(), "User Report");
+
+		TreeReportTab treeReportTab = new TreeReportTab(this);
+		treeReportTab.buildTreeReportForm();
+		_tabPanel.add(treeReportTab.getTreeReportTab(), "Tree User Report");
 	}
 
 	// -------------------------------------------------------------------

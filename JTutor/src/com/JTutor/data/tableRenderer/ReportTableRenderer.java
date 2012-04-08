@@ -7,7 +7,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import com.JTutor.data.tableModel.UserTableModel;
+import com.JTutor.data.model.UserTableModel;
 
 public class ReportTableRenderer extends DefaultTableCellRenderer {
 	@Override
