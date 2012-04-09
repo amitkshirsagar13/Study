@@ -305,9 +305,14 @@ public class TreeReportTab extends JFrame implements JTutorConst,
 		if (userData != null) {
 			_columnNames = new Vector(Arrays.asList(userData
 					.getColumnIdentifiers()));
-			Vector record = new Vector(Arrays.asList(userData.getRowData()));
+
+			String[][] recordData = userData.getRowData();
+
 			_rowData = new Vector();
-			_rowData.add(record);
+			for (int index = 0; index < recordData.length; index++) {
+				Vector record = new Vector(Arrays.asList(recordData[index]));
+				_rowData.add(record);
+			}
 
 			_tabModel.setDataVector(_rowData, _columnNames);
 

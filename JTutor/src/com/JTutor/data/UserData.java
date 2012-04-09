@@ -7,7 +7,7 @@ public class UserData {
 	public String id = null;
 
 	public String[] columnIdentifiers = null;
-	public String[] rowData = null;
+	public String[][] rowData = null;
 
 	public UserData() {
 
@@ -36,11 +36,11 @@ public class UserData {
 		this.columnIdentifiers = columnIdentifiers;
 	}
 
-	public String[] getRowData() {
+	public String[][] getRowData() {
 		return rowData;
 	}
 
-	public void setRowData(String[] rowData) {
+	public void setRowData(String[][] rowData) {
 		this.rowData = rowData;
 	}
 }

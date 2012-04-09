@@ -135,11 +135,16 @@ public class UserDAO {
 			}
 
 			UserData userData = new UserData();
-			String[] rowData = new String[columnCount - 1];
+			rs.last();
+
+			String[][] rowData = new String[rs.getRow()][columnCount - 1];
+			rs.beforeFirst();
+			int rowId = 0;
 			while (rs.next()) {
 				for (int index = 1; index < columnCount; index++) {
-					rowData[index - 1] = rs.getString(index);
+					rowData[rowId][index - 1] = rs.getString(index);
 				}
+				rowId = rowId + 1;
 			} // end while
 			userData.setColumnIdentifiers(columnIdentifiers);
 			userData.setRowData(rowData);
@@ -149,4 +154,5 @@ public class UserDAO {
 		}
 		return null;
 	}
+
 }
