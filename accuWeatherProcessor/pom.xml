@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>accuWeatherProcessor</groupId>
+	<artifactId>accuWeatherProcessor</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>accuWeatherProcessor</name>
+	<description>Accuweather Processor for preprocessing weather information for Conky.</description>
+	<developers>
+		<developer>
+			<id>AccuWeather</id>
+			<name>Amit Kshirsagar</name>
+			<email>amit.kshirsagar.13@gmail.com</email>
+			<organization>openSource</organization>
+			<roles>
+				<role>Team Lead</role>
+			</roles>
+		</developer>
+	</developers>
+	<build>
+	<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+</project>
