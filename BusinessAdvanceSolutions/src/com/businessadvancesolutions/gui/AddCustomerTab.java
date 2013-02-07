@@ -330,27 +330,15 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 					.getCustomerDetail(customerID.getText(),
 							customerFirstName.getText(),
 							customerLastName.getText());
-
-			customerID.setText(customerDetail.getCustomerID() + "");
-			customerFirstName.setText(customerDetail.getCustomerFirstName());
-			customerLastName.setText(customerDetail.getCustomerLastName());
-			birthDate.setText(customerDetail.getBirthDate());
-			contactNumber.setText(customerDetail.getContactNumber() + "");
-			addressFirstLine.setText(customerDetail.getAddressFirstLine());
-			addressSecondLine.setText(customerDetail.getAddressSecondLine());
-			landMark.setText(customerDetail.getLandMark());
-			city.setText(customerDetail.getCity());
-			state.setText(customerDetail.getState());
-			zip.setText(customerDetail.getZip() + "");
-			occupation.setText(customerDetail.getOccupation());
-			customerIndex.setText(customerDetail.getCustomerIndex());
-			customerBarCode.setText(customerDetail.getCustomerBarCode());
-
+			setCustomerForm(customerDetail);
 			_parent.setCustomerDetail(customerDetail);
 		} else {
 			_parent.statusBarMsg("Inserting/Updating Customer");
 			if (customerID.getText().equals("")) {
 				_parent.statusBarMsg("Inserting Customer");
+				CustomerDetail customerDetail = new CustomerDetail();
+				CustomerDetailDAO
+						.insertCustomerDetail(getCustomerForm(customerDetail));
 			} else {
 				_parent.statusBarMsg("Updating Customer");
 			}
@@ -441,6 +429,47 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 
 	@Override
 	public void mouseReleased(MouseEvent event) {
+
+	}
+
+	private void setCustomerForm(CustomerDetail customerDetail) {
+		customerID.setText(customerDetail.getCustomerID() + "");
+		customerFirstName.setText(customerDetail.getCustomerFirstName());
+		customerLastName.setText(customerDetail.getCustomerLastName());
+		birthDate.setText(customerDetail.getBirthDate());
+		contactNumber.setText(customerDetail.getContactNumber() + "");
+		addressFirstLine.setText(customerDetail.getAddressFirstLine());
+		addressSecondLine.setText(customerDetail.getAddressSecondLine());
+		landMark.setText(customerDetail.getLandMark());
+		city.setText(customerDetail.getCity());
+		state.setText(customerDetail.getState());
+		zip.setText(customerDetail.getZip() + "");
+		occupation.setText(customerDetail.getOccupation());
+		customerIndex.setText(customerDetail.getCustomerIndex());
+		customerBarCode.setText(customerDetail.getCustomerBarCode());
+
+	}
+
+	private CustomerDetail getCustomerForm(CustomerDetail customerDetail) {
+		if (customerID.getText() != null && !customerID.getText().equals("")) {
+			customerDetail
+					.setCustomerID(Integer.parseInt(customerID.getText()));
+		}
+		customerDetail.setCustomerFirstName(customerFirstName.getText());
+		customerDetail.setCustomerLastName(customerLastName.getText());
+		customerDetail.setBirthDate(birthDate.getText());
+		customerDetail
+				.setContactNumber(Long.parseLong(contactNumber.getText()));
+		customerDetail.setAddressFirstLine(addressFirstLine.getText());
+		customerDetail.setAddressSecondLine(addressSecondLine.getText());
+		customerDetail.setLandMark(landMark.getText());
+		customerDetail.setCity(city.getText());
+		customerDetail.setState(state.getText());
+		customerDetail.setZip(Integer.parseInt(zip.getText()));
+		customerDetail.setOccupation(occupation.getText());
+		customerDetail.setCustomerIndex(customerIndex.getText());
+		customerDetail.setCustomerBarCode(customerBarCode.getText());
+		return customerDetail;
 
 	}
 }
