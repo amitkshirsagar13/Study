@@ -173,4 +173,50 @@ public class CustomerDetailDAO {
 
 		return customerDetail;
 	}
+
+	public static void insertCustomerDetail(CustomerDetail customerForm) {
+		StringBuffer insertCustomerDetail = new StringBuffer(
+				"INSERT INTO `businessadvancedatabase`.`customerDetails` "
+						+ "(`customerFirstName`, `CustomerLastName`, "
+						+ "`BirthDate`, `AddressFirstLine`, "
+						+ "`AddressSecondLine`, `LandMark`, `City`, "
+						+ "`State`, `Zip`, `ContactNumber`, `Occupation`, "
+						+ "`CustomerIndex`, `CustomerBarCode`) VALUES " + "('"
+						+ customerForm.getCustomerFirstName()
+						+ "', '"
+						+ customerForm.getCustomerLastName()
+						+ "', '"
+						+ customerForm.getBirthDate()
+						+ "', "
+						+ "'"
+						+ customerForm.getAddressFirstLine()
+						+ "', '"
+						+ customerForm.getAddressSecondLine()
+						+ "', "
+						+ "'"
+						+ customerForm.getLandMark()
+						+ "', '"
+						+ customerForm.getCity()
+						+ "', "
+						+ "'"
+						+ customerForm.getState()
+						+ "', '"
+						+ customerForm.getZip()
+						+ "', "
+						+ "'"
+						+ customerForm.getContactNumber()
+						+ "', '"
+						+ customerForm.getOccupation()
+						+ "', '5', '"
+						+ customerForm.getCustomerBarCode() + "')");
+
+		try {
+
+			_conn.createStatement().execute(insertCustomerDetail.toString());
+
+		} catch (SQLException e) {
+
+		}
+
+	}
 }
