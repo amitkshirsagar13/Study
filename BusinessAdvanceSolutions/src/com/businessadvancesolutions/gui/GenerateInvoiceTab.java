@@ -199,9 +199,13 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			int startColumnScrollPane = 550;
 
 			invoiceTableModel = new BusinessInvoiceTableModel(null);
-			invoiceTableModel.addInvoiceDetail(new InvoiceDetail());
+			invoiceTableModel.addInvoiceDetail(new InvoiceDetail().getVector());
+
 			invoiceDetailJTable = new JTable(invoiceTableModel);
 			invoiceDetailJTable.setCellSelectionEnabled(true);
+
+			// invoiceDetailJTable.getModel().addTableModelListener(
+			// invoiceTableModel);
 
 			for (int i = 0; i < invoiceTableModel.getColumnCount(); i++) {
 				invoiceDetailJTable.getColumnModel().getColumn(i)
@@ -323,7 +327,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 	}
 
 	private void addInvoiceDetail() {
-		invoiceTableModel.addInvoiceDetail(new InvoiceDetail());
+		invoiceTableModel.addInvoiceDetail(new InvoiceDetail().getVector());
 	}
 
 	private void deleteInvoiceDetail() {

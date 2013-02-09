@@ -1,51 +1,53 @@
 package com.businessadvancesolutions.businessmodel;
 
+import java.util.Vector;
+
 public class InvoiceDetail {
-	int invoiceDetailID = -1;
-	int invoiceID = -1;
-	int dressID = -1;
-	int itemSrNo = 0;
-	int quantity = 0;
-	float invoiceDetailPrice = 0;
+	String invoiceDetailID = null;
+	String invoiceID = null;
+	String dressID = null;
+	String itemSrNo = null;
+	String quantity = null;
+	String invoiceDetailPrice = null;
 	String dressBarCodeID = "";
 
-	public int getInvoiceDetailID() {
+	public String getInvoiceDetailID() {
 		return invoiceDetailID;
 	}
 
-	public void setInvoiceDetailID(int invoiceDetailID) {
+	public void setInvoiceDetailID(String invoiceDetailID) {
 		this.invoiceDetailID = invoiceDetailID;
 	}
 
-	public int getInvoiceID() {
+	public String getInvoiceID() {
 		return invoiceID;
 	}
 
-	public void setInvoiceID(int invoiceID) {
+	public void setInvoiceID(String invoiceID) {
 		this.invoiceID = invoiceID;
 	}
 
-	public int getDressID() {
+	public String getDressID() {
 		return dressID;
 	}
 
-	public void setDressID(int dressID) {
+	public void setDressID(String dressID) {
 		this.dressID = dressID;
 	}
 
-	public int getItemSrNo() {
+	public String getItemSrNo() {
 		return itemSrNo;
 	}
 
-	public void setItemSrNo(int itemSrNo) {
+	public void setItemSrNo(String itemSrNo) {
 		this.itemSrNo = itemSrNo;
 	}
 
-	public float getInvoiceDetailPrice() {
+	public String getInvoiceDetailPrice() {
 		return invoiceDetailPrice;
 	}
 
-	public void setInvoiceDetailPrice(float invoiceDetailPrice) {
+	public void setInvoiceDetailPrice(String invoiceDetailPrice) {
 		this.invoiceDetailPrice = invoiceDetailPrice;
 	}
 
@@ -55,5 +57,16 @@ public class InvoiceDetail {
 
 	public void setDressBarCodeID(String dressBarCodeID) {
 		this.dressBarCodeID = dressBarCodeID;
+	}
+
+	public Vector<Object> getVector() {
+		Vector<Object> vector = new Vector<Object>();
+		vector.add(itemSrNo);
+		vector.add(dressID);
+		vector.add(quantity);
+		vector.add(dressID);
+		vector.add(invoiceDetailPrice);
+		vector.add(dressBarCodeID);
+		return vector;
 	}
 }

@@ -2,32 +2,33 @@ package com.businessadvancesolutions.gui.model;
 
 import java.util.Vector;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
-import com.businessadvancesolutions.businessmodel.InvoiceDetail;
-
-public class BusinessInvoiceTableModel extends AbstractTableModel {
+public class BusinessInvoiceTableModel extends AbstractTableModel implements
+		TableModelListener {
 
 	public BusinessInvoiceTableModel(Vector recordRecordVector) {
 		super();
 		if (recordRecordVector == null) {
-			recordRecordVector = new Vector<InvoiceDetail>();
+			recordRecordVector = new Vector();
 		}
 		this.recordRecordVector = recordRecordVector;
 	}
 
-	Vector<InvoiceDetail> recordRecordVector = null;
+	Vector<Vector<Object>> recordRecordVector = null;
 
-	public void setUserList(Vector<InvoiceDetail> recordRecordVector) {
+	public void setUserList(Vector recordRecordVector) {
 		this.recordRecordVector = recordRecordVector;
 		fireTableDataChanged();
 	}
 
-	public Vector<InvoiceDetail> getRecordVector() {
+	public Vector getRecordVector() {
 		return recordRecordVector;
 	}
 
-	public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
+	public void addInvoiceDetail(Vector invoiceDetail) {
 		recordRecordVector.add(invoiceDetail);
 		fireTableDataChanged();
 	}
@@ -35,11 +36,6 @@ public class BusinessInvoiceTableModel extends AbstractTableModel {
 	public void deleteInvoiceDetail(int selectedRecord) {
 		recordRecordVector.remove(selectedRecord);
 		fireTableDataChanged();
-	}
-
-	public Float getInvoiceDetailPrice(int row) {
-		InvoiceDetail invoiceDetail = recordRecordVector.elementAt(row);
-		return invoiceDetail.getInvoiceDetailPrice();
 	}
 
 	// Names of the columns
@@ -64,9 +60,24 @@ public class BusinessInvoiceTableModel extends AbstractTableModel {
 	}
 
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public Object getValueAt(int row, int col) {
+		Vector<Object> value = recordRecordVector.get(row);
+		return value.get(col);
+	}
+
+	//
+	// public void setValueAt(Object value, int rowIndex, int columnIndex) {
+	// String sValue = (String) value;
+	// recordRecordVector.get(rowIndex).setValueAtColumn(sValue, columnIndex);
+	// fireTableDataChanged();
+	// }
+
+	@Override
+	public void setValueAt(Object newVal, int row, int col) {
+		Vector<Object> aRow = recordRecordVector.elementAt(row);
+		aRow.remove(col);
+		aRow.insertElementAt(newVal, col);
+		fireTableCellUpdated(row, col);
 	}
 
 	public boolean isCellEditable(int row, int col) {
@@ -83,6 +94,13 @@ public class BusinessInvoiceTableModel extends AbstractTableModel {
 			return true;
 		default:
 			return false;
+		}
+	}
+
+	@Override
+	public void tableChanged(TableModelEvent tme) {
+		System.out.println("Change event:" + tme.getType());
+		if (tme.getType() == TableModelEvent.UPDATE) {
 		}
 	}
 }
