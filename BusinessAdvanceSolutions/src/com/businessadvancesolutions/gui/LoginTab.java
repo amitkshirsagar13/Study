@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -23,7 +25,7 @@ import com.businessadvancesolutions.businessmodel.UserDetail;
 import com.businessadvancesolutions.dbapi.dao.UserDetailDAO;
 import com.businessadvancesolutions.helper.SystemLogger;
 
-public class LoginTab extends JFrame implements FocusListener {
+public class LoginTab extends JFrame implements FocusListener, MouseListener {
 	private static Logger _log = null;
 	private JMasterFrame _parent = null;
 
@@ -50,7 +52,9 @@ public class LoginTab extends JFrame implements FocusListener {
 
 	JTextField userNameText = new JTextField(20);
 	JPasswordField userPasswordText = new JPasswordField(20);
+
 	JButton resetForm = null;
+	JButton toggleFunction = null;
 	JButton submitForm = null;
 
 	public void buildForm() {
@@ -71,21 +75,33 @@ public class LoginTab extends JFrame implements FocusListener {
 			centerPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 			centerPanel.setLayout(null);
 
+			int labelWidth = 150;
+			int labelHight = 25;
+
+			/*
+			 * First Column
+			 */
+			int firstColumnStart = 50;
+
+			int firstTextFieldColumnStart = labelWidth + firstColumnStart + 50;
+
 			JLabel userIDLabel = new JLabel("UserName");
-			assignJLabelDetails(userIDLabel, "User Name: ", 20, 50, 100, 25);
+			assignJLabelDetails(userIDLabel, "User Name: ", firstColumnStart,
+					50, 100, 25);
 
 			JLabel userNameLabel = new JLabel("UserPassword");
-			assignJLabelDetails(userNameLabel, "User Password: ", 20, 100, 100,
-					25);
+			assignJLabelDetails(userNameLabel, "User Password: ",
+					firstColumnStart, 100, labelWidth, labelHight);
 
 			centerPanel.add(userIDLabel);
 			// centerPanel.add(getEmptyLabel());
 			centerPanel.add(userNameLabel);
 			// centerPanel.add(getEmptyLabel());
 
-			assignJTextFieldDetails(userNameText, "userName", 150, 50, 100, 25);
-			assignJTextFieldDetails(userPasswordText, "userPassword", 150, 100,
-					100, 25);
+			assignJTextFieldDetails(userNameText, "userName",
+					firstTextFieldColumnStart, 50, labelWidth, labelHight);
+			assignJTextFieldDetails(userPasswordText, "userPassword",
+					firstTextFieldColumnStart, 100, labelWidth, labelHight);
 
 			centerPanel.add(userNameText);
 			centerPanel.add(userPasswordText);
@@ -122,6 +138,18 @@ public class LoginTab extends JFrame implements FocusListener {
 			});
 
 			buttonPanel.add(resetForm);
+
+			toggleFunction = new JButton("ToggleQuery");
+			toggleFunction.setBounds(50, 5, 100, 50);
+
+			toggleFunction.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					toggleFunction();
+				}
+			});
+
+			// buttonPanel.add(toggleFunction);
 
 			_mainTab.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -211,6 +239,9 @@ public class LoginTab extends JFrame implements FocusListener {
 
 	}
 
+	protected void toggleFunction() {
+	}
+
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
 	protected void resetForm() {
@@ -250,6 +281,7 @@ public class LoginTab extends JFrame implements FocusListener {
 				hight));
 		newJTextField.setBorder(BorderFactory.createLoweredBevelBorder());
 
+		newJTextField.addMouseListener(this);
 		newJTextField.addFocusListener(this);
 
 	}
@@ -257,5 +289,42 @@ public class LoginTab extends JFrame implements FocusListener {
 	private Rectangle getBound(int startHorizontal, int startVertical,
 			int width, int hight) {
 		return new Rectangle(startHorizontal, startVertical, width, hight);
+	}
+
+	JTextField _dummyTextField = new JTextField();
+
+	@Override
+	public void mouseClicked(MouseEvent event) {
+		if (event.getClickCount() == 3) {
+			if (event.getSource().getClass().equals(_dummyTextField.getClass())) {
+				((JTextField) event.getSource()).setText("");
+			} else {
+			}
+		}
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent event) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent event) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent event) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent event) {
+		// TODO Auto-generated method stub
+
 	}
 }

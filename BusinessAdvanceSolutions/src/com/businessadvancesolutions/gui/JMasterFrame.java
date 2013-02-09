@@ -417,13 +417,17 @@ public class JMasterFrame extends JFrame implements MouseListener {
 		addcustomerTab.buildForm();
 		_tabPanel.add(addcustomerTab.getTab(), "Add Customer");
 
-		ReportTab reportTab = new ReportTab(this);
-		reportTab.buildForm();
-		_tabPanel.add(reportTab.getTab(), "User Report");
+		GenerateInvoiceTab addGenerateInvoiceTab = new GenerateInvoiceTab(this);
+		addGenerateInvoiceTab.buildForm();
+		_tabPanel.add(addGenerateInvoiceTab.getTab(), "Generate Invoice");
 
 		AddUserTab addUserTab = new AddUserTab(this);
 		addUserTab.buildForm();
 		_tabPanel.add(addUserTab.getTab(), "Add User");
+
+		ReportTab reportTab = new ReportTab(this);
+		reportTab.buildForm();
+		_tabPanel.add(reportTab.getTab(), "Sells Report");
 
 	}
 
@@ -458,7 +462,7 @@ public class JMasterFrame extends JFrame implements MouseListener {
 	private void slowDownASecond() {
 
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(600);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

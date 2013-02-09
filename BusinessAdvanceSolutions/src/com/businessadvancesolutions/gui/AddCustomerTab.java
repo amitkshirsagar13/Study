@@ -63,6 +63,7 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 	JTextField customerBarCode = new JTextField(20);
 
 	JButton resetForm = null;
+	JButton toggleFunction = null;
 	JButton submitForm = null;
 
 	public void buildForm() {
@@ -236,9 +237,6 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 			centerPanel.add(customerIndex);
 			centerPanel.add(customerBarCode);
 
-			customerFirstName.addMouseListener(this);
-			customerLastName.addMouseListener(this);
-
 			_mainTab.add(centerPanel, BorderLayout.CENTER);
 
 			JPanel buttonPanel = new JPanel();
@@ -260,7 +258,7 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 
 			buttonPanel.add(submitForm);
 
-			resetForm = new JButton("ToggleQuery");
+			resetForm = new JButton("Rest");
 			resetForm.setBounds(50, 5, 100, 50);
 
 			resetForm.addActionListener(new ActionListener() {
@@ -271,6 +269,18 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 			});
 
 			buttonPanel.add(resetForm);
+
+			toggleFunction = new JButton("ToggleQuery");
+			toggleFunction.setBounds(50, 5, 100, 50);
+
+			toggleFunction.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					toggleFunction();
+				}
+			});
+
+			buttonPanel.add(toggleFunction);
 
 			_mainTab.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -340,25 +350,45 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 				CustomerDetailDAO
 						.insertCustomerDetail(getCustomerForm(customerDetail));
 			} else {
+				CustomerDetail customerDetail = new CustomerDetail();
+				CustomerDetailDAO
+						.updateCustomerDetail(getCustomerForm(customerDetail));
 				_parent.statusBarMsg("Updating Customer");
 			}
+		}
+	}
+
+	protected void toggleFunction() {
+		if (!customerID.isEnabled()) {
+			_parent.statusBarMsg("ID: Enabled For Query.");
+			customerID.setEnabled(true);
+			toggleFunction.setText("ToggleInsert/Update");
+			submitForm.setText("Query");
+		} else {
+			_parent.statusBarMsg("ID: Disabled For Insert.");
+			customerID.setEnabled(false);
+			submitForm.setText("Insert/Update");
+			toggleFunction.setText("ToggleQuery");
 		}
 	}
 
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
 	protected void resetForm() {
-		if (!customerID.isEnabled()) {
-			_parent.statusBarMsg("ID: Enabled For Query.");
-			customerID.setEnabled(true);
-			resetForm.setText("ToggleInsert/Update");
-			submitForm.setText("Query");
-		} else {
-			_parent.statusBarMsg("ID: Disabled For Insert.");
-			customerID.setEnabled(false);
-			submitForm.setText("Insert/Update");
-			resetForm.setText("ToggleQuery");
-		}
+		customerID.setText("");
+		customerFirstName.setText("");
+		customerLastName.setText("");
+		birthDate.setText("");
+		contactNumber.setText("");
+		addressFirstLine.setText("");
+		addressSecondLine.setText("");
+		landMark.setText("");
+		city.setText("");
+		state.setText("");
+		zip.setText("");
+		occupation.setText("");
+		customerIndex.setText("");
+		customerBarCode.setText("");
 	}
 
 	// -------------------------------------------------------------------
@@ -392,6 +422,7 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 				hight));
 		newJTextField.setBorder(BorderFactory.createLoweredBevelBorder());
 
+		newJTextField.addMouseListener(this);
 		newJTextField.addFocusListener(this);
 
 	}
@@ -401,15 +432,17 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 		return new Rectangle(startHorizontal, startVertical, width, hight);
 	}
 
+	JTextField _dummyTextField = new JTextField();
+
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		if (event.getClickCount() == 3) {
-			if (event.getSource() == customerFirstName) {
-				customerFirstName.setText("");
-			} else if (event.getSource() == customerLastName) {
-				customerLastName.setText("");
+			if (event.getSource().getClass().equals(_dummyTextField.getClass())) {
+				((JTextField) event.getSource()).setText("");
+			} else {
 			}
 		}
+
 	}
 
 	@Override

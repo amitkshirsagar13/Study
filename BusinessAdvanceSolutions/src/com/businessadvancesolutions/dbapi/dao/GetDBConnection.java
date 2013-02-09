@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.businessadvancesolutions.helper.SystemLogger;
+
 /**
  * 
  * @author Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
@@ -45,15 +47,13 @@ public class GetDBConnection {
 			_connection = DriverManager.getConnection(url, userName, password);
 			// connection = DriverManager.getConnection (url);
 		} catch (SQLException e) {
-			System.out
-					.println("GetDBConnection.getDBConnection : Error opening the db connection: "
-							+ e.getMessage());
-			e.printStackTrace();
+			SystemLogger.logError(
+					"GetDBConnection.getDBConnection : Error opening the db connection: "
+							+ e.getMessage(), e);
 		} catch (ClassNotFoundException e) {
-			System.out
-					.println("GetDBConnection.getDBConnection : Error opening the db connection: "
-							+ e.getMessage());
-			e.printStackTrace();
+			SystemLogger.logError(
+					"GetDBConnection.getDBConnection : Error opening the db connection: "
+							+ e.getMessage(), e);
 		}
 	}
 

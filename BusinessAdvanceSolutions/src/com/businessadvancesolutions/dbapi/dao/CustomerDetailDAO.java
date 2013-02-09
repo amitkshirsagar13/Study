@@ -64,7 +64,7 @@ public class CustomerDetailDAO {
 			customerDetailQuery.append(" customerlastname like '%" + lastName
 					+ "%' ");
 		}
-		SystemLogger.logMessage(customerDetailQuery.toString());
+		SystemLogger.logDebug(customerDetailQuery.toString());
 		try {
 			ResultSet resultset = _conn.createStatement().executeQuery(
 					customerDetailQuery.toString());
@@ -97,8 +97,7 @@ public class CustomerDetailDAO {
 						+ customerDetail.toString());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SystemLogger.logError(e.getMessage(), e);
 		}
 
 		return customerDetailList;
@@ -135,7 +134,7 @@ public class CustomerDetailDAO {
 						+ lastName + "%' ");
 			}
 		}
-		SystemLogger.logMessage(customerDetailQuery.toString());
+		SystemLogger.logDebug(customerDetailQuery.toString());
 		try {
 			ResultSet resultset = _conn.createStatement().executeQuery(
 					customerDetailQuery.toString());
@@ -167,11 +166,54 @@ public class CustomerDetailDAO {
 						+ customerDetail.toString());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SystemLogger.logError(e.getMessage(), e);
 		}
 
 		return customerDetail;
+	}
+
+	public static void updateCustomerDetail(CustomerDetail customerForm) {
+		if (customerForm.getCustomerID() < 0) {
+			SystemLogger.logMessage("CustomerUpdate not possible as id is -1.");
+		}
+		StringBuffer updateCustomerDetail = new StringBuffer(
+				"update `businessadvancedatabase`.`customerDetails` "
+						+ "set `customerFirstName`='"
+						+ customerForm.getCustomerFirstName()
+						+ "', `CustomerLastName`='"
+						+ customerForm.getCustomerLastName()
+						+ "', `BirthDate`='"
+						+ customerForm.getBirthDate()
+						+ "', `AddressFirstLine`='"
+						+ customerForm.getAddressFirstLine()
+						+ "', `AddressSecondLine`='"
+						+ customerForm.getAddressSecondLine()
+						+ "', `LandMark`='"
+						+ customerForm.getLandMark()
+						+ "', `City`='"
+						+ customerForm.getCity()
+						+ "', `State`='"
+						+ customerForm.getState()
+						+ "', `Zip`='"
+						+ customerForm.getZip()
+						+ "', `ContactNumber`='"
+						+ customerForm.getContactNumber()
+						+ "', `Occupation`='"
+						+ customerForm.getOccupation()
+						+ "', `CustomerBarCode`='"
+						+ customerForm.getCustomerBarCode()
+						+ "' where customerID='"
+						+ customerForm.getCustomerID()
+						+ "'");
+		SystemLogger.logDebug(updateCustomerDetail.toString());
+		try {
+
+			_conn.createStatement().execute(updateCustomerDetail.toString());
+
+		} catch (SQLException e) {
+			SystemLogger.logError(e.getMessage(), e);
+		}
+
 	}
 
 	public static void insertCustomerDetail(CustomerDetail customerForm) {
@@ -209,14 +251,15 @@ public class CustomerDetailDAO {
 						+ customerForm.getOccupation()
 						+ "', '5', '"
 						+ customerForm.getCustomerBarCode() + "')");
-
+		SystemLogger.logDebug(insertCustomerDetail.toString());
 		try {
 
 			_conn.createStatement().execute(insertCustomerDetail.toString());
 
 		} catch (SQLException e) {
-
+			SystemLogger.logError(e.getMessage(), e);
 		}
 
 	}
+
 }

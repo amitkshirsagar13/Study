@@ -69,7 +69,7 @@ public class UserDetailDAO {
 			}
 			userDetailQuery.append(" userrole like '%" + userRole + "%' ");
 		}
-		SystemLogger.logMessage(userDetailQuery.toString());
+		SystemLogger.logDebug(userDetailQuery.toString());
 		try {
 			ResultSet resultset = _conn.createStatement().executeQuery(
 					userDetailQuery.toString());
@@ -84,8 +84,7 @@ public class UserDetailDAO {
 				SystemLogger.logDebug("UserDetails: " + userDetail.toString());
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SystemLogger.logError(e.getMessage(), e);
 		}
 
 		return userDetailList;
@@ -97,7 +96,7 @@ public class UserDetailDAO {
 		String insertUser = "insert into businessuser (username, userrole, userpassword) values ('"
 				+ userName + "'," + userRole + ",'" + userName + "')";
 
-		SystemLogger.logMessage(insertUser);
+		SystemLogger.logDebug(insertUser);
 		try {
 			insertStatus = _conn.createStatement().execute(insertUser);
 		} catch (Exception e) {
@@ -114,7 +113,7 @@ public class UserDetailDAO {
 				+ "', userpassword='" + userName + "', userrole=" + userRole
 				+ " where userid=" + userID;
 
-		SystemLogger.logMessage(updateUser);
+		SystemLogger.logDebug(updateUser);
 		try {
 			updateStatus = _conn.createStatement().execute(updateUser);
 		} catch (Exception e) {
@@ -136,13 +135,12 @@ public class UserDetailDAO {
 		userDetailQuery.append("username='" + userName + "' and userpassword='"
 				+ userPassword + "'");
 
-		SystemLogger.logMessage(userDetailQuery.toString());
+		SystemLogger.logDebug(userDetailQuery.toString());
 		try {
 			ResultSet resultset = _conn.createStatement().executeQuery(
 					userDetailQuery.toString());
 			while (resultset.next()) {
 				userDetail = new UserDetail();
-				System.out.println("Is it working");
 				userDetail.setUserID(resultset.getInt("userID"));
 				userDetail.setUserName(resultset.getString("userName"));
 				userDetail.setUserRole(resultset.getInt("userRole"));

@@ -22,17 +22,17 @@ import org.apache.log4j.Logger;
 import com.businessadvancesolutions.businessmodel.UserDetail;
 import com.businessadvancesolutions.dbapi.dao.UserDetailDAO;
 
-public class AddUserTab extends JFrame implements FocusListener, MouseListener {
+public class DummyTab extends JFrame implements FocusListener, MouseListener {
 	private static Logger _log = null;
 	private JMasterFrame _parent = null;
 
 	private JPanel _mainTab = null;
 
-	public AddUserTab(JMasterFrame parentFrame) {
-		super("AddUserTab");
+	public DummyTab(JMasterFrame parentFrame) {
+		super("DummyTab");
 		_parent = parentFrame;
 		if (_log == null) {
-			_log = Logger.getLogger(AddUserTab.class);
+			_log = Logger.getLogger(DummyTab.class);
 		}
 	}
 
@@ -50,7 +50,6 @@ public class AddUserTab extends JFrame implements FocusListener, MouseListener {
 	JTextField userIDText = new JTextField(20);
 	JTextField userNameText = new JTextField(20);
 	JTextField userRoleText = new JTextField(20);
-
 	JButton resetForm = null;
 	JButton toggleFunction = null;
 	JButton submitForm = null;
@@ -247,7 +246,7 @@ public class AddUserTab extends JFrame implements FocusListener, MouseListener {
 
 	}
 
-	protected void toggleFunction() {
+	private void toggleFunction() {
 
 		if (!userIDText.isEnabled()) {
 			_parent.statusBarMsg("ID: Enabled For Query.");
@@ -266,9 +265,6 @@ public class AddUserTab extends JFrame implements FocusListener, MouseListener {
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
 	protected void resetForm() {
-		userIDText.setText("");
-		userNameText.setText("");
-		userRoleText.setText("");
 	}
 
 	// -------------------------------------------------------------------
