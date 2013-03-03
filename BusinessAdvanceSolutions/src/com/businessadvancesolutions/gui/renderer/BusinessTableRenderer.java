@@ -7,7 +7,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import com.businessadvancesolutions.gui.model.BusinessInvoiceTableModel;
+import com.businessadvancesolutions.gui.model.BusinessTableModel;
 
 public class BusinessTableRenderer extends DefaultTableCellRenderer {
 	@Override
@@ -18,8 +18,7 @@ public class BusinessTableRenderer extends DefaultTableCellRenderer {
 				isSelected, hasFocus, row, column);
 
 		// Get the status for the current row.
-		BusinessInvoiceTableModel tableModel = (BusinessInvoiceTableModel) table
-				.getModel();
+		BusinessTableModel tableModel = (BusinessTableModel) table.getModel();
 
 		if (table.isRowSelected(row)) {
 			setForeground(Color.BLUE);
@@ -34,7 +33,7 @@ public class BusinessTableRenderer extends DefaultTableCellRenderer {
 		}
 
 		if (table.isCellSelected(row, column)) {
-			setBackground(Color.GREEN);
+			setBackground(new Color(0xF8FCC7));
 		} else {
 			if (row % 2 == 0) {
 				cell.setBackground(Color.WHITE);

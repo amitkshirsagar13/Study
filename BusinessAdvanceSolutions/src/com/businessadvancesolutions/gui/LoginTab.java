@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 import org.apache.log4j.Logger;
 
 import com.businessadvancesolutions.businessmodel.SystemUser;
-import com.businessadvancesolutions.businessmodel.UserDetail;
-import com.businessadvancesolutions.dbapi.dao.UserDetailDAO;
+import com.businessadvancesolutions.businessmodel.BusinessUser;
+import com.businessadvancesolutions.dbapi.dao.BusinessUserDAO;
 import com.businessadvancesolutions.helper.SystemLogger;
 
 public class LoginTab extends JFrame implements FocusListener, MouseListener {
@@ -205,14 +205,14 @@ public class LoginTab extends JFrame implements FocusListener, MouseListener {
 
 		try {
 
-			UserDetail userDetail = UserDetailDAO.loginUser(
+			BusinessUser businessUser = BusinessUserDAO.loginUser(
 					userNameText.getText(), userPasswordText.getText());
-			if (userDetail != null) {
+			if (businessUser != null) {
 				SystemUser systemUser = new SystemUser();
-				systemUser.setSystemUserID(userDetail.getUserID());
-				systemUser.setSystemUserName(userDetail.getUserName());
-				systemUser.setSystemUserRole(userDetail.getUserRole());
-				systemUser.setSystemUserPassword(userDetail.getUserPassword());
+				systemUser.setSystemUserID(businessUser.getUserId());
+				systemUser.setSystemUserName(businessUser.getUserName());
+				systemUser.setSystemUserRole(businessUser.getUserRole());
+				systemUser.setSystemUserPassword(businessUser.getUserPassword());
 				_parent.setSystemUser(systemUser);
 				_parent.populateWorkTabs();
 				_parent.statusBarMsg("System User Set as ID:"

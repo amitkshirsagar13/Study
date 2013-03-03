@@ -18,8 +18,8 @@ import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 
-import com.businessadvancesolutions.businessmodel.CustomerDetail;
-import com.businessadvancesolutions.dbapi.dao.CustomerDetailDAO;
+import com.businessadvancesolutions.businessmodel.BusinessCustomer;
+import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
 
 public class AddCustomerTab extends JFrame implements FocusListener,
 		MouseListener {
@@ -336,7 +336,7 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 		if (customerID.isEnabled()) {
 			_parent.statusBarMsg("Querying Customer ID: "
 					+ customerID.getText());
-			CustomerDetail customerDetail = CustomerDetailDAO
+			BusinessCustomer customerDetail = BusinessCustomerDAO
 					.getCustomerDetail(customerID.getText(),
 							customerFirstName.getText(),
 							customerLastName.getText());
@@ -346,12 +346,12 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 			_parent.statusBarMsg("Inserting/Updating Customer");
 			if (customerID.getText().equals("")) {
 				_parent.statusBarMsg("Inserting Customer");
-				CustomerDetail customerDetail = new CustomerDetail();
-				CustomerDetailDAO
+				BusinessCustomer customerDetail = new BusinessCustomer();
+				BusinessCustomerDAO
 						.insertCustomerDetail(getCustomerForm(customerDetail));
 			} else {
-				CustomerDetail customerDetail = new CustomerDetail();
-				CustomerDetailDAO
+				BusinessCustomer customerDetail = new BusinessCustomer();
+				BusinessCustomerDAO
 						.updateCustomerDetail(getCustomerForm(customerDetail));
 				_parent.statusBarMsg("Updating Customer");
 			}
@@ -465,7 +465,7 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 
 	}
 
-	private void setCustomerForm(CustomerDetail customerDetail) {
+	private void setCustomerForm(BusinessCustomer customerDetail) {
 		customerID.setText(customerDetail.getCustomerID() + "");
 		customerFirstName.setText(customerDetail.getCustomerFirstName());
 		customerLastName.setText(customerDetail.getCustomerLastName());
@@ -483,7 +483,7 @@ public class AddCustomerTab extends JFrame implements FocusListener,
 
 	}
 
-	private CustomerDetail getCustomerForm(CustomerDetail customerDetail) {
+	private BusinessCustomer getCustomerForm(BusinessCustomer customerDetail) {
 		if (customerID.getText() != null && !customerID.getText().equals("")) {
 			customerDetail
 					.setCustomerID(Integer.parseInt(customerID.getText()));

@@ -1,6 +1,8 @@
 package com.businessadvancesolutions.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -23,16 +25,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.apache.log4j.Logger;
 
-import com.businessadvancesolutions.businessmodel.CustomerDetail;
-import com.businessadvancesolutions.businessmodel.InvoiceDetail;
-import com.businessadvancesolutions.businessmodel.UserDetail;
-import com.businessadvancesolutions.dbapi.dao.CustomerDetailDAO;
-import com.businessadvancesolutions.dbapi.dao.UserDetailDAO;
-import com.businessadvancesolutions.gui.model.BusinessInvoiceTableModel;
+import com.businessadvancesolutions.businessmodel.BusinessCustomer;
+import com.businessadvancesolutions.businessmodel.BusinessInvoice;
+import com.businessadvancesolutions.businessmodel.BusinessUser;
+import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
+import com.businessadvancesolutions.dbapi.dao.BusinessUserDAO;
+import com.businessadvancesolutions.gui.model.BusinessTableModel;
 import com.businessadvancesolutions.gui.renderer.BusinessTableRenderer;
+import com.businessadvancesolutions.helper.SystemLogger;
 
 public class GenerateInvoiceTab extends JFrame implements FocusListener,
 		MouseListener, ItemListener {
@@ -71,7 +76,9 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 	JCheckBox customerIDCheckBox = new JCheckBox();
 	JTextField customerBarCodeText = new JTextField();
 
-	BusinessInvoiceTableModel invoiceTableModel = null;
+	JTextField dressBarCodeText = new JTextField();
+
+	BusinessTableModel invoiceTableModel = null;
 	JTable invoiceDetailJTable = null;
 
 	JButton resetForm = null;
@@ -175,6 +182,34 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			customerLastNameText.setEnabled(false);
 			customerBarCodeText.setEnabled(false);
 
+			JLabel dressBarCodeLabel = new JLabel("dressBarCode");
+			assignJLabelDetails(dressBarCodeLabel, "Dress BarCode: ",
+					firstColumnStart, 400, labelWidth, labelHight);
+			dressBarCodeLabel
+					.setFont(new Font("Times New Roman", Font.BOLD, 12));
+			centerPanel.add(dressBarCodeLabel);
+
+			assignJTextFieldDetails(dressBarCodeText, "dressBarCode",
+					firstTextFieldColumnStart, 400, labelWidth, labelHight);
+			dressBarCodeText.setBackground(new Color(0xEBF29B));
+			dressBarCodeText.getDocument().addDocumentListener(
+					new DocumentListener() {
+						public void changedUpdate(DocumentEvent e) {
+							processDressBarCode();
+						}
+
+						public void removeUpdate(DocumentEvent e) {
+							processDressBarCode();
+						}
+
+						public void insertUpdate(DocumentEvent e) {
+							processDressBarCode();
+						}
+
+					});
+
+			centerPanel.add(dressBarCodeText);
+
 			assignJTextFieldDetails(invoiceDiscount, "invoiceDiscount",
 					firstTextFieldColumnStart, 500, labelWidth, labelHight,
 					true);
@@ -198,8 +233,10 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 			int startColumnScrollPane = 550;
 
-			invoiceTableModel = new BusinessInvoiceTableModel(null);
-			invoiceTableModel.addInvoiceDetail(new InvoiceDetail().getVector());
+			invoiceTableModel = new BusinessTableModel(null);
+			invoiceTableModel.setColumnNames(m_colNames);
+			invoiceTableModel.setColumnTypes(m_colTypes);
+			invoiceTableModel.addInvoiceDetail(new BusinessInvoice().getVector());
 
 			invoiceDetailJTable = new JTable(invoiceTableModel);
 			invoiceDetailJTable.setCellSelectionEnabled(true);
@@ -256,7 +293,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					addInvoiceDetail();
+					addInvoiceDetail(null);
 				}
 			});
 
@@ -326,8 +363,34 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 	}
 
-	private void addInvoiceDetail() {
-		invoiceTableModel.addInvoiceDetail(new InvoiceDetail().getVector());
+	public void processDressBarCode() {
+		if (dressBarCodeText.getText().length() == 9) {
+			dressBarCodeText.setEditable(false);
+			SystemLogger.logDebug("Entered Valid BarCode:"
+					+ dressBarCodeText.getText());
+			BusinessInvoice invoiceDetailsFromBarCode = new BusinessInvoice();
+			invoiceDetailsFromBarCode.setDressID(dressBarCodeText.getText()
+					.substring(0, 2));
+			invoiceDetailsFromBarCode.setDressBarCodeID(dressBarCodeText
+					.getText());
+			addInvoiceDetail(invoiceDetailsFromBarCode);
+		}
+	}
+
+	// Names of the columns
+	public String[] m_colNames = { "ItemSrNo", "DressName", "Quantity",
+			"ItemPrice", "InvoiceDetailPrice" };
+	// Types of the columns.
+	public Class[] m_colTypes = { String.class, String.class, Integer.class,
+			Float.class, Float.class };
+
+	private void addInvoiceDetail(BusinessInvoice invoiceDetailsFromBarCode) {
+		if (invoiceDetailsFromBarCode == null) {
+			invoiceTableModel.addInvoiceDetail(new BusinessInvoice().getVector());
+		} else {
+			invoiceTableModel.addInvoiceDetail(invoiceDetailsFromBarCode
+					.getVector());
+		}
 	}
 
 	private void deleteInvoiceDetail() {
@@ -345,6 +408,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 	@Override
 	public void focusGained(FocusEvent evt) {
+
 		// if (evt.getSource() == invoiceIDText) {
 		// if (invoiceIDText.getText().equals("UserID")) {
 		// invoiceIDText.setText("");
@@ -366,7 +430,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			_parent.statusBarMsg("Querying Customer ID: "
 					+ customerIDText.getText());
 			customerIDCheckBox.setSelected(true);
-			CustomerDetail customerDetail = CustomerDetailDAO
+			BusinessCustomer customerDetail = BusinessCustomerDAO
 					.getCustomerDetail(customerIDText.getText(), null, null);
 			setCustomerDetails(customerDetail);
 			_parent.statusBarMsg("Customer : "
@@ -381,15 +445,15 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 		if (invoiceIDText.isEnabled()) {
 			try {
 
-				List<UserDetail> userDetailList = UserDetailDAO
-						.getUserDetailList(invoiceIDText.getText(),
+				List<BusinessUser> businessUserList = BusinessUserDAO
+						.getbusinessUserList(invoiceIDText.getText(),
 								customerFirstNameText.getText(), null);
-				if (userDetailList.size() > 0) {
-					invoiceIDText.setText(userDetailList.get(0).getUserID()
+				if (businessUserList.size() > 0) {
+					invoiceIDText.setText(businessUserList.get(0).getUserId()
 							+ "");
-					customerFirstNameText.setText(userDetailList.get(0)
+					customerFirstNameText.setText(businessUserList.get(0)
 							.getUserName());
-					customerLastNameText.setText(userDetailList.get(0)
+					customerLastNameText.setText(businessUserList.get(0)
 							.getUserRole() + "");
 				}
 
@@ -403,13 +467,13 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 		} else {
 			if (invoiceIDText.getText().equals("")) {
-				boolean insertStatus = UserDetailDAO.addUserDetail(
+				boolean insertStatus = BusinessUserDAO.addbusinessUser(
 						invoiceIDText.getText(),
 						customerFirstNameText.getText(),
 						customerLastNameText.getText());
 				_parent.statusBarMsg("Inserted: " + insertStatus);
 			} else {
-				boolean insertStatus = UserDetailDAO.updateUserDetail(
+				boolean insertStatus = BusinessUserDAO.updatebusinessUser(
 						invoiceIDText.getText(),
 						customerFirstNameText.getText(),
 						customerLastNameText.getText());
@@ -446,7 +510,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 		_log.info("Populated Role List...");
 	}
 
-	private void setCustomerDetails(CustomerDetail customerDetail) {
+	private void setCustomerDetails(BusinessCustomer customerDetail) {
 		customerFirstNameText.setText(customerDetail.getCustomerFirstName());
 		customerLastNameText.setText(customerDetail.getCustomerLastName());
 		customerBarCodeText.setText(customerDetail.getCustomerBarCode());

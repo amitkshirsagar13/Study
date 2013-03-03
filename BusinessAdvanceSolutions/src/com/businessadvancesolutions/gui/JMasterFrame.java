@@ -31,10 +31,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
-import com.businessadvancesolutions.businessmodel.CustomerDetail;
+import com.businessadvancesolutions.businessmodel.BusinessCustomer;
 import com.businessadvancesolutions.businessmodel.SystemUser;
-import com.businessadvancesolutions.dbapi.dao.CustomerDetailDAO;
-import com.businessadvancesolutions.dbapi.dao.UserDetailDAO;
+import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
+import com.businessadvancesolutions.dbapi.dao.BusinessUserDAO;
 import com.businessadvancesolutions.helper.SystemLogger;
 
 public class JMasterFrame extends JFrame implements MouseListener {
@@ -81,11 +81,12 @@ public class JMasterFrame extends JFrame implements MouseListener {
 			SystemLogger.createSystemLogger();
 			SystemLogger.setPrintStream(System.out);
 
-			UserDetailDAO.getUserDetailDAO();
-			CustomerDetailDAO.getCustomerDetailDAO();
+			BusinessUserDAO.getBusinessUserDao();
+			BusinessCustomerDAO.getbusinessCustomerDao();
 
+			// BusinessUserDAO.testHibernate();
 		} catch (Exception e) {
-			// logError("Exception:" + e.getMessage());
+			SystemLogger.logError("Exception:" + e.getMessage(), e);
 		}
 
 		// readProperties();
@@ -490,7 +491,7 @@ public class JMasterFrame extends JFrame implements MouseListener {
 		}
 	}
 
-	public void setCustomerDetail(CustomerDetail customerDetail) {
+	public void setCustomerDetail(BusinessCustomer customerDetail) {
 		if (Integer.parseInt(customerDetail.getCustomerIndex()) < 4) {
 			_customerIndex.setText("Good Buyer");
 			_customerIndex.setToolTipText("Good Buyer");

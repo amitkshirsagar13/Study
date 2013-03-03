@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 
-import com.businessadvancesolutions.businessmodel.UserDetail;
-import com.businessadvancesolutions.dbapi.dao.UserDetailDAO;
+import com.businessadvancesolutions.businessmodel.BusinessUser;
+import com.businessadvancesolutions.dbapi.dao.BusinessUserDAO;
 
 public class DummyTab extends JFrame implements FocusListener, MouseListener {
 	private static Logger _log = null;
@@ -212,13 +212,13 @@ public class DummyTab extends JFrame implements FocusListener, MouseListener {
 		if (userIDText.isEnabled()) {
 			try {
 
-				List<UserDetail> userDetailList = UserDetailDAO
-						.getUserDetailList(userIDText.getText(),
+				List<BusinessUser> businessUserList = BusinessUserDAO
+						.getbusinessUserList(userIDText.getText(),
 								userNameText.getText(), null);
-				if (userDetailList.size() > 0) {
-					userIDText.setText(userDetailList.get(0).getUserID() + "");
-					userNameText.setText(userDetailList.get(0).getUserName());
-					userRoleText.setText(userDetailList.get(0).getUserRole()
+				if (businessUserList.size() > 0) {
+					userIDText.setText(businessUserList.get(0).getUserId() + "");
+					userNameText.setText(businessUserList.get(0).getUserName());
+					userRoleText.setText(businessUserList.get(0).getUserRole()
 							+ "");
 				}
 
@@ -231,12 +231,12 @@ public class DummyTab extends JFrame implements FocusListener, MouseListener {
 
 		} else {
 			if (userIDText.getText().equals("")) {
-				boolean insertStatus = UserDetailDAO.addUserDetail(
+				boolean insertStatus = BusinessUserDAO.addbusinessUser(
 						userIDText.getText(), userNameText.getText(),
 						userRoleText.getText());
 				_parent.statusBarMsg("Inserted: " + insertStatus);
 			} else {
-				boolean insertStatus = UserDetailDAO.updateUserDetail(
+				boolean insertStatus = BusinessUserDAO.updatebusinessUser(
 						userIDText.getText(), userNameText.getText(),
 						userRoleText.getText());
 				_parent.statusBarMsg("Updated: " + insertStatus);

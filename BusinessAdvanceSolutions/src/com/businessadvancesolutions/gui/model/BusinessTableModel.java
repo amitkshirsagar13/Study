@@ -6,8 +6,6 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
-import com.businessadvancesolutions.helper.SystemLogger;
-
 public class BusinessTableModel extends AbstractTableModel implements
 		TableModelListener {
 
@@ -71,6 +69,7 @@ public class BusinessTableModel extends AbstractTableModel implements
 		return m_colNames.length;
 	}
 
+	@Override
 	public String getColumnName(int col) {
 		return m_colNames[col];
 	}
@@ -96,13 +95,14 @@ public class BusinessTableModel extends AbstractTableModel implements
 		if (col == 2 || col == 3) {
 			String unitQuantity = aRow.get(2);
 			String unitPrice = aRow.get(3);
-			SystemLogger.logDebug("Updating quatity price...out" + unitQuantity
-					+ "*" + unitPrice);
+			// SystemLogger.logDebug("Updating quatity price...out" +
+			// unitQuantity
+			// + "*" + unitPrice);
 			if (unitQuantity != null && !unitQuantity.equals("")
 					&& unitPrice != null && !unitPrice.equals("")) {
-				SystemLogger.logDebug("Updating quatity price...in"
-						+ Integer.parseInt(unitQuantity) + "*"
-						+ Integer.parseInt(unitPrice));
+				// SystemLogger.logDebug("Updating quatity price...in"
+				// + Integer.parseInt(unitQuantity) + "*"
+				// + Integer.parseInt(unitPrice));
 				String invoiceDetailPrice = "" + Integer.parseInt(unitQuantity)
 						* Integer.parseInt(unitPrice);
 				aRow.remove(4);
@@ -113,6 +113,7 @@ public class BusinessTableModel extends AbstractTableModel implements
 		fireTableCellUpdated(row, col);
 	}
 
+	@Override
 	public boolean isCellEditable(int row, int col) {
 		switch (col) {
 		case 0:
@@ -132,7 +133,6 @@ public class BusinessTableModel extends AbstractTableModel implements
 
 	@Override
 	public void tableChanged(TableModelEvent tme) {
-		System.out.println("Change event:" + tme.getType());
 		if (tme.getType() == TableModelEvent.UPDATE) {
 		}
 	}
