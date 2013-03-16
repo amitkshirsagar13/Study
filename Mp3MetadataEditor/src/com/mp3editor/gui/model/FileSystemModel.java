@@ -1,5 +1,12 @@
 package com.mp3editor.gui.model;
 
+/**
+ * This software is created by @author Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
+ * It is not allowed to copy and distribute without prior approval from Auther.
+ */
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
@@ -9,7 +16,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-public class FileSystemModel implements TreeModel {
+public class FileSystemModel implements TreeModel, MouseListener {
 	private final File root;
 
 	private final Vector listeners = new Vector();
@@ -107,6 +114,44 @@ public class FileSystemModel implements TreeModel {
 		public String toString() {
 			return getName();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+		if (e.getButton() == e.BUTTON1) {
+			System.out.println("Clicked BUTTON1");
+		} else if (e.getButton() == e.BUTTON2) {
+			System.out.println("Clicked BUTTON2");
+		} else if (e.getButton() == e.BUTTON3) {
+			System.out.println("Show Popup Option here");
+
+		}
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

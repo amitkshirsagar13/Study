@@ -1,5 +1,10 @@
 package com.mp3editor.gui.tabs;
 
+/**
+ * This software is created by @author Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
+ * It is not allowed to copy and distribute without prior approval from Auther.
+ */
+
 import jaco.mp3.player.MP3Player;
 
 import java.awt.BorderLayout;
@@ -482,7 +487,7 @@ public class Mp3Tab extends JFrame implements FocusListener, MouseListener {
 
 			buttonPanel.add(submitForm);
 
-			resetForm = new JButton("ToggleQuery");
+			resetForm = new JButton("Reset");
 			resetForm.setBounds(50, 5, 100, 50);
 
 			resetForm.addActionListener(new ActionListener() {

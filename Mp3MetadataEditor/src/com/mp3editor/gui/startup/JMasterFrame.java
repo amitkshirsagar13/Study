@@ -1,10 +1,16 @@
 package com.mp3editor.gui.startup;
 
+/**
+ * This software is created by @author Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
+ * It is not allowed to copy and distribute without prior approval from Auther.
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,11 +36,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -219,6 +227,99 @@ public class JMasterFrame extends JFrame implements MouseListener,
 		populateFileSystemTree();
 
 		fileTree = new JTree(fileSystemModel);
+
+		fileTree.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+
+				if (e.getButton() == e.BUTTON1) {
+					// System.out.println("Clicked BUTTON1");
+				} else if (e.getButton() == e.BUTTON2) {
+					// System.out.println("Clicked BUTTON2");
+				} else if (e.getButton() == e.BUTTON3) {
+
+					handleRightMouseButtonClick(e);
+					// System.out.println("Show Popup Option here");
+					final File chosenFile = (File) fileTree
+							.getLastSelectedPathComponent();
+					final JPopupMenu popup = new JPopupMenu();
+					JMenuItem menuItem1 = new JMenuItem(chosenFile.getName());
+					popup.add(menuItem1);
+
+					menuItem1.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JOptionPane.showMessageDialog(
+									fileTree.getParent(),
+									"File Path: "
+											+ chosenFile.getAbsolutePath(),
+									"Selected File Path",
+									JOptionPane.PLAIN_MESSAGE);
+						}
+					});
+
+					popup.show(fileTree, e.getX(), e.getY());
+
+				}
+
+			}
+
+			private void handleRightMouseButtonClick(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e)) {
+					// System.out.println("Right Mouse button clicked.");
+					Point p = e.getPoint();
+					if (moreThanOneTreeNodesSelected()) {
+						if (!fileTree.getSelectionModel().isPathSelected(
+								fileTree.getPathForLocation(p.x, p.y))) {
+							selectPointedPathOnTree(p);
+						}
+					} else {
+						selectPointedPathOnTree(p);
+					}
+				}
+			}
+
+			private void selectPointedPathOnTree(Point p) {
+				fileTree.getSelectionModel().setSelectionPath(
+						fileTree.getPathForLocation(p.x, p.y));
+			}
+
+			private boolean moreThanOneTreeNodesSelected() {
+				if (fileTree.getSelectionPaths() == null) {
+					return false;
+				}
+				if (fileTree.getSelectionPaths().length > 1) {
+					return true;
+				}
+				return false;
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		fileTree.addTreeSelectionListener(new TreeSelectionListener() {
 			@Override
@@ -509,7 +610,7 @@ public class JMasterFrame extends JFrame implements MouseListener,
 
 		mp3Tab = new Mp3Tab(this);
 		mp3Tab.buildForm();
-		_tabPanel.add(mp3Tab.getTab(), "Templet");
+		_tabPanel.add(mp3Tab.getTab(), "Mp3MetadataEditor");
 
 	}
 
