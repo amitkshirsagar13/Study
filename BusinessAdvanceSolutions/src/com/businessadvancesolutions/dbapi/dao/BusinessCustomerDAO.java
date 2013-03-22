@@ -4,37 +4,33 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import org.hibernate.Query;
 
 import com.businessadvancesolutions.businessmodel.BusinessCustomer;
 import com.businessadvancesolutions.helper.SystemLogger;
 
-public class BusinessCustomerDAO {
+public class BusinessCustomerDAO extends BusinessAdvanceDAO {
 
 	private static Connection _conn = null;
 	private static BusinessCustomerDAO businessCustomerDao = null;
 
 	private BusinessCustomerDAO() {
+		BusinessAdvanceDAO.initilize();
 	}
 
 	public static BusinessCustomerDAO getbusinessCustomerDao() {
 		if (businessCustomerDao == null) {
 			businessCustomerDao = new BusinessCustomerDAO();
-			businessCustomerDao.setConnection();
+			// businessCustomerDao.setConnection();
 		}
 		return businessCustomerDao;
 	}
 
-	private void setConnection() {
-		_conn = GetDBConnection.getDatabaseConnection();
-	}
-
-	private void resetConnection() {
-		_conn = GetDBConnection.getDatabaseConnection();
-	}
-
-	public static List<BusinessCustomer> getCustomerDetailList(String customerID,
-			String firstName, String lastName) {
+	public static List<BusinessCustomer> getCustomerDetailList(
+			String customerID, String firstName, String lastName) {
 
 		List<BusinessCustomer> customerDetailList = new ArrayList<BusinessCustomer>();
 		BusinessCustomer customerDetail = new BusinessCustomer();
@@ -71,12 +67,12 @@ public class BusinessCustomerDAO {
 			while (resultset.next()) {
 				customerDetail = new BusinessCustomer();
 
-				customerDetail.setCustomerID(resultset.getInt("customerID"));
+				customerDetail.setCustomerId(resultset.getInt("customerID"));
 				customerDetail.setCustomerFirstName(resultset
 						.getString("customerFirstName"));
 				customerDetail.setCustomerLastName(resultset
 						.getString("CustomerLastName"));
-				customerDetail.setBirthDate(resultset.getString("BirthDate"));
+				// customerDetail.setBirthDate(resultset.getString("BirthDate"));
 				customerDetail.setAddressFirstLine(resultset
 						.getString("AddressFirstLine"));
 				customerDetail.setAddressSecondLine(resultset
@@ -141,12 +137,12 @@ public class BusinessCustomerDAO {
 			while (resultset.next()) {
 				customerDetail = new BusinessCustomer();
 
-				customerDetail.setCustomerID(resultset.getInt("customerID"));
+				customerDetail.setCustomerId(resultset.getInt("customerId"));
 				customerDetail.setCustomerFirstName(resultset
 						.getString("customerFirstName"));
 				customerDetail.setCustomerLastName(resultset
 						.getString("CustomerLastName"));
-				customerDetail.setBirthDate(resultset.getString("BirthDate"));
+				// customerDetail.setBirthDate(resultset.getString("BirthDate"));
 				customerDetail.setAddressFirstLine(resultset
 						.getString("AddressFirstLine"));
 				customerDetail.setAddressSecondLine(resultset
@@ -172,48 +168,77 @@ public class BusinessCustomerDAO {
 		return customerDetail;
 	}
 
-	public static void updateCustomerDetail(BusinessCustomer customerForm) {
-		if (customerForm.getCustomerID() < 0) {
-			SystemLogger.logMessage("CustomerUpdate not possible as id is -1.");
+	public static boolean updateCustomerDetail(BusinessCustomer customerForm) {
+		boolean updateStatus = false;
+
+		BusinessCustomer businessCustomer = getBusinessCustomer(customerForm);
+		if (businessCustomer != null) {
+			customerForm.setCustomerId(businessCustomer.getCustomerId());
+			mergeObject(customerForm);
+			updateStatus = true;
 		}
-		StringBuffer updateCustomerDetail = new StringBuffer(
-				"update `businessadvancedatabase`.`customerDetails` "
-						+ "set `customerFirstName`='"
-						+ customerForm.getCustomerFirstName()
-						+ "', `CustomerLastName`='"
-						+ customerForm.getCustomerLastName()
-						+ "', `BirthDate`='"
-						+ customerForm.getBirthDate()
-						+ "', `AddressFirstLine`='"
-						+ customerForm.getAddressFirstLine()
-						+ "', `AddressSecondLine`='"
-						+ customerForm.getAddressSecondLine()
-						+ "', `LandMark`='"
-						+ customerForm.getLandMark()
-						+ "', `City`='"
-						+ customerForm.getCity()
-						+ "', `State`='"
-						+ customerForm.getState()
-						+ "', `Zip`='"
-						+ customerForm.getZip()
-						+ "', `ContactNumber`='"
-						+ customerForm.getContactNumber()
-						+ "', `Occupation`='"
-						+ customerForm.getOccupation()
-						+ "', `CustomerBarCode`='"
-						+ customerForm.getCustomerBarCode()
-						+ "' where customerID='"
-						+ customerForm.getCustomerID()
-						+ "'");
-		SystemLogger.logDebug(updateCustomerDetail.toString());
-		try {
+		businessCustomer = getBusinessCustomer(businessCustomer);
+		return updateStatus;
+	}
 
-			_conn.createStatement().execute(updateCustomerDetail.toString());
+	public static BusinessCustomer addBusinessCustomer(
+			BusinessCustomer customerForm) {
+		boolean insertStatus = false;
 
-		} catch (SQLException e) {
-			SystemLogger.logError(e.getMessage(), e);
+		BusinessCustomer businessCustomer = getBusinessCustomer(customerForm);
+		if (businessCustomer == null) {
+			businessCustomer = customerForm;
+			saveObject(businessCustomer);
+			// _userBusinessSession.getTransaction().commit();
+		}
+		businessCustomer = getBusinessCustomer(businessCustomer);
+		return businessCustomer;
+	}
+
+	public static BusinessCustomer getBusinessCustomer(
+			BusinessCustomer customerForm) {
+		BusinessCustomer businessCustomer = null;
+		Query query = null;
+		if (customerForm.getCustomerId() > 0) {
+			query = createQuery("from BusinessCustomer where customerid=:customerid ");
+			query.setParameter("customerid", customerForm.getCustomerId());
+		} else if (!customerForm.getCustomerFirstName().equalsIgnoreCase("")
+				&& !customerForm.getCustomerLastName().equalsIgnoreCase("")) {
+			query = createQuery("from BusinessCustomer where customerfirstname like :customerfirstname and customerlastname like :customerlastname ");
+			query.setParameter("customerfirstname",
+					"%" + customerForm.getCustomerFirstName() + "%");
+			query.setParameter("customerlastname",
+					"%" + customerForm.getCustomerLastName() + "%");
+		} else if (!customerForm.getCustomerFirstName().equalsIgnoreCase("")) {
+			query = createQuery("from BusinessCustomer where customerfirstname like :customerfirstname ");
+			query.setParameter("customerfirstname",
+					"%" + customerForm.getCustomerFirstName() + "%");
+		} else if (!customerForm.getCustomerLastName().equalsIgnoreCase("")) {
+			query = createQuery("from BusinessCustomer where customerlastname like :customerlastname ");
+			query.setParameter("customerlastname",
+					"%" + customerForm.getCustomerLastName() + "%");
+		} else if (customerForm.getContactNumber() > 0) {
+			query = createQuery("from BusinessCustomer where customerlastname like :contactnumber ");
+			query.setParameter("contactnumber",
+					"%" + customerForm.getCustomerLastName() + "%");
+		} else {
+			return businessCustomer;
 		}
 
+		List<BusinessCustomer> list = query.list();
+		Iterator<BusinessCustomer> iter = list.iterator();
+		while (iter.hasNext()) {
+
+			businessCustomer = iter.next();
+			SystemLogger.logMessage("Fetched BusinessCustomer- "
+					+ businessCustomer.getCustomerId() + ", "
+					+ businessCustomer.getCustomerFirstName() + ", "
+					+ businessCustomer.getCustomerLastName() + ", "
+					+ businessCustomer.getCustomerIndex());
+
+		}
+		commitTransaction();
+		return businessCustomer;
 	}
 
 	public static void insertCustomerDetail(BusinessCustomer customerForm) {

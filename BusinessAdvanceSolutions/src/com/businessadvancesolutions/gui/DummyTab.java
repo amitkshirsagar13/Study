@@ -213,10 +213,11 @@ public class DummyTab extends JFrame implements FocusListener, MouseListener {
 			try {
 
 				List<BusinessUser> businessUserList = BusinessUserDAO
-						.getbusinessUserList(userIDText.getText(),
+						.getBusinessUserList(userIDText.getText(),
 								userNameText.getText(), null);
 				if (businessUserList.size() > 0) {
-					userIDText.setText(businessUserList.get(0).getUserId() + "");
+					userIDText
+							.setText(businessUserList.get(0).getUserId() + "");
 					userNameText.setText(businessUserList.get(0).getUserName());
 					userRoleText.setText(businessUserList.get(0).getUserRole()
 							+ "");
@@ -231,12 +232,9 @@ public class DummyTab extends JFrame implements FocusListener, MouseListener {
 
 		} else {
 			if (userIDText.getText().equals("")) {
-				boolean insertStatus = BusinessUserDAO.addbusinessUser(
-						userIDText.getText(), userNameText.getText(),
-						userRoleText.getText());
-				_parent.statusBarMsg("Inserted: " + insertStatus);
+
 			} else {
-				boolean insertStatus = BusinessUserDAO.updatebusinessUser(
+				boolean insertStatus = BusinessUserDAO.updateBusinessUser(
 						userIDText.getText(), userNameText.getText(),
 						userRoleText.getText());
 				_parent.statusBarMsg("Updated: " + insertStatus);

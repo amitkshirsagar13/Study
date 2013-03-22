@@ -29,8 +29,9 @@ public class BusinessTableModel extends AbstractTableModel implements
 	}
 
 	public void addInvoiceDetail(Vector<String> invoiceDetail) {
-		if (invoiceDetail.get(2) != null && invoiceDetail.get(2).equals("")) {
-			if (invoiceDetail.get(3) != null && invoiceDetail.get(3).equals("")) {
+		if (invoiceDetail.get(2) != null && !invoiceDetail.get(2).equals("")) {
+			if (invoiceDetail.get(3) != null
+					&& !invoiceDetail.get(3).equals("")) {
 				String invoiceDetailPrice = ""
 						+ Integer.parseInt(invoiceDetail.get(2))
 						* Integer.parseInt(invoiceDetail.get(3));

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
 
 import com.businessadvancesolutions.businessmodel.BusinessUser;
 import com.businessadvancesolutions.helper.SystemLogger;
@@ -16,11 +15,12 @@ public class BusinessUserDAO extends BusinessAdvanceDAO {
 
 	private static Connection _conn = null;
 	private static BusinessUserDAO businessUserDao = null;
-	private static Session _userBusinessSession = null;
+
+	// private static Session _userBusinessSession = null;
 
 	private BusinessUserDAO() {
 		BusinessAdvanceDAO.initilize();
-		_userBusinessSession = super.getSession();
+		// _userBusinessSession = super.getSession();
 	}
 
 	public static BusinessUserDAO getBusinessUserDao() {
@@ -39,13 +39,8 @@ public class BusinessUserDAO extends BusinessAdvanceDAO {
 		_conn = GetDBConnection.getDatabaseConnection();
 	}
 
-	public static List<BusinessUser> getbusinessUserList(String userID,
+	public static List<BusinessUser> getBusinessUserList(String userID,
 			String userName, String userRole) throws Exception {
-
-		if (_conn == null) {
-			throw new Exception("Initiate businessUsersDAO, before user...");
-		}
-
 		List<BusinessUser> businessUserList = new ArrayList<BusinessUser>();
 		BusinessUser businessUser = null;
 
@@ -98,77 +93,40 @@ public class BusinessUserDAO extends BusinessAdvanceDAO {
 		return businessUserList;
 	}
 
-	public static boolean addbusinessUser(String userID, String userName,
+	public static BusinessUser addBusinessUser(String userID, String userName,
 			String userRole) {
 		boolean insertStatus = false;
 
-		String insertUser = "insert into businessuser (username, userrole, userpassword) values ('"
-				+ userName + "'," + userRole + ",'" + userName + "')";
-
-		SystemLogger.logDebug(insertUser);
-		try {
-			insertStatus = _conn.createStatement().execute(insertUser);
-		} catch (Exception e) {
-			SystemLogger.logError(e.getMessage(), e);
+		BusinessUser businessUser = checkExistingUser(userName);
+		if (businessUser == null) {
+			businessUser = new BusinessUser();
+			businessUser.setUserName(userName);
+			businessUser.setUserPassword(userName);
+			businessUser.setUserRole(Integer.parseInt(userRole));
+			saveObject(businessUser);
+			// _userBusinessSession.getTransaction().commit();
 		}
-
-		return insertStatus;
-	}
-
-	public static boolean updatebusinessUser(String userID, String userName,
-			String userRole) {
-		boolean updateStatus = false;
-		String updateUser = "update businessuser set username='" + userName
-				+ "', userpassword='" + userName + "', userrole=" + userRole
-				+ " where userid=" + userID;
-
-		SystemLogger.logDebug(updateUser);
-		try {
-			updateStatus = _conn.createStatement().execute(updateUser);
-		} catch (Exception e) {
-			SystemLogger.logError(e.getMessage(), e);
-		}
-
-		return updateStatus;
-	}
-
-	public static BusinessUser loginUserOld(String userName, String userPassword) {
-		BusinessUser businessUser = null;
-		StringBuffer businessUserQuery = new StringBuffer(
-				"select * from businessuser");
-
-		String whereClouse = " where ";
-
-		businessUserQuery.append(whereClouse);
-
-		businessUserQuery.append("username='" + userName
-				+ "' and userpassword='" + userPassword + "'");
-
-		SystemLogger.logDebug(businessUserQuery.toString());
-		try {
-			ResultSet resultset = _conn.createStatement().executeQuery(
-					businessUserQuery.toString());
-			while (resultset.next()) {
-				businessUser = new BusinessUser();
-				businessUser.setUserId(resultset.getInt("userID"));
-				businessUser.setUserName(resultset.getString("userName"));
-				businessUser.setUserRole(resultset.getInt("userRole"));
-				businessUser.setUserPassword(resultset
-						.getString("userPassword"));
-				SystemLogger.logDebug("businessUsers: "
-						+ businessUser.toString());
-			}
-		} catch (Exception e) {
-			SystemLogger.logError(e.getMessage(), e);
-		}
-
+		businessUser = checkExistingUser(userName);
 		return businessUser;
 	}
 
-	public static BusinessUser loginUser(String userName, String userPassword) {
+	public static boolean updateBusinessUser(String userId, String userName,
+			String userRole) {
+		boolean updateStatus = false;
+		BusinessUser businessUser = getBusinessUser(userId);
+		businessUser.setUserName(userName);
+		businessUser.setUserRole(Integer.parseInt(userRole));
+		if (businessUser != null) {
+			updateObject(businessUser);
+			updateStatus = true;
+		}
+		return updateStatus;
+	}
+
+	public static BusinessUser getBusinessUser(String userId) {
 		BusinessUser businessUser = null;
-		Query query = _userBusinessSession
-				.createQuery("from BusinessUser where username= :username and password= :userpassword");
+		Query query = createQuery("from BusinessUser where userid= :userid");
+		query.setParameter("userid", userId);
 
 		List<BusinessUser> list = query.list();
 		java.util.Iterator<BusinessUser> iter = list.iterator();
@@ -182,12 +140,54 @@ public class BusinessUserDAO extends BusinessAdvanceDAO {
 					+ businessUser.getUserPassword());
 
 		}
+		commitTransaction();
+		return businessUser;
+	}
 
+	public static BusinessUser checkExistingUser(String userName) {
+		BusinessUser businessUser = null;
+		Query query = createQuery("from BusinessUser where username= :username");
+		query.setParameter("username", userName);
+
+		List<BusinessUser> list = query.list();
+		java.util.Iterator<BusinessUser> iter = list.iterator();
+		while (iter.hasNext()) {
+
+			businessUser = iter.next();
+			SystemLogger.logMessage("Fetched BusinessUser- "
+					+ businessUser.getUserId() + ", "
+					+ businessUser.getUserName() + ", "
+					+ businessUser.getUserRole() + ", "
+					+ businessUser.getUserPassword());
+
+		}
+		commitTransaction();
+		return businessUser;
+	}
+
+	public static BusinessUser loginUser(String userName, String userPassword) {
+		BusinessUser businessUser = null;
+		Query query = createQuery("from BusinessUser where username= :username and userpassword= :userpassword");
+		query.setParameter("username", userName);
+		query.setParameter("userpassword", userPassword);
+		List<BusinessUser> list = query.list();
+		java.util.Iterator<BusinessUser> iter = list.iterator();
+		while (iter.hasNext()) {
+
+			businessUser = iter.next();
+			SystemLogger.logMessage("Fetched BusinessUser- "
+					+ businessUser.getUserId() + ", "
+					+ businessUser.getUserName() + ", "
+					+ businessUser.getUserRole() + ", "
+					+ businessUser.getUserPassword());
+
+		}
+		commitTransaction();
 		return businessUser;
 	}
 
 	public static void testHibernate() {
-		Query query = _userBusinessSession.createQuery("from BusinessUser");
+		Query query = createQuery("from BusinessUser");
 
 		List<BusinessUser> list = query.list();
 		java.util.Iterator<BusinessUser> iter = list.iterator();

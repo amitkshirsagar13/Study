@@ -21,7 +21,7 @@ CREATE  TABLE `businessadvancedatabase`.`businesscustomer` (
   `City` VARCHAR(45) NULL ,
   `State` VARCHAR(45) NULL ,
   `Zip` INT NULL ,
-  `ContactNumber` DOUBLE NULL ,
+  `ContactNumber` BIGINT NULL ,
   `Occupation` VARCHAR(45) NULL ,
   `CustomerIndex` VARCHAR(45) NULL ,
   `CustomerBarCode` VARCHAR(45) NULL ,
@@ -35,3 +35,17 @@ INSERT INTO `businessadvancedatabase`.`businesscustomer` (`customerFirstName`, `
 
 INSERT INTO `businessadvancedatabase`.`businesscustomer` (`customerFirstName`, `CustomerLastName`, `BirthDate`, `AddressFirstLine`, `AddressSecondLine`, `LandMark`, `City`, `State`, `Zip`, `ContactNumber`, `Occupation`, `CustomerIndex`, `CustomerBarCode`) VALUES 
 ('Poonam', 'Kshirsagar', '1984-3-10', 'Flat No A101, Saheel''s Elegance', 'Thergaon', 'Behind D-Mart', 'Pune', 'Maharashtra', '411033', '7798982320', 'Team Lead', '1', '123154648');
+
+CREATE  TABLE `businessadvancedatabase`.`businessdress` (
+  `dressid` INT NOT NULL ,
+  `dressName` VARCHAR(45) NULL ,
+  `dressColor` VARCHAR(45) NULL ,
+  `sellPrice` INT NULL ,
+  `supplierId` INT NULL ,
+  `supplierPrice` INT NULL ,
+  `discount` VARCHAR(45) NULL ,
+  `lotNumberDate` VARCHAR(45) NULL ,
+  `barCodeId` DOUBLE NULL ,
+  `damageId` INT NULL ,
+  PRIMARY KEY (`dressid`) );
+

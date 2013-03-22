@@ -1,12 +1,14 @@
 package com.businessadvancesolutions.businessmodel;
 
+import java.sql.Date;
+
 public class BusinessCustomer {
-	public int customerID = -1;
+	public int customerId = -1;
 
 	public String customerFirstName = null;
 	public String customerLastName = null;
 
-	public String birthDate = null;
+	public Date birthDate = null;
 
 	public String addressFirstLine = null;
 	public String addressSecondLine = null;
@@ -23,12 +25,12 @@ public class BusinessCustomer {
 
 	public String customerBarCode = null;
 
-	public int getCustomerID() {
-		return customerID;
+	public int getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getCustomerFirstName() {
@@ -47,11 +49,11 @@ public class BusinessCustomer {
 		this.customerLastName = customerLastName;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -145,7 +147,7 @@ public class BusinessCustomer {
 
 	@Override
 	public String toString() {
-		return "\nCustomerID- " + customerID + "\nCustomerFirstName- "
+		return "\nCustomerID- " + customerId + "\nCustomerFirstName- "
 				+ customerFirstName + "\nCustomerLastName- " + customerLastName
 				+ "\nBirthDate- " + birthDate
 				+ "\nAddress-\n\tAddressFirstLine- " + addressFirstLine

@@ -132,7 +132,7 @@ public class JMasterFrame extends JFrame implements MouseListener {
 	private void createComponents() {
 		String app_icon = System.getProperty("APP_ICON");
 		setIconImage(Toolkit.getDefaultToolkit().createImage(app_icon));
-		setTitle("JTutor Application");
+		setTitle("BusinessAdvanceSoftwares Application");
 		this.setSize(new Dimension(1000, 750));
 
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);

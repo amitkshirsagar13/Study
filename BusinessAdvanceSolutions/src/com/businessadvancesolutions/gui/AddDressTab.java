@@ -23,18 +23,18 @@ import com.businessadvancesolutions.businessmodel.BusinessCustomer;
 import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
 import com.toedter.calendar.JDateChooser;
 
-public class AddCustomerTab extends JFrame implements FocusListener,
+public class AddDressTab extends JFrame implements FocusListener,
 		MouseListener {
 	private static Logger _log = null;
 	private JMasterFrame _parent = null;
 
 	private JPanel _mainTab = null;
 
-	public AddCustomerTab(JMasterFrame parentFrame) {
+	public AddDressTab(JMasterFrame parentFrame) {
 		super("AddCustomerTab");
 		_parent = parentFrame;
 		if (_log == null) {
-			_log = Logger.getLogger(AddCustomerTab.class);
+			_log = Logger.getLogger(AddDressTab.class);
 		}
 	}
 
