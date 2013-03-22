@@ -742,7 +742,7 @@ public class JMasterFrame extends JFrame implements MouseListener,
 	private void slowDownASecond() {
 
 		try {
-			Thread.sleep(500);
+			Thread.sleep(750);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

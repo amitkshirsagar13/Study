@@ -53,7 +53,6 @@ import com.mp3editor.logger.SystemLogger;
 import com.mp3editor.object.Mp3FileObject;
 import com.mp3editor.util.ImageHelper;
 import com.mp3editor.util.SearchResultParser;
-import com.mp3editor.util.WorkThreadHandler;
 import com.mpatric.mp3agic.ID3v1;
 import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.ID3v22Tag;
@@ -339,11 +338,25 @@ public class Mp3Tab extends JFrame implements FocusListener, MouseListener {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 
-					WorkThreadHandler workHandler = new WorkThreadHandler();
-					workHandler.setTemplateTab(_parent.getMp3Tab());
-					Thread workerThread = new Thread(workHandler);
-					workerThread.start();
+					// WorkThreadHandler workHandler = new WorkThreadHandler();
+					// workHandler.setTemplateTab(_parent.getMp3Tab());
+					// Thread workerThread = new Thread(workHandler);
+					// workerThread.start();
+
 					// searchImagesOnline();
+
+					Runnable runSearch = new Runnable() {
+
+						@Override
+						public void run() {
+							searchImagesOnline();
+						}
+					};
+
+					Thread onlineSearchThread = new Thread(runSearch,
+							"OnlineSearchThread");
+
+					onlineSearchThread.start();
 
 				}
 			});
