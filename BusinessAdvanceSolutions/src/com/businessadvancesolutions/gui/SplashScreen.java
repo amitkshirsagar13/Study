@@ -3,6 +3,7 @@ package com.businessadvancesolutions.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JWindow;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class SplashScreen extends JWindow {
 	BorderLayout borderLayout1 = new BorderLayout();
@@ -47,15 +49,6 @@ public class SplashScreen extends JWindow {
 		int y = (screenSize.height - height) / 2;
 
 		this.setBounds(x, y, width, height);
-
-		progressBar.setSize(iImgWidth, 20);
-		progressBar.setForeground(Color.GREEN);
-		progressBar.setBackground(Color.BLACK);
-
-		progressBarMsg.setSize(iImgWidth, 15);
-		progressBarMsg.setForeground(Color.BLACK);
-		progressBarMsg.setBackground(Color.WHITE);
-		progressBarMsg.setOpaque(true);
 
 		try {
 			jbInit();
@@ -99,13 +92,26 @@ public class SplashScreen extends JWindow {
 	void jbInit() throws Exception {
 
 		imageLabel.setIcon(imageIcon);
+
 		this.getContentPane().setLayout(borderLayout1);
-		// southPanel.setBackground(Color.BLACK);
 		this.getContentPane().add(imageLabel, BorderLayout.CENTER);
-		// this.getContentPane().add(southPanel, BorderLayout.SOUTH);
-		// southPanel.add(progressBar);
-		this.getContentPane().add(progressBarMsg, BorderLayout.SOUTH);
-		this.getContentPane().add(progressBar, BorderLayout.SOUTH);
+
+		progressBar.setForeground(Color.GREEN);
+		progressBar.setBackground(Color.BLACK);
+
+		progressBarMsg.setSize(iImgWidth, 10);
+		progressBarMsg.setForeground(Color.BLACK);
+
+		progressBar.setBounds(0, iImgHeight - 45, iImgWidth, 15);
+
+		progressBarMsg.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		progressBarMsg.setOpaque(false);
+
+		progressBar.add(progressBarMsg);
+
+		imageLabel.setLayout(null);
+		imageLabel.add(progressBar);
+
 		this.pack();
 	}
 
@@ -130,10 +136,23 @@ public class SplashScreen extends JWindow {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
+				changeProgressBarColor();
 				progressBar.setValue(theProgress);
 				setMessage(theMessage);
 			}
 		});
+	}
+
+	private static void changeProgressBarColor() {
+		if (progressBar.getForeground() == Color.GREEN) {
+			UIManager.put("ProgressBar.foreground", Color.YELLOW);
+		} else if (progressBar.getForeground() == Color.YELLOW) {
+			UIManager.put("ProgressBar.foreground", Color.ORANGE);
+		} else if (progressBar.getForeground() == Color.ORANGE) {
+			UIManager.put("ProgressBar.foreground", Color.RED);
+		} else if (progressBar.getForeground() == Color.RED) {
+			UIManager.put("ProgressBar.foreground", Color.GREEN);
+		}
 	}
 
 	public void setScreenVisible(boolean b) {
@@ -151,7 +170,7 @@ public class SplashScreen extends JWindow {
 			message = "";
 			progressBarMsg.setText("");
 		} else {
-			progressBarMsg.setText(message);
+			progressBarMsg.setText("   " + message);
 		}
 	}
 }

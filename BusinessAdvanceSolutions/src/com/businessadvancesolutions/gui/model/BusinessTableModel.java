@@ -6,14 +6,19 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
+import com.businessadvancesolutions.gui.GenerateInvoiceTab;
+
 public class BusinessTableModel extends AbstractTableModel implements
 		TableModelListener {
+	GenerateInvoiceTab generateInvoiceTab = null;
 
-	public BusinessTableModel(Vector recordRecordVector) {
+	public BusinessTableModel(Vector recordRecordVector,
+			GenerateInvoiceTab generateInvoiceTab) {
 		super();
 		if (recordRecordVector == null) {
 			recordRecordVector = new Vector();
 		}
+		this.generateInvoiceTab = generateInvoiceTab;
 		this.recordRecordVector = recordRecordVector;
 	}
 
@@ -40,11 +45,14 @@ public class BusinessTableModel extends AbstractTableModel implements
 		}
 		recordRecordVector.add(invoiceDetail);
 		fireTableDataChanged();
+		generateInvoiceTab.calculateInvoiceTotal();
+
 	}
 
 	public void deleteInvoiceDetail(int selectedRecord) {
 		recordRecordVector.remove(selectedRecord);
 		fireTableDataChanged();
+		generateInvoiceTab.calculateInvoiceTotal();
 	}
 
 	// Names of the columns
@@ -112,6 +120,7 @@ public class BusinessTableModel extends AbstractTableModel implements
 			}
 		}
 		fireTableCellUpdated(row, col);
+		generateInvoiceTab.calculateInvoiceTotal();
 	}
 
 	@Override

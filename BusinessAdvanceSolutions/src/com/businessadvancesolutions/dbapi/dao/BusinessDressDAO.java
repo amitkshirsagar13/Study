@@ -32,19 +32,33 @@ public class BusinessDressDAO extends BusinessAdvanceDAO {
 		return businessDress;
 	}
 
+	public static BusinessDress getBusinessDress(String dressBarCode) {
+		BusinessDress dressForm = new BusinessDress();
+		dressForm.setBarCodeId(dressBarCode);
+		BusinessDress businessDress = getBusinessDress(dressForm);
+		return businessDress;
+	}
+
 	public static BusinessDress getBusinessDress(BusinessDress dressForm) {
 		BusinessDress businessDress = null;
 
 		Query query = null;
 		if (dressForm.getDressId() > 0) {
-			query = createQuery("from BusinessCustomer where dressid=:dressid ");
+			query = createQuery("from BusinessDress where dressid=:dressid ");
 			query.setParameter("dressid", dressForm.getDressId());
-		} else if (!dressForm.getDressName().equalsIgnoreCase("")
+		} else if (dressForm.getDressName() != null
+				&& !dressForm.getDressName().equalsIgnoreCase("")
+				&& dressForm.getDressColor() != null
 				&& !dressForm.getDressColor().equalsIgnoreCase("")) {
-			query = createQuery("from BusinessCustomer where dressname like :dressname and dresscolor like :dresscolor");
+			query = createQuery("from BusinessDress where dressname like :dressname and dresscolor like :dresscolor");
 			query.setParameter("dressname", "%" + dressForm.getDressName()
 					+ "%");
 			query.setParameter("dresscolor", "%" + dressForm.getDressName()
+					+ "%");
+		} else if (dressForm.getBarCodeId() != null
+				&& !dressForm.getBarCodeId().equalsIgnoreCase("")) {
+			query = createQuery("from BusinessDress where barCodeId like :barCodeId");
+			query.setParameter("barCodeId", "%" + dressForm.getBarCodeId()
 					+ "%");
 		}
 
@@ -53,13 +67,14 @@ public class BusinessDressDAO extends BusinessAdvanceDAO {
 		while (iter.hasNext()) {
 
 			businessDress = iter.next();
-			SystemLogger.logMessage("Fetched BusinessDress- "
-					+ businessDress.getDressId() + ", "
-					+ businessDress.getDressName() + ", "
-					+ businessDress.getDressColor() + ", "
-					+ businessDress.getSellPrice());
 
 		}
+		SystemLogger.logMessage("Fetched BusinessDress- "
+				+ businessDress.getDressId() + ", "
+				+ businessDress.getDressName() + ", "
+				+ businessDress.getDressColor() + ", "
+				+ businessDress.getSellPrice());
+
 		commitTransaction();
 		return businessDress;
 	}

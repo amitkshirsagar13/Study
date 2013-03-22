@@ -418,6 +418,10 @@ public class JMasterFrame extends JFrame implements MouseListener {
 		addcustomerTab.buildForm();
 		_tabPanel.add(addcustomerTab.getTab(), "Add Customer");
 
+		AddDressTab adddressTab = new AddDressTab(this);
+		adddressTab.buildForm();
+		_tabPanel.add(adddressTab.getTab(), "Add Dress");
+
 		GenerateInvoiceTab addGenerateInvoiceTab = new GenerateInvoiceTab(this);
 		addGenerateInvoiceTab.buildForm();
 		_tabPanel.add(addGenerateInvoiceTab.getTab(), "Generate Invoice");

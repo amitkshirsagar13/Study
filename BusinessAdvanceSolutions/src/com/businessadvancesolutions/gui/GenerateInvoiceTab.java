@@ -31,7 +31,7 @@ import javax.swing.event.DocumentListener;
 import org.apache.log4j.Logger;
 
 import com.businessadvancesolutions.businessmodel.BusinessCustomer;
-import com.businessadvancesolutions.businessmodel.BusinessInvoice;
+import com.businessadvancesolutions.businessmodel.BusinessSell;
 import com.businessadvancesolutions.businessmodel.BusinessUser;
 import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
 import com.businessadvancesolutions.dbapi.dao.BusinessUserDAO;
@@ -252,7 +252,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 			int startColumnScrollPane = 550;
 
-			invoiceTableModel = new BusinessTableModel(null);
+			invoiceTableModel = new BusinessTableModel(null, this);
 			invoiceTableModel.setColumnNames(m_colNames);
 			invoiceTableModel.setColumnTypes(m_colTypes);
 			// invoiceTableModel.addInvoiceDetail(new BusinessInvoice()
@@ -388,14 +388,31 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			dressBarCodeText.setEditable(false);
 			SystemLogger.logDebug("Entered Valid BarCode:"
 					+ dressBarCodeText.getText());
-			BusinessInvoice invoiceDetailsFromBarCode = new BusinessInvoice();
+			BusinessSell businessSell = new BusinessSell(
+					dressBarCodeText.getText());
+
+			businessSell.setDressBarCode(dressBarCodeText.getText());
 			int itemSrNo = invoiceTableModel.getRowCount() + 1;
-			// invoiceDetailsFromBarCode.setItemSrNo(itemSrNo + "");
-			// invoiceDetailsFromBarCode.setDressID(dressBarCodeText.getText()
-			// .substring(0, 2));
-			// invoiceDetailsFromBarCode.setDressBarCodeID(dressBarCodeText
-			// .getText());
-			addInvoiceDetail(invoiceDetailsFromBarCode);
+			businessSell.setItemSrNo(itemSrNo + "");
+			addInvoiceDetail(businessSell);
+
+			Runnable cleanBarCodeField = new Runnable() {
+
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(3500);
+						dressBarCodeText.setText("");
+						dressBarCodeText.setEditable(true);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						// e.printStackTrace();
+					}
+				}
+			};
+
+			Thread cleanBarCode = new Thread(cleanBarCodeField);
+			cleanBarCode.start();
 		}
 	}
 
@@ -406,8 +423,8 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 	public Class[] m_colTypes = { String.class, String.class, Integer.class,
 			Float.class, Float.class };
 
-	private void addInvoiceDetail(BusinessInvoice invoiceDetailsFromBarCode) {
-		if (invoiceDetailsFromBarCode == null) {
+	private void addInvoiceDetail(BusinessSell sellFromBarCode) {
+		if (sellFromBarCode == null) {
 			// invoiceTableModel.addInvoiceDetail(new BusinessInvoice()
 			// .getVector());
 		} else {
@@ -420,12 +437,10 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 					|| (invoiceTableModel.getValueAt(rowNum, 2) != null && Integer
 							.parseInt((String) invoiceTableModel.getValueAt(
 									rowNum, 2)) > 0)) {
-				// invoiceTableModel.addInvoiceDetail(invoiceDetailsFromBarCode
-				// .getVector());
+				invoiceTableModel.addInvoiceDetail(sellFromBarCode.getVector());
 			} else {
-				invoiceTableModel.deleteInvoiceDetail(rowNum);
-				// invoiceTableModel.addInvoiceDetail(invoiceDetailsFromBarCode
-				// .getVector());
+				// invoiceTableModel.deleteInvoiceDetail(rowNum);
+				invoiceTableModel.addInvoiceDetail(sellFromBarCode.getVector());
 			}
 
 		}
@@ -541,8 +556,6 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
 	protected void resetForm() {
-		dressBarCodeText.setText("");
-		dressBarCodeText.setEditable(true);
 	}
 
 	// -------------------------------------------------------------------
@@ -643,5 +656,16 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 				customerBarCodeText.setText("");
 			}
 		}
+	}
+
+	public void calculateInvoiceTotal() {
+		int rowCount = invoiceTableModel.getRowCount();
+		int invoiceTotalCost = 0;
+		for (int i = 0; i < rowCount; i++) {
+			invoiceTotalCost = invoiceTotalCost
+					+ Integer.parseInt((String) invoiceTableModel.getValueAt(i,
+							4));
+		}
+		invoiceTotal.setText(invoiceTotalCost + "");
 	}
 }

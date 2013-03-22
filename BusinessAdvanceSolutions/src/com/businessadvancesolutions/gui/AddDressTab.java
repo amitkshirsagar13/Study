@@ -8,7 +8,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,19 +18,17 @@ import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 
-import com.businessadvancesolutions.businessmodel.BusinessCustomer;
-import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
-import com.toedter.calendar.JDateChooser;
+import com.businessadvancesolutions.businessmodel.BusinessDress;
+import com.businessadvancesolutions.dbapi.dao.BusinessDressDAO;
 
-public class AddDressTab extends JFrame implements FocusListener,
-		MouseListener {
+public class AddDressTab extends JFrame implements FocusListener, MouseListener {
 	private static Logger _log = null;
 	private JMasterFrame _parent = null;
 
 	private JPanel _mainTab = null;
 
 	public AddDressTab(JMasterFrame parentFrame) {
-		super("AddCustomerTab");
+		super("AddDressTab");
 		_parent = parentFrame;
 		if (_log == null) {
 			_log = Logger.getLogger(AddDressTab.class);
@@ -49,20 +46,16 @@ public class AddDressTab extends JFrame implements FocusListener,
 		return _mainTab;
 	}
 
-	JTextField customerID = new JTextField(20);
-	JTextField customerFirstName = new JTextField(20);
-	JTextField customerLastName = new JTextField(20);
-	JDateChooser birthDate = null;
-	JTextField addressFirstLine = new JTextField(20);
-	JTextField addressSecondLine = new JTextField(20);
-	JTextField landMark = new JTextField(20);
-	JTextField city = new JTextField(20);
-	JTextField state = new JTextField(20);
-	JTextField zip = new JTextField(20);
-	JTextField contactNumber = new JTextField(20);
-	JTextField occupation = new JTextField(20);
-	JTextField customerIndex = new JTextField(20);
-	JTextField customerBarCode = new JTextField(20);
+	JTextField dressID = new JTextField(20);
+	JTextField dressName = new JTextField(20);
+	JTextField dressColor = new JTextField(20);
+	JTextField sellPrice = new JTextField(20);
+	JTextField supplierId = new JTextField(20);
+	JTextField supplierPrice = new JTextField(20);
+	JTextField discount = new JTextField(20);
+	JTextField lotNumberDate = new JTextField(20);
+	JTextField barcodeId = new JTextField(20);
+	JTextField damageId = new JTextField(20);
 
 	JButton resetForm = null;
 	JButton toggleFunction = null;
@@ -98,61 +91,53 @@ public class AddDressTab extends JFrame implements FocusListener,
 
 			int firstTextFieldColumnStart = labelWidth + firstColumnStart + 50;
 
-			JLabel customerIDLabel = new JLabel("CustomerIDLabel");
-			assignJLabelDetails(customerIDLabel, "Customer ID: ",
-					firstColumnStart, 50, labelWidth, labelHight);
+			JLabel dressIDLabel = new JLabel("dressIDLabel");
+			assignJLabelDetails(dressIDLabel, "Dress ID: ", firstColumnStart,
+					50, labelWidth, labelHight);
 
-			JLabel customerFirstNameLabel = new JLabel("CustomerFirstNameLabel");
-			assignJLabelDetails(customerFirstNameLabel, "First Name: ",
+			JLabel dressNameLabel = new JLabel("dressNameLabel");
+			assignJLabelDetails(dressNameLabel, "Dress Name: ",
 					firstColumnStart, 100, labelWidth, labelHight);
 
-			JLabel customerLastNameLabel = new JLabel("CustomerLastNameLabel");
-			assignJLabelDetails(customerLastNameLabel, "Last Name: ",
+			JLabel dressColorLabel = new JLabel("dressColorLabel");
+			assignJLabelDetails(dressColorLabel, "Dress Color: ",
 					firstColumnStart, 150, labelWidth, labelHight);
 
-			JLabel customerBirthDateLabel = new JLabel("customerBirthDateLabel");
-			assignJLabelDetails(customerBirthDateLabel, "BirthDate: ",
+			JLabel sellPriceLabel = new JLabel("sellPriceLabel");
+			assignJLabelDetails(sellPriceLabel, "Sell Price: ",
 					firstColumnStart, 200, labelWidth, labelHight);
 
-			JLabel customerOccupationLabel = new JLabel(
-					"customerOccupationLabel");
-			assignJLabelDetails(customerOccupationLabel, "Occupation: ",
+			JLabel supplierIdLabel = new JLabel("supplierIdLabel");
+			assignJLabelDetails(supplierIdLabel, "Supplier Id: ",
 					firstColumnStart, 250, labelWidth, labelHight);
 
-			JLabel customerContactNumberLabel = new JLabel(
-					"customerContactNumberLabel");
-			assignJLabelDetails(customerContactNumberLabel, "Contact Number: ",
+			JLabel supplierPriceLabel = new JLabel("supplierPriceLabel");
+			assignJLabelDetails(supplierPriceLabel, "Supplier Price: ",
 					firstColumnStart, 300, labelWidth, labelHight);
 
-			JLabel customerIndexLabel = new JLabel("customerIndexLabel");
-			assignJLabelDetails(customerIndexLabel, "Customer Index: ",
-					firstColumnStart, 350, labelWidth, labelHight);
+			JLabel discountLabel = new JLabel("discountLabel");
+			assignJLabelDetails(discountLabel, "Discount: ", firstColumnStart,
+					350, labelWidth, labelHight);
 
-			assignJTextFieldDetails(customerID, "customerID",
+			assignJTextFieldDetails(dressID, "dressID",
 					firstTextFieldColumnStart, 50, labelWidth, labelHight, true);
 
-			assignJTextFieldDetails(customerFirstName, "customerFirstName",
+			assignJTextFieldDetails(dressName, "dressName",
 					firstTextFieldColumnStart, 100, labelWidth, labelHight);
 
-			assignJTextFieldDetails(customerLastName, "customerLastName",
+			assignJTextFieldDetails(dressColor, "dressColor",
 					firstTextFieldColumnStart, 150, labelWidth, labelHight);
 
-			// assignJTextFieldDetails(birthDate, "birthDate",
-			// firstTextFieldColumnStart, 200, labelWidth, labelHight);
+			assignJTextFieldDetails(sellPrice, "sellPrice",
+					firstTextFieldColumnStart, 200, labelWidth, labelHight);
 
-			birthDate = new JDateChooser();
-			birthDate.setBounds(firstTextFieldColumnStart, 200, labelWidth,
-					labelHight);
-			birthDate.setDateFormatString("dd-MMM-yyyy");
-			centerPanel.add(birthDate);
-
-			assignJTextFieldDetails(occupation, "occupation",
+			assignJTextFieldDetails(supplierId, "supplierId",
 					firstTextFieldColumnStart, 250, labelWidth, labelHight);
 
-			assignJTextFieldDetails(contactNumber, "contactNumber",
+			assignJTextFieldDetails(supplierPrice, "supplierPrice",
 					firstTextFieldColumnStart, 300, labelWidth, labelHight);
 
-			assignJTextFieldDetails(customerIndex, "customerIndex",
+			assignJTextFieldDetails(discount, "discount",
 					firstTextFieldColumnStart, 350, labelWidth, labelHight,
 					true);
 
@@ -163,18 +148,16 @@ public class AddDressTab extends JFrame implements FocusListener,
 			int secondTextFieldColumnStart = secondColumnStart + labelWidth
 					+ 50;
 
-			JLabel customerBarCodeLabel = new JLabel("customerBarCodeLabel");
-			assignJLabelDetails(customerBarCodeLabel, "Customer BarCode: ",
+			JLabel lotNumberDateLabel = new JLabel("lotNumberDateLabel");
+			assignJLabelDetails(lotNumberDateLabel, "Lot Number: ",
 					secondColumnStart, 50, labelWidth, labelHight);
 
-			JLabel customerAddressLine1Label = new JLabel(
-					"customerAddressLine1Label");
-			assignJLabelDetails(customerAddressLine1Label, "Address Line 1: ",
+			JLabel barCodeIdLabel = new JLabel("barCodeIdLabel");
+			assignJLabelDetails(barCodeIdLabel, "Dress BarCode: ",
 					secondColumnStart, 100, labelWidth, labelHight);
 
-			JLabel customerAddressLine2Label = new JLabel(
-					"customerAddressLine2Label");
-			assignJLabelDetails(customerAddressLine2Label, "Address Line 2: ",
+			JLabel damageIdLabel = new JLabel("damageIdLabel");
+			assignJLabelDetails(damageIdLabel, "Damage ID: ",
 					secondColumnStart, 150, labelWidth, labelHight);
 
 			JLabel customerLandMarkLabel = new JLabel("customerLandMarkLabel");
@@ -193,59 +176,38 @@ public class AddDressTab extends JFrame implements FocusListener,
 			assignJLabelDetails(customerZipLabel, "Zip: ", secondColumnStart,
 					350, labelWidth, labelHight);
 
-			assignJTextFieldDetails(customerBarCode, "customerBarCode",
+			assignJTextFieldDetails(lotNumberDate, "lotNumberDate",
 					secondTextFieldColumnStart, 50, labelWidth, labelHight);
 
-			assignJTextFieldDetails(addressFirstLine, "addressFirstLine",
+			assignJTextFieldDetails(barcodeId, "barcodeId",
 					secondTextFieldColumnStart, 100, labelWidth + 100,
 					labelHight);
 
-			assignJTextFieldDetails(addressSecondLine, "addressSecondLine",
+			assignJTextFieldDetails(damageId, "damageId",
 					secondTextFieldColumnStart, 150, labelWidth + 100,
 					labelHight);
 
-			assignJTextFieldDetails(landMark, "landMark",
-					secondTextFieldColumnStart, 200, labelWidth + 100,
-					labelHight);
+			centerPanel.add(dressIDLabel);
+			centerPanel.add(dressNameLabel);
+			centerPanel.add(dressColorLabel);
+			centerPanel.add(sellPriceLabel);
+			centerPanel.add(supplierIdLabel);
+			centerPanel.add(supplierPriceLabel);
+			centerPanel.add(discountLabel);
+			centerPanel.add(lotNumberDateLabel);
+			centerPanel.add(barCodeIdLabel);
+			centerPanel.add(damageIdLabel);
 
-			assignJTextFieldDetails(city, "city", secondTextFieldColumnStart,
-					250, labelWidth, labelHight);
-
-			assignJTextFieldDetails(state, "state", secondTextFieldColumnStart,
-					300, labelWidth, labelHight);
-
-			assignJTextFieldDetails(zip, "zip", secondTextFieldColumnStart,
-					350, labelWidth, labelHight);
-
-			centerPanel.add(customerIDLabel);
-			centerPanel.add(customerFirstNameLabel);
-			centerPanel.add(customerLastNameLabel);
-			centerPanel.add(customerBirthDateLabel);
-			centerPanel.add(customerContactNumberLabel);
-			centerPanel.add(customerAddressLine1Label);
-			centerPanel.add(customerAddressLine2Label);
-			centerPanel.add(customerLandMarkLabel);
-			centerPanel.add(customerCityLabel);
-			centerPanel.add(customerStateLabel);
-			centerPanel.add(customerZipLabel);
-			centerPanel.add(customerOccupationLabel);
-			centerPanel.add(customerIndexLabel);
-			centerPanel.add(customerBarCodeLabel);
-
-			centerPanel.add(customerID);
-			centerPanel.add(customerFirstName);
-			centerPanel.add(customerLastName);
-			centerPanel.add(birthDate);
-			centerPanel.add(contactNumber);
-			centerPanel.add(addressFirstLine);
-			centerPanel.add(addressSecondLine);
-			centerPanel.add(landMark);
-			centerPanel.add(city);
-			centerPanel.add(state);
-			centerPanel.add(zip);
-			centerPanel.add(occupation);
-			centerPanel.add(customerIndex);
-			centerPanel.add(customerBarCode);
+			centerPanel.add(dressID);
+			centerPanel.add(dressName);
+			centerPanel.add(dressColor);
+			centerPanel.add(sellPrice);
+			centerPanel.add(supplierId);
+			centerPanel.add(supplierPrice);
+			centerPanel.add(discount);
+			centerPanel.add(lotNumberDate);
+			centerPanel.add(barcodeId);
+			centerPanel.add(damageId);
 
 			_mainTab.add(centerPanel, BorderLayout.CENTER);
 
@@ -343,47 +305,43 @@ public class AddDressTab extends JFrame implements FocusListener,
 
 	// -------------------------------------------------------------------
 	protected void submitForm() {
-		if (customerID.isEnabled()) {
-			_parent.statusBarMsg("Querying Customer ID: "
-					+ customerID.getText());
+		if (dressID.isEnabled()) {
+			_parent.statusBarMsg("Querying Dress ID: " + dressID.getText());
 			// BusinessCustomer customerDetail = BusinessCustomerDAO
 			// .getCustomerDetail(customerID.getText(),
 			// customerFirstName.getText(),
 			// customerLastName.getText());
 			// setCustomerForm(customerDetail);
 
-			BusinessCustomer customerDetail = BusinessCustomerDAO
-					.getBusinessCustomer(getCustomerForm(new BusinessCustomer()));
-			setCustomerForm(customerDetail);
+			BusinessDress customerDetail = BusinessDressDAO
+					.getBusinessDress(getDressForm(new BusinessDress()));
+			setDressForm(customerDetail);
 
-			_parent.setCustomerDetail(customerDetail);
 		} else {
-			_parent.statusBarMsg("Inserting/Updating Customer");
-			if (customerID.getText().equals("")) {
-				_parent.statusBarMsg("Inserting Customer");
-				BusinessCustomer customerDetail = new BusinessCustomer();
-				BusinessCustomerDAO
-						.addBusinessCustomer(getCustomerForm(customerDetail));
-				setCustomerForm(customerDetail);
+			_parent.statusBarMsg("Inserting/Updating Dress");
+			if (dressID.getText().equals("")) {
+				_parent.statusBarMsg("Inserting Dress");
+				BusinessDress dressForm = new BusinessDress();
+				BusinessDressDAO.addBusinessDress(getDressForm(dressForm));
+				setDressForm(dressForm);
 			} else {
-				BusinessCustomer customerDetail = new BusinessCustomer();
-				BusinessCustomerDAO
-						.updateCustomerDetail(getCustomerForm(customerDetail));
-				setCustomerForm(customerDetail);
-				_parent.statusBarMsg("Updating Customer");
+				BusinessDress dressForm = new BusinessDress();
+				BusinessDressDAO.addBusinessDress(getDressForm(dressForm));
+				setDressForm(dressForm);
+				_parent.statusBarMsg("Updating Dress");
 			}
 		}
 	}
 
 	protected void toggleFunction() {
-		if (!customerID.isEnabled()) {
+		if (!dressID.isEnabled()) {
 			_parent.statusBarMsg("ID: Enabled For Query.");
-			customerID.setEnabled(true);
+			dressID.setEnabled(true);
 			toggleFunction.setText("ToggleInsert/Update");
 			submitForm.setText("Query");
 		} else {
 			_parent.statusBarMsg("ID: Disabled For Insert.");
-			customerID.setEnabled(false);
+			dressID.setEnabled(false);
 			submitForm.setText("Insert/Update");
 			toggleFunction.setText("ToggleQuery");
 		}
@@ -392,20 +350,20 @@ public class AddDressTab extends JFrame implements FocusListener,
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
 	protected void resetForm() {
-		customerID.setText("");
-		customerFirstName.setText("");
-		customerLastName.setText("");
-		birthDate.setDate(null);
-		contactNumber.setText("");
-		addressFirstLine.setText("");
-		addressSecondLine.setText("");
-		landMark.setText("");
-		city.setText("");
-		state.setText("");
-		zip.setText("");
-		occupation.setText("");
-		customerIndex.setText("");
-		customerBarCode.setText("");
+		// customerID.setText("");
+		// customerFirstName.setText("");
+		// customerLastName.setText("");
+		// birthDate.setDate(null);
+		// contactNumber.setText("");
+		// addressFirstLine.setText("");
+		// addressSecondLine.setText("");
+		// landMark.setText("");
+		// city.setText("");
+		// state.setText("");
+		// zip.setText("");
+		// occupation.setText("");
+		// customerIndex.setText("");
+		// customerBarCode.setText("");
 	}
 
 	// -------------------------------------------------------------------
@@ -482,54 +440,45 @@ public class AddDressTab extends JFrame implements FocusListener,
 
 	}
 
-	SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+	private void setDressForm(BusinessDress businessDress) {
+		dressID.setText(businessDress.getDressId() + "");
+		dressName.setText(businessDress.getDressName());
+		dressColor.setText(businessDress.getDressColor());
 
-	private void setCustomerForm(BusinessCustomer customerDetail) {
-		customerID.setText(customerDetail.getCustomerId() + "");
-		customerFirstName.setText(customerDetail.getCustomerFirstName());
-		customerLastName.setText(customerDetail.getCustomerLastName());
-
-		birthDate.setDate(customerDetail.getBirthDate());
-		contactNumber.setText(customerDetail.getContactNumber() + "");
-		addressFirstLine.setText(customerDetail.getAddressFirstLine());
-		addressSecondLine.setText(customerDetail.getAddressSecondLine());
-		landMark.setText(customerDetail.getLandMark());
-		city.setText(customerDetail.getCity());
-		state.setText(customerDetail.getState());
-		zip.setText(customerDetail.getZip() + "");
-		occupation.setText(customerDetail.getOccupation());
-		customerIndex.setText(customerDetail.getCustomerIndex());
-		customerBarCode.setText(customerDetail.getCustomerBarCode());
+		sellPrice.setText(businessDress.getSellPrice() + "");
+		supplierId.setText(businessDress.getSupplierId() + "");
+		supplierPrice.setText(businessDress.getSupplierPrice() + "");
+		discount.setText(businessDress.getDiscount());
+		lotNumberDate.setText(businessDress.getLotNumberDate());
+		barcodeId.setText(businessDress.getBarCodeId());
+		damageId.setText(businessDress.getDamageId());
 
 	}
 
-	private BusinessCustomer getCustomerForm(BusinessCustomer customerDetail) {
-		if (customerID.getText() != null && !customerID.getText().equals("")) {
-			customerDetail
-					.setCustomerId(Integer.parseInt(customerID.getText()));
+	private BusinessDress getDressForm(BusinessDress businessDress) {
+		if (dressID.getText() != null && !dressID.getText().equals("")) {
+			businessDress.setDressId(Integer.parseInt(dressID.getText()));
 		}
-		customerDetail.setCustomerFirstName(customerFirstName.getText());
-		customerDetail.setCustomerLastName(customerLastName.getText());
-		if (birthDate.getDate() != null) {
-			customerDetail.setBirthDate(new java.sql.Date(birthDate.getDate()
-					.getTime()));
+		businessDress.setDressName(dressName.getText());
+		businessDress.setDressColor(dressColor.getText());
+
+		if (!sellPrice.getText().equalsIgnoreCase("")) {
+			businessDress.setSellPrice(Integer.parseInt(sellPrice.getText()));
 		}
-		if (!contactNumber.getText().equalsIgnoreCase("")) {
-			customerDetail.setContactNumber(Long.parseLong(contactNumber
+		if (!supplierId.getText().equalsIgnoreCase("")) {
+			businessDress.setSupplierId(Integer.parseInt(supplierId.getText()));
+		}
+		if (!supplierPrice.getText().equalsIgnoreCase("")) {
+			businessDress.setSupplierPrice(Integer.parseInt(supplierPrice
 					.getText()));
 		}
-		customerDetail.setAddressFirstLine(addressFirstLine.getText());
-		customerDetail.setAddressSecondLine(addressSecondLine.getText());
-		customerDetail.setLandMark(landMark.getText());
-		customerDetail.setCity(city.getText());
-		customerDetail.setState(state.getText());
-		if (!zip.getText().equalsIgnoreCase("")) {
-			customerDetail.setZip(Integer.parseInt(zip.getText()));
-		}
-		customerDetail.setOccupation(occupation.getText());
-		customerDetail.setCustomerIndex(customerIndex.getText());
-		customerDetail.setCustomerBarCode(customerBarCode.getText());
-		return customerDetail;
+		businessDress.setDiscount(discount.getText());
+		businessDress.setLotNumberDate(lotNumberDate.getText());
+
+		businessDress.setBarCodeId(barcodeId.getText());
+		businessDress.setDamageId(damageId.getText());
+
+		return businessDress;
 
 	}
 }
