@@ -35,6 +35,10 @@
 			resource="com\businessadvancesolutions\dbapi\hibernate\config\businesscustomer.hbm.xml" />
 		<mapping
 			resource="com\businessadvancesolutions\dbapi\hibernate\config\businessdress.hbm.xml" />
+			<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businesssell.hbm.xml" />
+			<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businessinvoice.hbm.xml" />
 		
 	</session-factory>
 </hibernate-configuration>

@@ -14,7 +14,10 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -31,10 +34,10 @@ import javax.swing.event.DocumentListener;
 import org.apache.log4j.Logger;
 
 import com.businessadvancesolutions.businessmodel.BusinessCustomer;
+import com.businessadvancesolutions.businessmodel.BusinessInvoice;
 import com.businessadvancesolutions.businessmodel.BusinessSell;
-import com.businessadvancesolutions.businessmodel.BusinessUser;
 import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
-import com.businessadvancesolutions.dbapi.dao.BusinessUserDAO;
+import com.businessadvancesolutions.dbapi.dao.BusinessInvoiceSellDAO;
 import com.businessadvancesolutions.gui.model.BusinessTableModel;
 import com.businessadvancesolutions.gui.renderer.BusinessTableRenderer;
 import com.businessadvancesolutions.helper.SystemLogger;
@@ -83,6 +86,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 	JTextField dressBarCodeText = new JTextField();
 
 	BusinessTableModel invoiceTableModel = null;
+	List<BusinessSell> businessSellList = new ArrayList<BusinessSell>();
 	JTable invoiceDetailJTable = null;
 
 	JButton resetForm = null;
@@ -388,8 +392,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			dressBarCodeText.setEditable(false);
 			SystemLogger.logDebug("Entered Valid BarCode:"
 					+ dressBarCodeText.getText());
-			BusinessSell businessSell = new BusinessSell(
-					dressBarCodeText.getText());
+			BusinessSell businessSell = new BusinessSell();
 
 			businessSell.setDressBarCode(dressBarCodeText.getText());
 			int itemSrNo = invoiceTableModel.getRowCount() + 1;
@@ -433,6 +436,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			// .getVector());
 
 			int rowNum = invoiceTableModel.getRowCount() - 1;
+			businessSellList.add(sellFromBarCode);
 			if ((rowNum < 0)
 					|| (invoiceTableModel.getValueAt(rowNum, 2) != null && Integer
 							.parseInt((String) invoiceTableModel.getValueAt(
@@ -501,18 +505,17 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 		if (invoiceIDText.isEnabled()) {
 			try {
-
-				List<BusinessUser> businessUserList = BusinessUserDAO
-						.getBusinessUserList(invoiceIDText.getText(),
-								customerFirstNameText.getText(), null);
-				if (businessUserList.size() > 0) {
-					invoiceIDText.setText(businessUserList.get(0).getUserId()
-							+ "");
-					customerFirstNameText.setText(businessUserList.get(0)
-							.getUserName());
-					customerLastNameText.setText(businessUserList.get(0)
-							.getUserRole() + "");
+				BusinessInvoice invoiceForm = new BusinessInvoice();
+				if (invoiceIDText.getText() != null
+						&& !invoiceIDText.getText().equalsIgnoreCase("")) {
+					invoiceForm.setInvoiceId(Integer.parseInt(invoiceIDText
+							.getText()));
 				}
+				invoiceForm.setInvoiceBarCode(invoiceBarCodeText.getText());
+				BusinessInvoice businessInvoice = BusinessInvoiceSellDAO
+						.getBusinessInvoice(invoiceForm);
+
+				setInvoiceForm(businessInvoice);
 
 			} catch (Exception e) {
 				_parent.statusBarMsg("Exception: " + e.getMessage());
@@ -521,19 +524,110 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 					+ " Name:" + customerFirstNameText.getText() + "| "
 					+ " Role:" + customerLastNameText.getText() + "| "
 					+ " Password: | ");
-
 		} else {
 			if (invoiceIDText.getText().equals("")) {
 
+				BusinessInvoice businessInvoice = BusinessInvoiceSellDAO
+						.addBusinessInvoice(getInvoiceForm());
+				for (Iterator<BusinessSell> iterator = businessSellList
+						.iterator(); iterator.hasNext();) {
+					BusinessSell businessSellForm = iterator.next();
+					businessSellForm.setInvoiceId(businessInvoice
+							.getInvoiceId());
+
+					BusinessInvoiceSellDAO.addBusinessSell(businessSellForm);
+				}
+
 			} else {
-				boolean insertStatus = BusinessUserDAO.updateBusinessUser(
-						invoiceIDText.getText(),
-						customerFirstNameText.getText(),
-						customerLastNameText.getText());
-				_parent.statusBarMsg("Updated: " + insertStatus);
+				BusinessInvoice businessInvoice = BusinessInvoiceSellDAO
+						.addBusinessInvoice(getInvoiceForm());
+				int iSize = businessSellList.size();
+				for (int i = 0; i < iSize; i++) {
+					BusinessSell businessSellForm = businessSellList.get(i);
+					businessSellForm.setQuantity(Integer
+							.parseInt((String) invoiceTableModel.getValueAt(i,
+									2)));
+					businessSellForm.setSellPrice((String) invoiceTableModel
+							.getValueAt(i, 3));
+					businessSellForm.setTotalPrice(Integer
+							.parseInt((String) invoiceTableModel.getValueAt(i,
+									4)));
+
+					businessSellForm.setInvoiceId(businessInvoice
+							.getInvoiceId());
+
+					BusinessInvoiceSellDAO.updateBusinessSell(businessSellForm);
+				}
 			}
 
 		}
+
+	}
+
+	private BusinessInvoice getInvoiceForm() {
+		BusinessInvoice invoiceForm = new BusinessInvoice();
+		if (invoiceIDText.getText() != null
+				&& !invoiceIDText.getText().equalsIgnoreCase("")) {
+			invoiceForm.setInvoiceId(Integer.parseInt(invoiceIDText.getText()));
+		}
+		if (customerIDText.getText() != null
+				&& !customerIDText.getText().equalsIgnoreCase("")) {
+			invoiceForm
+					.setCustomerId(Integer.parseInt(customerIDText.getText()));
+		}
+		if (invoiceTotal.getText() != null
+				&& !invoiceTotal.getText().equalsIgnoreCase("")) {
+			invoiceForm
+					.setInvoiceTotal(Integer.parseInt(invoiceTotal.getText()));
+		}
+		if (invoiceDiscount.getText() != null
+				&& !invoiceDiscount.getText().equalsIgnoreCase("")) {
+			invoiceForm.setTotalDiscount(Integer.parseInt(invoiceDiscount
+					.getText()));
+		}
+		invoiceForm.setInvoiceBarCode(invoiceIDText.getText());
+		invoiceForm.setInvoiceDate(invoiceDate.getDate());
+
+		return invoiceForm;
+	}
+
+	private void setInvoiceForm(BusinessInvoice businessInvoice) {
+		invoiceIDText.setText(businessInvoice.getInvoiceId() + "");
+		invoiceBarCodeText.setText(businessInvoice.getInvoiceBarCode());
+		invoiceDiscount.setText(businessInvoice.getTotalDiscount() + "");
+		invoiceTotal.setText(businessInvoice.getInvoiceTotal() + "");
+		customerIDText.setText(businessInvoice.getCustomerId() + "");
+		invoiceDate.setDate(businessInvoice.getInvoiceDate());
+
+		BusinessCustomer businessCustomer = new BusinessCustomer();
+		businessCustomer.setCustomerId(businessInvoice.getCustomerId());
+		businessCustomer = BusinessCustomerDAO
+				.getBusinessCustomer(businessCustomer);
+		customerFirstNameText.setText(businessCustomer.getCustomerFirstName());
+		customerLastNameText.setText(businessCustomer.getCustomerLastName());
+		customerIDCheckBox.setSelected(true);
+		customerBarCodeText.setText(businessCustomer.getCustomerBarCode());
+
+		businessSellList = BusinessInvoiceSellDAO
+				.getBusinessSellList(businessInvoice);
+
+		Vector<Vector<String>> recordRecordVector = new Vector();
+		for (Iterator<BusinessSell> iterator = businessSellList.iterator(); iterator
+				.hasNext();) {
+			recordRecordVector.add(iterator.next().getVector());
+
+		}
+		invoiceTableModel.setRecordVector(recordRecordVector);
+
+		// for (Iterator<BusinessSell> iterator = businessSellList.iterator();
+		// iterator
+		// .hasNext();) {
+		// BusinessSell businessSell = iterator.next();
+		//
+		// System.out.println("Adding row to table..."
+		// + businessSell.getVector());
+		// addInvoiceDetail(businessSell);
+		// }
 
 	}
 

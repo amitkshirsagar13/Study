@@ -49,3 +49,24 @@ CREATE  TABLE `businessadvancedatabase`.`businessdress` (
   `damageId` VARCHAR(45) NULL ,
   PRIMARY KEY (`dressid`) );
 
+CREATE  TABLE `businessadvancedatabase`.`businesssell` (
+  `sellId` INT NOT NULL ,
+  `invoiceId` INT NULL ,
+  `dressBarCode` VARCHAR(45) NULL ,
+  `itemSrNo` VARCHAR(45) NULL ,
+  `quantity` INT NULL ,
+  `sellPrice` VARCHAR(45) NULL ,
+  `totalPrice` INT NULL ,
+  PRIMARY KEY (`sellId`) );
+
+  
+  CREATE  TABLE `businessadvancedatabase`.`businessinvoice` (
+  `invoiceId` INT NOT NULL ,
+  `customerId` INT NULL ,
+  `invoiceTotal` INT NULL ,
+  `totalDiscount` INT NULL ,
+  `invoiceBarCode` VARCHAR(45) NULL ,
+  `invoiceDate` DATE NULL ,
+  PRIMARY KEY (`invoiceId`) );
+  
+  

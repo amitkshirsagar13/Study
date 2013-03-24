@@ -99,12 +99,12 @@ public class SplashScreen extends JWindow {
 		progressBar.setForeground(Color.GREEN);
 		progressBar.setBackground(Color.BLACK);
 
-		progressBarMsg.setSize(iImgWidth, 10);
+		progressBarMsg.setSize(iImgWidth, 15);
 		progressBarMsg.setForeground(Color.BLACK);
 
-		progressBar.setBounds(0, iImgHeight - 45, iImgWidth, 15);
+		progressBar.setBounds(0, iImgHeight - 45, iImgWidth, 18);
 
-		progressBarMsg.setFont(new Font("SansSerif", Font.PLAIN, 11));
+		progressBarMsg.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		progressBarMsg.setOpaque(false);
 
 		progressBar.add(progressBarMsg);

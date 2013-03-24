@@ -29,6 +29,11 @@ public class BusinessTableModel extends AbstractTableModel implements
 		fireTableDataChanged();
 	}
 
+	public void setRecordVector(Vector<Vector<String>> recordRecordVector) {
+		this.recordRecordVector = recordRecordVector;
+		fireTableDataChanged();
+	}
+
 	public Vector getRecordVector() {
 		return recordRecordVector;
 	}

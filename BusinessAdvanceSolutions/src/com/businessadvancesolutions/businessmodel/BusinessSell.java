@@ -6,31 +6,27 @@ import com.businessadvancesolutions.dbapi.dao.BusinessDressDAO;
 
 public class BusinessSell {
 
-	private String invoiceId = null;
-	private String sellId = null;
+	private int invoiceId = -1;
+	private int sellId = -1;
 	private String dressBarCode = null;
 	private String itemSrNo = null;
 	private int quantity = 0;
 	private String sellPrice = null;
 	private int totalPrice = 0;
 
-	public BusinessSell(String dressBarCode) {
-		this.dressBarCode = dressBarCode;
-	}
-
-	public String getInvoiceId() {
+	public int getInvoiceId() {
 		return invoiceId;
 	}
 
-	public void setInvoiceId(String invoiceId) {
+	public void setInvoiceId(int invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 
-	public String getSellId() {
+	public int getSellId() {
 		return sellId;
 	}
 
-	public void setSellId(String sellId) {
+	public void setSellId(int sellId) {
 		this.sellId = sellId;
 	}
 
@@ -87,6 +83,14 @@ public class BusinessSell {
 						.getSellPrice();
 		vector.add(totalPrice + "");
 		return vector;
+	}
+
+	@Override
+	public String toString() {
+
+		return "InvoiceId: " + invoiceId + " : " + "SellId: " + sellId + " : "
+				+ "Quantity: " + quantity + " : SellPrice" + sellPrice
+				+ " : TotalPrice" + totalPrice;
 	}
 
 }
