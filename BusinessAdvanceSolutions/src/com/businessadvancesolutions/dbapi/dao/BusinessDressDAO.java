@@ -62,18 +62,21 @@ public class BusinessDressDAO extends BusinessAdvanceDAO {
 					+ "%");
 		}
 
+		if (query == null) {
+			return null;
+		}
 		List<BusinessDress> list = query.list();
 		Iterator<BusinessDress> iter = list.iterator();
 		while (iter.hasNext()) {
 
 			businessDress = iter.next();
 
+			SystemLogger.logMessage("Fetched BusinessDress- "
+					+ businessDress.getDressId() + ", "
+					+ businessDress.getDressName() + ", "
+					+ businessDress.getDressColor() + ", "
+					+ businessDress.getSellPrice());
 		}
-		SystemLogger.logMessage("Fetched BusinessDress- "
-				+ businessDress.getDressId() + ", "
-				+ businessDress.getDressName() + ", "
-				+ businessDress.getDressColor() + ", "
-				+ businessDress.getSellPrice());
 
 		commitTransaction();
 		return businessDress;

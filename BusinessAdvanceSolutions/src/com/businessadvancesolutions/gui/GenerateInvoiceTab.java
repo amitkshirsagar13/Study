@@ -310,8 +310,8 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			invoiceDetailAdd.setBounds(50, 5, 100, 50);
 			invoiceDetailDelete.setBounds(50, 5, 100, 50);
 
-			invoiceButtonPanel.add(invoiceDetailAdd);
-			invoiceButtonPanel.add(invoiceDetailDelete);
+			// invoiceButtonPanel.add(invoiceDetailAdd);
+			// invoiceButtonPanel.add(invoiceDetailDelete);
 
 			invoiceDetailAdd.addActionListener(new ActionListener() {
 
@@ -527,37 +527,52 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 		} else {
 			if (invoiceIDText.getText().equals("")) {
 
-				BusinessInvoice businessInvoice = BusinessInvoiceSellDAO
-						.addBusinessInvoice(getInvoiceForm());
-				for (Iterator<BusinessSell> iterator = businessSellList
-						.iterator(); iterator.hasNext();) {
-					BusinessSell businessSellForm = iterator.next();
-					businessSellForm.setInvoiceId(businessInvoice
-							.getInvoiceId());
+				// BusinessInvoice businessInvoice = BusinessInvoiceSellDAO
+				// .addBusinessInvoice(getInvoiceForm());
+				BusinessInvoice businessInvoice = getInvoiceForm();
+				int iSize = businessSellList.size();
+				for (int i = 0; i < iSize; i++) {
+					businessSellList.get(i);
+					businessSellList.get(i).setQuantity(
+							Integer.parseInt((String) invoiceTableModel
+									.getValueAt(i, 2)));
+					businessSellList.get(i).setSellPrice(
+							(String) invoiceTableModel.getValueAt(i, 3));
+					businessSellList.get(i).setTotalPrice(
+							Integer.parseInt((String) invoiceTableModel
+									.getValueAt(i, 4)));
 
-					BusinessInvoiceSellDAO.addBusinessSell(businessSellForm);
+					// businessSellForm.setInvoiceId(businessInvoice
+					// .getInvoiceId());
+					businessInvoice.setBusinessSells(businessSellList);
+					// BusinessInvoiceSellDAO.updateBusinessSell(businessSellForm);
 				}
-
+				businessInvoice = BusinessInvoiceSellDAO
+						.addBusinessInvoice(businessInvoice);
+				setInvoiceForm(businessInvoice);
 			} else {
 				BusinessInvoice businessInvoice = BusinessInvoiceSellDAO
 						.addBusinessInvoice(getInvoiceForm());
 				int iSize = businessSellList.size();
 				for (int i = 0; i < iSize; i++) {
-					BusinessSell businessSellForm = businessSellList.get(i);
-					businessSellForm.setQuantity(Integer
-							.parseInt((String) invoiceTableModel.getValueAt(i,
-									2)));
-					businessSellForm.setSellPrice((String) invoiceTableModel
-							.getValueAt(i, 3));
-					businessSellForm.setTotalPrice(Integer
-							.parseInt((String) invoiceTableModel.getValueAt(i,
-									4)));
+					businessSellList.get(i);
+					businessSellList.get(i).setQuantity(
+							Integer.parseInt((String) invoiceTableModel
+									.getValueAt(i, 2)));
+					businessSellList.get(i).setSellPrice(
+							(String) invoiceTableModel.getValueAt(i, 3));
+					businessSellList.get(i).setTotalPrice(
+							Integer.parseInt((String) invoiceTableModel
+									.getValueAt(i, 4)));
 
-					businessSellForm.setInvoiceId(businessInvoice
-							.getInvoiceId());
-
-					BusinessInvoiceSellDAO.updateBusinessSell(businessSellForm);
+					// businessSellForm.setInvoiceId(businessInvoice
+					// .getInvoiceId());
+					businessInvoice.setBusinessSells(businessSellList);
+					// BusinessInvoiceSellDAO.updateBusinessSell(businessSellForm);
 				}
+				businessInvoice = BusinessInvoiceSellDAO
+						.addBusinessInvoice(businessInvoice);
+				setInvoiceForm(businessInvoice);
 			}
 
 		}
@@ -585,7 +600,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			invoiceForm.setTotalDiscount(Integer.parseInt(invoiceDiscount
 					.getText()));
 		}
-		invoiceForm.setInvoiceBarCode(invoiceIDText.getText());
+		invoiceForm.setInvoiceBarCode(invoiceBarCodeText.getText());
 		invoiceForm.setInvoiceDate(invoiceDate.getDate());
 
 		return invoiceForm;
@@ -608,15 +623,21 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 		customerIDCheckBox.setSelected(true);
 		customerBarCodeText.setText(businessCustomer.getCustomerBarCode());
 
-		businessSellList = BusinessInvoiceSellDAO
-				.getBusinessSellList(businessInvoice);
+		businessSellList = businessInvoice.getBusinessSells();
+		_parent.setCustomerDetail(businessCustomer);
+		// businessSellList = BusinessInvoiceSellDAO
+		// .getBusinessSellList(businessInvoice);
 
 		Vector<Vector<String>> recordRecordVector = new Vector();
 		for (Iterator<BusinessSell> iterator = businessSellList.iterator(); iterator
 				.hasNext();) {
-			recordRecordVector.add(iterator.next().getVector());
+			BusinessSell businessSell = iterator.next();
+			if (businessSell != null) {
+				recordRecordVector.add(businessSell.getVector());
+			}
 
 		}
+
 		invoiceTableModel.setRecordVector(recordRecordVector);
 
 		// for (Iterator<BusinessSell> iterator = businessSellList.iterator();
@@ -650,6 +671,28 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 	// -------------------------------------------------------------------
 	// -------------------------------------------------------------------
 	protected void resetForm() {
+		invoiceIDText.setText("");
+		toggleFunction();
+
+		invoiceBarCodeText.setText("");
+		invoiceDiscount.setText("");
+		invoiceTotal.setText("");
+		customerIDText.setText("");
+		invoiceDate.setDate(null);
+
+		customerFirstNameText.setText("");
+		customerLastNameText.setText("");
+		customerIDCheckBox.setSelected(false);
+		customerBarCodeText.setText("");
+
+		int rowCount = invoiceTableModel.getRowCount();
+
+		for (int index = rowCount - 1; index > -1; index--) {
+			invoiceTableModel.deleteInvoiceDetail(index);
+			// businessSellList.remove(index);
+		}
+
+		businessSellList = new ArrayList<BusinessSell>();
 	}
 
 	// -------------------------------------------------------------------
