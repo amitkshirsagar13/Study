@@ -34,9 +34,11 @@ import javax.swing.event.DocumentListener;
 import org.apache.log4j.Logger;
 
 import com.businessadvancesolutions.businessmodel.BusinessCustomer;
+import com.businessadvancesolutions.businessmodel.BusinessDress;
 import com.businessadvancesolutions.businessmodel.BusinessInvoice;
 import com.businessadvancesolutions.businessmodel.BusinessSell;
 import com.businessadvancesolutions.dbapi.dao.BusinessCustomerDAO;
+import com.businessadvancesolutions.dbapi.dao.BusinessDressDAO;
 import com.businessadvancesolutions.dbapi.dao.BusinessInvoiceSellDAO;
 import com.businessadvancesolutions.gui.model.BusinessTableModel;
 import com.businessadvancesolutions.gui.renderer.BusinessTableRenderer;
@@ -397,6 +399,10 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 			businessSell.setDressBarCode(dressBarCodeText.getText());
 			int itemSrNo = invoiceTableModel.getRowCount() + 1;
 			businessSell.setItemSrNo(itemSrNo + "");
+			BusinessDress businessDress = new BusinessDress();
+			businessDress.setDressBarCode(dressBarCodeText.getText());
+			businessDress = BusinessDressDAO.getBusinessDress(businessDress);
+			businessSell.setBusinessDress(businessDress);
 			addInvoiceDetail(businessSell);
 
 			Runnable cleanBarCodeField = new Runnable() {
@@ -614,19 +620,7 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 		customerIDText.setText(businessInvoice.getCustomerId() + "");
 		invoiceDate.setDate(businessInvoice.getInvoiceDate());
 
-		BusinessCustomer businessCustomer = new BusinessCustomer();
-		businessCustomer.setCustomerId(businessInvoice.getCustomerId());
-		businessCustomer = BusinessCustomerDAO
-				.getBusinessCustomer(businessCustomer);
-		customerFirstNameText.setText(businessCustomer.getCustomerFirstName());
-		customerLastNameText.setText(businessCustomer.getCustomerLastName());
-		customerIDCheckBox.setSelected(true);
-		customerBarCodeText.setText(businessCustomer.getCustomerBarCode());
-
 		businessSellList = businessInvoice.getBusinessSells();
-		_parent.setCustomerDetail(businessCustomer);
-		// businessSellList = BusinessInvoiceSellDAO
-		// .getBusinessSellList(businessInvoice);
 
 		Vector<Vector<String>> recordRecordVector = new Vector();
 		for (Iterator<BusinessSell> iterator = businessSellList.iterator(); iterator
@@ -640,15 +634,14 @@ public class GenerateInvoiceTab extends JFrame implements FocusListener,
 
 		invoiceTableModel.setRecordVector(recordRecordVector);
 
-		// for (Iterator<BusinessSell> iterator = businessSellList.iterator();
-		// iterator
-		// .hasNext();) {
-		// BusinessSell businessSell = iterator.next();
-		//
-		// System.out.println("Adding row to table..."
-		// + businessSell.getVector());
-		// addInvoiceDetail(businessSell);
-		// }
+		customerFirstNameText.setText(businessInvoice.getBusinessCustomer()
+				.getCustomerFirstName());
+		customerLastNameText.setText(businessInvoice.getBusinessCustomer()
+				.getCustomerLastName());
+		customerIDCheckBox.setSelected(true);
+		customerBarCodeText.setText(businessInvoice.getBusinessCustomer()
+				.getCustomerBarCode());
+		_parent.setCustomerDetail(businessInvoice.getBusinessCustomer());
 
 	}
 

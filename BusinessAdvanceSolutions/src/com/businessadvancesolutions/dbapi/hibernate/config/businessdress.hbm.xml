@@ -32,8 +32,8 @@
 		<property generated="never" lazy="false" name="lotNumberDate">
 			<column length="16" name="LOTNUMBERDATE" not-null="true" />
 		</property>
-		<property generated="never" lazy="false" name="barCodeId">
-			<column length="16" name="BARCODEID" not-null="true" />
+		<property generated="never" lazy="false" name="dressBarCode">
+			<column length="16" name="DRESSBARCODE" not-null="true" />
 		</property>
 		<property generated="never" lazy="false" name="damageId">
 			<column length="16" name="DAMAGEID" not-null="true" />

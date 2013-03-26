@@ -11,6 +11,7 @@ public class BusinessInvoice {
 	private int totalDiscount = 0;
 	private Date invoiceDate = null;
 	private String invoiceBarCode = null;
+	private BusinessCustomer businessCustomer = null;
 	private List<BusinessSell> businessSells = null;
 
 	public int getInvoiceId() {
@@ -80,5 +81,13 @@ public class BusinessInvoice {
 
 	public void setBusinessSells(List<BusinessSell> businessSells) {
 		this.businessSells = businessSells;
+	}
+
+	public BusinessCustomer getBusinessCustomer() {
+		return businessCustomer;
+	}
+
+	public void setBusinessCustomer(BusinessCustomer businessCustomer) {
+		this.businessCustomer = businessCustomer;
 	}
 }

@@ -45,7 +45,7 @@ CREATE  TABLE `businessadvancedatabase`.`businessdress` (
   `supplierPrice` INT NULL ,
   `discount` VARCHAR(45) NULL ,
   `lotNumberDate` VARCHAR(45) NULL ,
-  `barCodeId` VARCHAR(45) NULL ,
+  `dressBarCode` VARCHAR(45) NULL ,
   `damageId` VARCHAR(45) NULL ,
   PRIMARY KEY (`dressid`) );
 

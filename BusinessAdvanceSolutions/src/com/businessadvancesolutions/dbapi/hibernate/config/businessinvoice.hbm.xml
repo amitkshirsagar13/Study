@@ -26,16 +26,20 @@
 			type="date">
 			<column length="16" name="INVOICEDATE" not-null="true" />
 		</property>
-		
-		
+
+		<many-to-one name="businessCustomer" column="customerId"
+			class="com.businessadvancesolutions.businessmodel.BusinessCustomer"
+			cascade="none" not-null="true" insert="false" update="false"></many-to-one>
+
 		<list name="businessSells" table="businesssell" inverse="false"
 			cascade="all">
 
 			<key column="invoiceId" />
 			<list-index column="itemSrNo" />
-			<one-to-many class="com.businessadvancesolutions.businessmodel.BusinessSell" />
+			<one-to-many
+				class="com.businessadvancesolutions.businessmodel.BusinessSell" />
 		</list>
-		
+
 	</class>
 </hibernate-mapping>
 	

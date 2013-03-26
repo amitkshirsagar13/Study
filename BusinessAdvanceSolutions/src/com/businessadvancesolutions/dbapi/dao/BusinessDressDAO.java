@@ -34,7 +34,7 @@ public class BusinessDressDAO extends BusinessAdvanceDAO {
 
 	public static BusinessDress getBusinessDress(String dressBarCode) {
 		BusinessDress dressForm = new BusinessDress();
-		dressForm.setBarCodeId(dressBarCode);
+		dressForm.setDressBarCode(dressBarCode);
 		BusinessDress businessDress = getBusinessDress(dressForm);
 		return businessDress;
 	}
@@ -55,11 +55,11 @@ public class BusinessDressDAO extends BusinessAdvanceDAO {
 					+ "%");
 			query.setParameter("dresscolor", "%" + dressForm.getDressName()
 					+ "%");
-		} else if (dressForm.getBarCodeId() != null
-				&& !dressForm.getBarCodeId().equalsIgnoreCase("")) {
-			query = createQuery("from BusinessDress where barCodeId like :barCodeId");
-			query.setParameter("barCodeId", "%" + dressForm.getBarCodeId()
-					+ "%");
+		} else if (dressForm.getDressBarCode() != null
+				&& !dressForm.getDressBarCode().equalsIgnoreCase("")) {
+			query = createQuery("from BusinessDress where dressBarCode like :dressBarCode");
+			query.setParameter("dressBarCode",
+					"%" + dressForm.getDressBarCode() + "%");
 		}
 
 		if (query == null) {

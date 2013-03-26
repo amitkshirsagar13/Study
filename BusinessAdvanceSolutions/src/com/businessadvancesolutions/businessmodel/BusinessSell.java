@@ -2,8 +2,6 @@ package com.businessadvancesolutions.businessmodel;
 
 import java.util.Vector;
 
-import com.businessadvancesolutions.dbapi.dao.BusinessDressDAO;
-
 public class BusinessSell {
 
 	private int invoiceId = -1;
@@ -13,6 +11,7 @@ public class BusinessSell {
 	private int quantity = 0;
 	private String sellPrice = null;
 	private int totalPrice = 0;
+	private BusinessDress businessDress = null;
 
 	public int getInvoiceId() {
 		return invoiceId;
@@ -70,17 +69,24 @@ public class BusinessSell {
 		this.totalPrice = totalPrice;
 	}
 
+	public Vector<String> getVectorOld() {
+		Vector<String> vector = new Vector<String>();
+		vector.add(itemSrNo);
+		vector.add(businessDress.getDressName());
+		vector.add(quantity + "");
+		vector.add(businessDress.getSellPrice() + "");
+		totalPrice = quantity * businessDress.getSellPrice();
+		vector.add(totalPrice + "");
+		return vector;
+	}
+
 	public Vector<String> getVector() {
 		Vector<String> vector = new Vector<String>();
 		vector.add(itemSrNo);
-		vector.add(BusinessDressDAO.getBusinessDress(dressBarCode)
-				.getDressName());
+		vector.add(businessDress.getDressName());
 		vector.add(quantity + "");
-		vector.add(BusinessDressDAO.getBusinessDress(dressBarCode)
-				.getSellPrice() + "");
-		totalPrice = quantity
-				* BusinessDressDAO.getBusinessDress(dressBarCode)
-						.getSellPrice();
+		vector.add(businessDress.getSellPrice() + "");
+		totalPrice = quantity * businessDress.getSellPrice();
 		vector.add(totalPrice + "");
 		return vector;
 	}
@@ -91,6 +97,14 @@ public class BusinessSell {
 		return "InvoiceId: " + invoiceId + " : " + "SellId: " + sellId + " : "
 				+ "Quantity: " + quantity + " : SellPrice" + sellPrice
 				+ " : TotalPrice" + totalPrice;
+	}
+
+	public BusinessDress getBusinessDress() {
+		return businessDress;
+	}
+
+	public void setBusinessDress(BusinessDress businessDress) {
+		this.businessDress = businessDress;
 	}
 
 }

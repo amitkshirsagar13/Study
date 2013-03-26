@@ -77,6 +77,11 @@ public class BusinessInvoiceSellDAO extends BusinessAdvanceDAO {
 		if (businessSellForm.getSellId() > 0) {
 			query = createQuery("from BusinessSell where sellid=:sellid ");
 			query.setParameter("sellid", businessSellForm.getSellId());
+		} else if (businessSellForm.getDressBarCode() != null
+				&& !businessSellForm.getDressBarCode().equalsIgnoreCase("")) {
+			query = createQuery("from BusinessSell where dressBarCode=:dressBarCode ");
+			query.setParameter("dressBarCode",
+					businessSellForm.getDressBarCode());
 		}
 		if (query == null) {
 			return null;
@@ -120,7 +125,13 @@ public class BusinessInvoiceSellDAO extends BusinessAdvanceDAO {
 		if (query == null) {
 			return null;
 		}
-		List<BusinessInvoice> list = query.list();
+		List<BusinessInvoice> list = null;
+		try {
+			list = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// List<BusinessInvoice> list = query.list();
 		Iterator<BusinessInvoice> iter = list.iterator();
 		while (iter.hasNext()) {
 			businessInvoice = iter.next();

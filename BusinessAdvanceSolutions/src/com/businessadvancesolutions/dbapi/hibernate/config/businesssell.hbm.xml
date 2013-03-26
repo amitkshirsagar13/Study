@@ -6,7 +6,7 @@
 		table="businesssell">
 		<id column="SELLID" name="sellId" type="integer">
 			<generator class="increment" />
-		</id>		
+		</id>
 		<property generated="never" lazy="false" name="invoiceId"
 			type="integer">
 			<column length="16" name="INVOICEID" not-null="true" />
@@ -14,6 +14,12 @@
 		<property generated="never" lazy="false" name="dressBarCode">
 			<column length="16" name="DRESSBARCODE" not-null="true" />
 		</property>
+
+		<many-to-one name="businessDress" column="dressBarCode"
+			class="com.businessadvancesolutions.businessmodel.BusinessDress"
+			not-null="true" property-ref="dressBarCode" insert="false" update="false"></many-to-one>
+
+
 		<property generated="never" lazy="false" name="itemSrNo">
 			<column length="16" name="ITEMSRNO" not-null="true" />
 		</property>

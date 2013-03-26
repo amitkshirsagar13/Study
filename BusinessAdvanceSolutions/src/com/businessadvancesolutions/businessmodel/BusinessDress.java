@@ -9,7 +9,7 @@ public class BusinessDress {
 	private int supplierPrice = -1;
 	private String discount = null;
 	private String lotNumberDate = null;
-	private String barCodeId = null;
+	private String dressBarCode = null;
 	private String damageId = null;
 
 	public int getDressId() {
@@ -44,8 +44,8 @@ public class BusinessDress {
 		return lotNumberDate;
 	}
 
-	public String getBarCodeId() {
-		return barCodeId;
+	public String getDressBarCode() {
+		return dressBarCode;
 	}
 
 	public String getDamageId() {
@@ -84,8 +84,8 @@ public class BusinessDress {
 		this.lotNumberDate = lotNumberDate;
 	}
 
-	public void setBarCodeId(String barCodeId) {
-		this.barCodeId = barCodeId;
+	public void setDressBarCode(String dressBarCode) {
+		this.dressBarCode = dressBarCode;
 	}
 
 	public void setDamageId(String damageId) {

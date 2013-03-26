@@ -54,7 +54,7 @@ public class AddDressTab extends JFrame implements FocusListener, MouseListener 
 	JTextField supplierPrice = new JTextField(20);
 	JTextField discount = new JTextField(20);
 	JTextField lotNumberDate = new JTextField(20);
-	JTextField barcodeId = new JTextField(20);
+	JTextField dressBarCode = new JTextField(20);
 	JTextField damageId = new JTextField(20);
 
 	JButton resetForm = null;
@@ -179,7 +179,7 @@ public class AddDressTab extends JFrame implements FocusListener, MouseListener 
 			assignJTextFieldDetails(lotNumberDate, "lotNumberDate",
 					secondTextFieldColumnStart, 50, labelWidth, labelHight);
 
-			assignJTextFieldDetails(barcodeId, "barcodeId",
+			assignJTextFieldDetails(dressBarCode, "dressBarCode",
 					secondTextFieldColumnStart, 100, labelWidth + 100,
 					labelHight);
 
@@ -206,7 +206,7 @@ public class AddDressTab extends JFrame implements FocusListener, MouseListener 
 			centerPanel.add(supplierPrice);
 			centerPanel.add(discount);
 			centerPanel.add(lotNumberDate);
-			centerPanel.add(barcodeId);
+			centerPanel.add(dressBarCode);
 			centerPanel.add(damageId);
 
 			_mainTab.add(centerPanel, BorderLayout.CENTER);
@@ -450,7 +450,7 @@ public class AddDressTab extends JFrame implements FocusListener, MouseListener 
 		supplierPrice.setText(businessDress.getSupplierPrice() + "");
 		discount.setText(businessDress.getDiscount());
 		lotNumberDate.setText(businessDress.getLotNumberDate());
-		barcodeId.setText(businessDress.getBarCodeId());
+		dressBarCode.setText(businessDress.getDressBarCode());
 		damageId.setText(businessDress.getDamageId());
 
 	}
@@ -475,7 +475,7 @@ public class AddDressTab extends JFrame implements FocusListener, MouseListener 
 		businessDress.setDiscount(discount.getText());
 		businessDress.setLotNumberDate(lotNumberDate.getText());
 
-		businessDress.setBarCodeId(barcodeId.getText());
+		businessDress.setDressBarCode(dressBarCode.getText());
 		businessDress.setDamageId(damageId.getText());
 
 		return businessDress;
