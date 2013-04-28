@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://service.base.com/" xmlns:tns="http://service.base.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getMessage" type="tns:getMessage"/>
+
+  <xs:element name="getMessageResponse" type="tns:getMessageResponse"/>
+
+  <xs:complexType name="getMessage">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMessageResponse">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
