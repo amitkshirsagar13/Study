@@ -15,6 +15,10 @@
 
   <xs:element name="getUserHashMapResponse" type="tns:getUserHashMapResponse"/>
 
+  <xs:element name="getUserRequest" type="tns:getUserRequest"/>
+
+  <xs:element name="getUserRequestResponse" type="tns:getUserRequestResponse"/>
+
   <xs:element name="getUserResponse" type="tns:getUserResponse"/>
 
   <xs:element name="subjectList" type="tns:subjectList"/>
@@ -35,15 +39,9 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="getUser">
+  <xs:complexType name="getUserRequest">
     <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUserResponse">
-    <xs:sequence>
-      <xs:element name="User" type="tns:user" minOccurs="0"/>
+      <xs:element name="UserRequest" type="tns:user" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -58,6 +56,24 @@
   <xs:complexType name="subjectList">
     <xs:sequence>
       <xs:element name="subjects" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserRequestResponse">
+    <xs:sequence>
+      <xs:element name="User" type="tns:user" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUser">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserResponse">
+    <xs:sequence>
+      <xs:element name="User" type="tns:user" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 

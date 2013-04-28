@@ -59,4 +59,16 @@ public class FirstTest {
 		user.setSubjectList(subjectList);
 		return user;
 	}
+
+	@WebMethod(operationName = "getUserRequest", action = "getUserRequest")
+	@WebResult(name = "User")
+	public User getUserRequest(@WebParam(name = "UserRequest") User userRequest) {
+		List<String> subjects = new ArrayList<String>();
+		subjects.add("Maths");
+		subjects.add("Science");
+		SubjectList subjectList = new SubjectList();
+		subjectList.setSubjects(subjects);
+		userRequest.setSubjectList(subjectList);
+		return userRequest;
+	}
 }

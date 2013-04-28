@@ -24,6 +24,12 @@
   <message name="getUserHashMapResponse">
     <part name="parameters" element="tns:getUserHashMapResponse"/>
   </message>
+  <message name="getUserRequest">
+    <part name="parameters" element="tns:getUserRequest"/>
+  </message>
+  <message name="getUserRequestResponse">
+    <part name="parameters" element="tns:getUserRequestResponse"/>
+  </message>
   <message name="getUser">
     <part name="parameters" element="tns:getUser"/>
   </message>
@@ -42,6 +48,10 @@
     <operation name="getUserHashMap">
       <input wsam:Action="getUserHashMap" message="tns:getUserHashMap"/>
       <output wsam:Action="http://service.base.com/FirstTest/getUserHashMapResponse" message="tns:getUserHashMapResponse"/>
+    </operation>
+    <operation name="getUserRequest">
+      <input wsam:Action="getUserRequest" message="tns:getUserRequest"/>
+      <output wsam:Action="http://service.base.com/FirstTest/getUserRequestResponse" message="tns:getUserRequestResponse"/>
     </operation>
     <operation name="getUser">
       <input wsam:Action="getUser" message="tns:getUser"/>
@@ -70,6 +80,15 @@
     </operation>
     <operation name="getUserHashMap">
       <soap:operation soapAction="getUserHashMap"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getUserRequest">
+      <soap:operation soapAction="getUserRequest"/>
       <input>
         <soap:body use="literal"/>
       </input>
