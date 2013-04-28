@@ -12,16 +12,73 @@
   <message name="getMessageResponse">
     <part name="parameters" element="tns:getMessageResponse"/>
   </message>
+  <message name="getMessageList">
+    <part name="parameters" element="tns:getMessageList"/>
+  </message>
+  <message name="getMessageListResponse">
+    <part name="parameters" element="tns:getMessageListResponse"/>
+  </message>
+  <message name="getUserHashMap">
+    <part name="parameters" element="tns:getUserHashMap"/>
+  </message>
+  <message name="getUserHashMapResponse">
+    <part name="parameters" element="tns:getUserHashMapResponse"/>
+  </message>
+  <message name="getUser">
+    <part name="parameters" element="tns:getUser"/>
+  </message>
+  <message name="getUserResponse">
+    <part name="parameters" element="tns:getUserResponse"/>
+  </message>
   <portType name="FirstTest">
     <operation name="getMessage">
       <input wsam:Action="getMessage" message="tns:getMessage"/>
       <output wsam:Action="http://service.base.com/FirstTest/getMessageResponse" message="tns:getMessageResponse"/>
+    </operation>
+    <operation name="getMessageList">
+      <input wsam:Action="getMessageList" message="tns:getMessageList"/>
+      <output wsam:Action="http://service.base.com/FirstTest/getMessageListResponse" message="tns:getMessageListResponse"/>
+    </operation>
+    <operation name="getUserHashMap">
+      <input wsam:Action="getUserHashMap" message="tns:getUserHashMap"/>
+      <output wsam:Action="http://service.base.com/FirstTest/getUserHashMapResponse" message="tns:getUserHashMapResponse"/>
+    </operation>
+    <operation name="getUser">
+      <input wsam:Action="getUser" message="tns:getUser"/>
+      <output wsam:Action="http://service.base.com/FirstTest/getUserResponse" message="tns:getUserResponse"/>
     </operation>
   </portType>
   <binding name="FirstTestPortBinding" type="tns:FirstTest">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
     <operation name="getMessage">
       <soap:operation soapAction="getMessage"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getMessageList">
+      <soap:operation soapAction="getMessageList"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getUserHashMap">
+      <soap:operation soapAction="getUserHashMap"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getUser">
+      <soap:operation soapAction="getUser"/>
       <input>
         <soap:body use="literal"/>
       </input>
