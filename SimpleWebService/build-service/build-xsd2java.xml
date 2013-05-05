@@ -1,0 +1,28 @@
+<project name="Create POGO Classes for XSD" default="main"
+	basedir="../">
+	<!-- Root of classpath in which the web service class can be found. -->
+	<property name="class-dir" value="${basedir}/build/classes/" />
+	<!-- Directory to which generated sourcefiles will be written by wsgen. -->
+	<property name="src-outdir" value="${basedir}/src/" />
+	<!-- Directory to which generated classfiles will be written by wsgen. -->
+	<property name="gen-classdir" value="${class-dir}/com/" />
+	<!-- MODIFY HERE Absolute path of the wsgen command. -->
+	<property name="xjc-cmd" value="C:\Program Files\Java\jdk1.7.0_10\bin\xjc" />
+	<echo message="calling the xsd class generation task xjc" />
+	<target name="main">
+		<exec executable="${xjc-cmd}">
+			<arg value="-verbose" />
+			<!-- Set the classpath. -->
+			<arg value="-classpath" />
+			<arg value="${class-dir}" />
+			<!-- Specify where to write other generated files. -->
+			<arg value="-d" />
+			<arg value="${src-outdir}" />
+			<!-- Specify where to write generated source files. -->
+			<arg value="-p" />
+			<arg value="com.base.service.person.bean" />
+			<!-- Specify service endpoint interface/class. -->
+			<arg value="xsd/personStore.xsd" />
+		</exec>
+	</target>
+</project>

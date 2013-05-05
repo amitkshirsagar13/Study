@@ -30,6 +30,12 @@
   <message name="getUserRequestResponse">
     <part name="parameters" element="tns:getUserRequestResponse"/>
   </message>
+  <message name="getPerson">
+    <part name="parameters" element="tns:getPerson"/>
+  </message>
+  <message name="getPersonResponse">
+    <part name="parameters" element="tns:getPersonResponse"/>
+  </message>
   <message name="getUser">
     <part name="parameters" element="tns:getUser"/>
   </message>
@@ -52,6 +58,10 @@
     <operation name="getUserRequest">
       <input wsam:Action="getUserRequest" message="tns:getUserRequest"/>
       <output wsam:Action="http://service.base.com/FirstTest/getUserRequestResponse" message="tns:getUserRequestResponse"/>
+    </operation>
+    <operation name="getPerson">
+      <input wsam:Action="getPerson" message="tns:getPerson"/>
+      <output wsam:Action="http://service.base.com/FirstTest/getPersonResponse" message="tns:getPersonResponse"/>
     </operation>
     <operation name="getUser">
       <input wsam:Action="getUser" message="tns:getUser"/>
@@ -89,6 +99,15 @@
     </operation>
     <operation name="getUserRequest">
       <soap:operation soapAction="getUserRequest"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getPerson">
+      <soap:operation soapAction="getPerson"/>
       <input>
         <soap:body use="literal"/>
       </input>

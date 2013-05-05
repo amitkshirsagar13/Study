@@ -9,6 +9,10 @@
 
   <xs:element name="getMessageResponse" type="tns:getMessageResponse"/>
 
+  <xs:element name="getPerson" type="tns:getPerson"/>
+
+  <xs:element name="getPersonResponse" type="tns:getPersonResponse"/>
+
   <xs:element name="getUser" type="tns:getUser"/>
 
   <xs:element name="getUserHashMap" type="tns:getUserHashMap"/>
@@ -86,6 +90,43 @@
   <xs:complexType name="getMessageListResponse">
     <xs:sequence>
       <xs:element name="messageList" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getPerson">
+    <xs:sequence>
+      <xs:element name="PersonStore" type="tns:PersonStore" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PersonStore">
+    <xs:sequence>
+      <xs:element name="clientName" type="xs:string"/>
+      <xs:element name="personCount" type="xs:int"/>
+      <xs:element name="personList" type="tns:PersonList"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PersonList">
+    <xs:sequence>
+      <xs:element name="person" type="tns:Person" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Person">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="age" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="comment" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="getPersonResponse">
+    <xs:sequence>
+      <xs:element name="PersonStore" type="tns:PersonStore" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 

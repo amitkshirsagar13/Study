@@ -11,6 +11,9 @@ import javax.jws.WebService;
 import com.base.service.bean.SubjectList;
 import com.base.service.bean.User;
 import com.base.service.bean.UserRequest;
+import com.base.service.person.bean.Person;
+import com.base.service.person.bean.PersonList;
+import com.base.service.person.bean.PersonStore;
 
 @WebService(name = "FirstTest", serviceName = "FirstTest")
 public class FirstTest {
@@ -70,5 +73,44 @@ public class FirstTest {
 		subjectList.setSubjects(subjects);
 		userRequest.setSubjectList(subjectList);
 		return userRequest;
+	}
+
+	@WebMethod(operationName = "getPerson", action = "getPerson")
+	@WebResult(name = "PersonStore")
+	public PersonStore getPersonStore(
+			@WebParam(name = "PersonStore") PersonStore personStore) {
+
+		PersonList personList = new PersonList();
+		Person person1 = new Person();
+		person1.setId("1");
+		person1.setName("Amit");
+		person1.setValue("Power");
+		person1.setAge("30");
+		person1.setComment("Male");
+		person1.setStatus("Married");
+		personList.getPerson().add(person1);
+
+		Person person2 = new Person();
+		person2.setId("2");
+		person2.setName("Poonam");
+		person2.setValue("Protection");
+		person2.setAge("30");
+		person2.setComment("Female");
+		person2.setStatus("Married");
+		personList.getPerson().add(person2);
+
+		Person person3 = new Person();
+		person3.setId("3");
+		person3.setName("Amogh");
+		person3.setValue("Cute");
+		person3.setAge("30");
+		person3.setComment("Male");
+		person3.setStatus("Child");
+		personList.getPerson().add(person3);
+
+		personStore.setPersonList(personList);
+
+		personStore.setPersonCount(personList.getPerson().size());
+		return personStore;
 	}
 }
