@@ -1,5 +1,22 @@
 package com.businessadvancesolutions.gui.renderer;
 
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;

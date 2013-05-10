@@ -1,12 +1,29 @@
 package com.businessadvancesolutions.gui.model;
 
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 import java.util.Vector;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
-import com.businessadvancesolutions.gui.GenerateInvoiceTab;
+import com.businessadvancesolutions.gui.tabs.GenerateInvoiceTab;
 
 public class BusinessTableModel extends AbstractTableModel implements
 		TableModelListener {

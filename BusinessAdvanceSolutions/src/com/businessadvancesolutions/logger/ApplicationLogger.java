@@ -1,6 +1,22 @@
 package com.businessadvancesolutions.logger;
 
-import java.io.FileNotFoundException;
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 
 public abstract class ApplicationLogger {
 

@@ -1,5 +1,22 @@
 package com.businessadvancesolutions.dbapi.dao;
 
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

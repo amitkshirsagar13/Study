@@ -1,5 +1,22 @@
 package com.businessadvancesolutions.gui.listener;
 
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -17,7 +34,7 @@ import javax.swing.SwingUtilities;
  *  The source of the Action is a TableCellListener instance.
  */
 public class TableCellListener implements PropertyChangeListener, Runnable {
-	private JTable table;
+	private final JTable table;
 	private Action action;
 
 	private int row;

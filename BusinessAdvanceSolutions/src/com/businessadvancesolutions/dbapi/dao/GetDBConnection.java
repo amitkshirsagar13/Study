@@ -6,20 +6,48 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 package com.businessadvancesolutions.dbapi.dao;
 
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.businessadvancesolutions.helper.SystemLogger;
 
-/**
- * 
- * @author Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
- * 
- */
 public class GetDBConnection {
 
 	private static Connection _connection = null;
