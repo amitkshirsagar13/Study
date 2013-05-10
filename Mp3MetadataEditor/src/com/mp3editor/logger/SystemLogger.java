@@ -1,10 +1,22 @@
 package com.mp3editor.logger;
 
 /**
- * This software is created by @author Amit Kshirsagar <amit.kshirsagar.13@gmail.com>
- * It is not allowed to copy and distribute without prior approval from Auther.
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
  */
-
 import java.io.PrintStream;
 
 public class SystemLogger {
