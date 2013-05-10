@@ -1,12 +1,31 @@
 package com.base.service;
 
+/**
+ * <p>
+ * <b>Overview:</b>
+ * <p>
+ * 
+ * 
+ * <pre>
+ * Creation date: May 9, 2013
+ * @author Amit Kshirsagar
+ * @version 1.0
+ * @since
+ * 
+ * <p><b>Modification History:</b><p>
+ * 
+ * 
+ * </pre>
+ */
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceContext;
 
 import com.base.service.bean.SubjectList;
 import com.base.service.bean.User;
@@ -17,6 +36,8 @@ import com.base.service.person.bean.PersonStore;
 
 @WebService(name = "FirstTest", serviceName = "FirstTest")
 public class FirstTest {
+	@Resource
+	WebServiceContext ctx;
 
 	@WebMethod(operationName = "getMessage", action = "getMessage")
 	@WebResult(name = "message")
