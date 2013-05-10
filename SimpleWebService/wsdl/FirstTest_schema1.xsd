@@ -1,99 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema version="1.0" targetNamespace="http://service.base.com/" xmlns:tns="http://service.base.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:element name="getMessage" type="tns:getMessage"/>
+  <xs:element name="getPersonStore" type="tns:getPersonStore"/>
 
-  <xs:element name="getMessageList" type="tns:getMessageList"/>
+  <xs:element name="getPersonStoreResponse" type="tns:getPersonStoreResponse"/>
 
-  <xs:element name="getMessageListResponse" type="tns:getMessageListResponse"/>
-
-  <xs:element name="getMessageResponse" type="tns:getMessageResponse"/>
-
-  <xs:element name="getPerson" type="tns:getPerson"/>
-
-  <xs:element name="getPersonResponse" type="tns:getPersonResponse"/>
-
-  <xs:element name="getUser" type="tns:getUser"/>
-
-  <xs:element name="getUserHashMap" type="tns:getUserHashMap"/>
-
-  <xs:element name="getUserHashMapResponse" type="tns:getUserHashMapResponse"/>
-
-  <xs:element name="getUserRequest" type="tns:getUserRequest"/>
-
-  <xs:element name="getUserRequestResponse" type="tns:getUserRequestResponse"/>
-
-  <xs:element name="getUserResponse" type="tns:getUserResponse"/>
-
-  <xs:element name="subjectList" type="tns:subjectList"/>
-
-  <xs:element name="user" type="tns:user"/>
-
-  <xs:element name="userRequest" type="tns:userRequest"/>
-
-  <xs:complexType name="getMessage">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getMessageResponse">
-    <xs:sequence>
-      <xs:element name="message" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUserRequest">
-    <xs:sequence>
-      <xs:element name="UserRequest" type="tns:user" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="user">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-      <xs:element name="age" type="xs:int"/>
-      <xs:element ref="tns:subjectList" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="subjectList">
-    <xs:sequence>
-      <xs:element name="subjects" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUserRequestResponse">
-    <xs:sequence>
-      <xs:element name="User" type="tns:user" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUser">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUserResponse">
-    <xs:sequence>
-      <xs:element name="User" type="tns:user" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getMessageList">
-    <xs:sequence>
-      <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getMessageListResponse">
-    <xs:sequence>
-      <xs:element name="messageList" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getPerson">
+  <xs:complexType name="getPersonStore">
     <xs:sequence>
       <xs:element name="PersonStore" type="tns:PersonStore" minOccurs="0"/>
     </xs:sequence>
@@ -124,28 +36,9 @@
     <xs:attribute name="id" type="xs:string" use="required"/>
   </xs:complexType>
 
-  <xs:complexType name="getPersonResponse">
+  <xs:complexType name="getPersonStoreResponse">
     <xs:sequence>
       <xs:element name="PersonStore" type="tns:PersonStore" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUserHashMap">
-    <xs:sequence>
-      <xs:element name="UserRequest" type="tns:userRequest" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="userRequest">
-    <xs:sequence>
-      <xs:element name="userName" type="xs:string" minOccurs="0"/>
-      <xs:element name="userAge" type="xs:int"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="getUserHashMapResponse">
-    <xs:sequence>
-      <xs:element name="User" type="tns:user" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

@@ -20,9 +20,9 @@
 			<arg value="${src-outdir}" />
 			<!-- Specify where to write generated source files. -->
 			<arg value="-p" />
-			<arg value="com.base.service.person.bean" />
+			<arg value="com.base.service.zoo.bean" />
 			<!-- Specify service endpoint interface/class. -->
-			<arg value="xsd/personStore.xsd" />
+			<arg value="xsd/zoo.xsd" />
 		</exec>
 	</target>
 </project>

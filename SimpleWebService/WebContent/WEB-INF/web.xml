@@ -19,10 +19,19 @@
       <servlet-class>
         com.sun.xml.ws.transport.http.servlet.WSServlet
       </servlet-class>
-
    </servlet>
    <servlet-mapping>
      <servlet-name>FirstTest</servlet-name>
      <url-pattern>/firstTest</url-pattern>
+   </servlet-mapping>
+   <servlet>
+      <servlet-name>MyZooService</servlet-name>
+      <servlet-class>
+        com.sun.xml.ws.transport.http.servlet.WSServlet
+      </servlet-class>
+   </servlet>
+   <servlet-mapping>
+     <servlet-name>MyZooService</servlet-name>
+     <url-pattern>/myZooService</url-pattern>
    </servlet-mapping>
 </web-app>

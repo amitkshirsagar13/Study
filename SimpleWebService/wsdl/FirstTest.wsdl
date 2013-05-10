@@ -6,117 +6,22 @@
       <xsd:import namespace="http://service.base.com/" schemaLocation="FirstTest_schema1.xsd"/>
     </xsd:schema>
   </types>
-  <message name="getMessage">
-    <part name="parameters" element="tns:getMessage"/>
+  <message name="getPersonStore">
+    <part name="parameters" element="tns:getPersonStore"/>
   </message>
-  <message name="getMessageResponse">
-    <part name="parameters" element="tns:getMessageResponse"/>
-  </message>
-  <message name="getMessageList">
-    <part name="parameters" element="tns:getMessageList"/>
-  </message>
-  <message name="getMessageListResponse">
-    <part name="parameters" element="tns:getMessageListResponse"/>
-  </message>
-  <message name="getUserHashMap">
-    <part name="parameters" element="tns:getUserHashMap"/>
-  </message>
-  <message name="getUserHashMapResponse">
-    <part name="parameters" element="tns:getUserHashMapResponse"/>
-  </message>
-  <message name="getUserRequest">
-    <part name="parameters" element="tns:getUserRequest"/>
-  </message>
-  <message name="getUserRequestResponse">
-    <part name="parameters" element="tns:getUserRequestResponse"/>
-  </message>
-  <message name="getPerson">
-    <part name="parameters" element="tns:getPerson"/>
-  </message>
-  <message name="getPersonResponse">
-    <part name="parameters" element="tns:getPersonResponse"/>
-  </message>
-  <message name="getUser">
-    <part name="parameters" element="tns:getUser"/>
-  </message>
-  <message name="getUserResponse">
-    <part name="parameters" element="tns:getUserResponse"/>
+  <message name="getPersonStoreResponse">
+    <part name="parameters" element="tns:getPersonStoreResponse"/>
   </message>
   <portType name="FirstTest">
-    <operation name="getMessage">
-      <input wsam:Action="getMessage" message="tns:getMessage"/>
-      <output wsam:Action="http://service.base.com/FirstTest/getMessageResponse" message="tns:getMessageResponse"/>
-    </operation>
-    <operation name="getMessageList">
-      <input wsam:Action="getMessageList" message="tns:getMessageList"/>
-      <output wsam:Action="http://service.base.com/FirstTest/getMessageListResponse" message="tns:getMessageListResponse"/>
-    </operation>
-    <operation name="getUserHashMap">
-      <input wsam:Action="getUserHashMap" message="tns:getUserHashMap"/>
-      <output wsam:Action="http://service.base.com/FirstTest/getUserHashMapResponse" message="tns:getUserHashMapResponse"/>
-    </operation>
-    <operation name="getUserRequest">
-      <input wsam:Action="getUserRequest" message="tns:getUserRequest"/>
-      <output wsam:Action="http://service.base.com/FirstTest/getUserRequestResponse" message="tns:getUserRequestResponse"/>
-    </operation>
-    <operation name="getPerson">
-      <input wsam:Action="getPerson" message="tns:getPerson"/>
-      <output wsam:Action="http://service.base.com/FirstTest/getPersonResponse" message="tns:getPersonResponse"/>
-    </operation>
-    <operation name="getUser">
-      <input wsam:Action="getUser" message="tns:getUser"/>
-      <output wsam:Action="http://service.base.com/FirstTest/getUserResponse" message="tns:getUserResponse"/>
+    <operation name="getPersonStore">
+      <input wsam:Action="getPersonStore" message="tns:getPersonStore"/>
+      <output wsam:Action="http://service.base.com/FirstTest/getPersonStoreResponse" message="tns:getPersonStoreResponse"/>
     </operation>
   </portType>
   <binding name="FirstTestPortBinding" type="tns:FirstTest">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-    <operation name="getMessage">
-      <soap:operation soapAction="getMessage"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="getMessageList">
-      <soap:operation soapAction="getMessageList"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="getUserHashMap">
-      <soap:operation soapAction="getUserHashMap"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="getUserRequest">
-      <soap:operation soapAction="getUserRequest"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="getPerson">
-      <soap:operation soapAction="getPerson"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="getUser">
-      <soap:operation soapAction="getUser"/>
+    <operation name="getPersonStore">
+      <soap:operation soapAction="getPersonStore"/>
       <input>
         <soap:body use="literal"/>
       </input>
