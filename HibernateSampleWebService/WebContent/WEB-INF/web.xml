@@ -43,4 +43,13 @@
 		<url-pattern>/employeeService</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<servlet-class>com.sample.hibernate.servlet.EmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<url-pattern>/EmployeeServlet.do</url-pattern>
+	</servlet-mapping>
+
 </web-app>

@@ -18,7 +18,7 @@
 			root
 		</property>
 		<property name="hibernate.connection.password">
-			admin
+			amogh
 		</property>
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.hbm2ddl.auto">create</property>
