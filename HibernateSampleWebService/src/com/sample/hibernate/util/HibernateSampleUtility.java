@@ -1,13 +1,3 @@
-/*==================================================================*
- * Copyright (c) 2009 LEXISNEXIS                                    *
- * 9443 Springboro Pike, P.O. Box 933, Miamisburg, Ohio, 45401-0933 *
- * All rights reserved.                                             *
- * This software is the proprietary information of LexisNexis       *
- * ("Confidential Information"). You shall                          *
- * disclose such Confidential Information and shall use it only in  *
- * accordance with the terms of the license agreement you entered   *
- * with LEXISNEXIS.                                                 *
- ===================================================================*/
 package com.sample.hibernate.util;
 
 import java.io.ByteArrayOutputStream;
