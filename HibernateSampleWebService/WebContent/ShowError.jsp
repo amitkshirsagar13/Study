@@ -187,7 +187,7 @@
 		<table class="noLinks" align="center">
 			<tr>
 				<td><label style="text-align: center; color: white;">Copyright2013
-						© LexisNexis</label></td>
+						</label></td>
 			</tr>
 		</table>
 	</div>
