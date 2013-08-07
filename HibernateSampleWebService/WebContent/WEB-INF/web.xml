@@ -25,15 +25,6 @@
 	<!-- context-param> <param-name>SYSMAN_CONFIG_FILE</param-name> <param-value>/SysmanConfig.xml</param-value> 
 		</context-param -->
 
-	<!-- servlet>
-		<servlet-name>CrasWebServlet</servlet-name>
-		<servlet-class>com.lexisnexis.cras.servlet.CrasWebServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CrasWebServlet</servlet-name>
-		<url-pattern>/CrasWebServlet.do</url-pattern>
-	</servlet-mapping -->
-
 	<servlet>
 		<servlet-name>EmployeeService</servlet-name>
 		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
