@@ -1,10 +1,14 @@
 package com.sample.hibernate.dao;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.criterion.Example;
 
+import com.sample.hibernate.bean.Address;
 import com.sample.hibernate.bean.Employee;
 
 /**
@@ -40,22 +44,37 @@ public class EmployeeFactory extends AbstractTransactionFactory {
 		return employeeFactory;
 	}
 
-	public int addEmployee(Employee employee) {
+	public synchronized int addEmployee(Employee employee) {
 		Session session = getTransactionSession();
+
+		List<Address> addressList = employee.getAddresses();
+		List<Address> checkedAddressList = new ArrayList<Address>();
+		for (Iterator iterator = addressList.iterator(); iterator.hasNext();) {
+			Address address = (Address) iterator.next();
+			Address addressOld = (Address) session
+					.createCriteria(Address.class).add(Example.create(address))
+					.uniqueResult();
+			if (addressOld != null) {
+				checkedAddressList.add(addressOld);
+			} else {
+				checkedAddressList.add(address);
+			}
+		}
+		employee.setAddresses(checkedAddressList);
 		int employeeID = (Integer) session.save(employee);
 		logger.info("Employee added as " + employeeID);
 		commitSession(session);
 		return employeeID;
 	}
 
-	public List<Employee> listAllEmployee() {
+	public synchronized List<Employee> listAllEmployee() {
 		Session session = getTransactionSession();
 		List<Employee> employees = session.createQuery("FROM Employee").list();
 		commitSession(session);
 		return employees;
 	}
 
-	public Employee getEmployee(Integer EmployeeID) {
+	public synchronized Employee getEmployee(Integer EmployeeID) {
 		Session session = getTransactionSession();
 		Employee employee = (Employee) session.get(Employee.class, EmployeeID);
 		commitSession(session);
@@ -63,14 +82,14 @@ public class EmployeeFactory extends AbstractTransactionFactory {
 	}
 
 	/* Method to UPDATE salary for an employee */
-	public void updateEmployee(Employee employee) {
+	public synchronized void updateEmployee(Employee employee) {
 		Session session = getTransactionSession();
 		session.update(employee);
 		commitSession(session);
 	}
 
 	/* Method to DELETE an employee from the records */
-	public void deleteEmployee(Employee employee) {
+	public synchronized void deleteEmployee(Employee employee) {
 		Session session = getTransactionSession();
 		session.delete(employee);
 		commitSession(session);
