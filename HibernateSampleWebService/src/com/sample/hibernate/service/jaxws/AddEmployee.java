@@ -16,7 +16,7 @@ public class AddEmployee {
 
 	/**
 	 * 
-	 * @return returns Employee
+	 * @return Employee
 	 */
 	public com.sample.hibernate.bean.Employee getEmployee() {
 		return this.employee;
