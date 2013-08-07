@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery: sorting a table alphabetically</title>
+<meta charset="utf-8" />
+<style>
+#movies {
+	width: 40em;
+	font: 1.5em Arial, sans-serif;
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0 auto;
+}
+
+#movies caption {
+	width: 40em;
+	padding: 0.5em 0;
+	text-align: center;
+	background: #333;
+	color: #fff;
+	font-family: Georgia, serif;
+}
+
+#movies th {
+	background: #666;
+	width: 20em;
+	text-align: center;
+}
+
+#movies th a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	background: url(sort.png) no-repeat 100% 2px;
+}
+
+#movies th a:hover {
+	color: #f50;
+	text-decoration: underline;
+}
+
+#movies td {
+	width: 20em;
+	border: 1px solid #666;
+	vertical-align: middle;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<table summary="Movies" id="movies">
+		<caption>Movies</caption>
+		<thead>
+			<tr>
+				<th scope="col"><a href="#" id="title">Title</a></th>
+				<th scope="col"><a href="#" id="director">Director</a></th>
+				<th scope="col">Rate</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Ghosts of Mars</td>
+				<td>John Carpenter</td>
+				<td>80</td>
+			</tr>
+			<tr>
+				<td>Blade Runner</td>
+				<td>Ridley Scott</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>Star Wars</td>
+				<td>George Lukas</td>
+				<td>20</td>
+			</tr>
+			<tr>
+				<td>E.T.</td>
+				<td>Steven Spielberg</td>
+				<td>60</td>
+			</tr>
+		</tbody>
+	</table>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$('#movies #title').click(function(e) {
+				var rows = $('#movies tbody  tr').get();
+				rows.sort(function(a, b) {
+					var A = $(a).children('td').eq(0).text().toUpperCase();
+					var B = $(b).children('td').eq(0).text().toUpperCase();
+					if (A < B) {
+						return -1;
+					}
+					if (A > B) {
+						return 1;
+					}
+					return 0;
+				});
+				$.each(rows, function(index, row) {
+					$('#movies').children('tbody').append(row);
+				});
+				e.preventDefault();
+			});
+			$('#movies #director').click(function(e) {
+				var rows = $('#movies tbody  tr').get();
+				rows.sort(function(a, b) {
+					var A = $(a).children('td').eq(1).text().toUpperCase();
+					var B = $(b).children('td').eq(1).text().toUpperCase();
+					if (A < B) {
+						return -1;
+					}
+					if (A > B) {
+						return 1;
+					}
+					return 0;
+				});
+				$.each(rows, function(index, row) {
+					$('#movies').children('tbody').append(row);
+				});
+				e.preventDefault();
+			});
+		});
+	</script>
+</body>
+</html>
