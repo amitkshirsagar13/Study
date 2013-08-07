@@ -9,25 +9,12 @@
 }
 
 /*--------------------------------------------------
-  .tabber = before the tabber interface is set up
-  .tabberlive = after the tabber interface is set up
-  --------------------------------------------------*/
-.tabber {
-    
-}
-
-.tabberlive {
-    margin-top: 1em;
-}
-
-/*--------------------------------------------------
   ul.tabbernav = the tab navigation list
   li.tabberactive = the active tab
   --------------------------------------------------*/
 ul.tabbernav {
     margin: 0;
     padding: 3px 0;
-    border-bottom: 1px solid #778;
     font: bold 11px Verdana, sans-serif;
 }
 
@@ -35,31 +22,6 @@ ul.tabbernav li {
     list-style: none;
     margin: 0;
     display: inline;
-}
-
-
-
-/*--------------------------------------------------
-  .tabbertab = the tab content
-  Add style only after the tabber interface is set up (.tabberlive)
-  --------------------------------------------------*/
-.tabberlive .tabbertab {
-    padding: 5px;
-    border: 0px solid #aaa;
-    border-top: 0;
-    width: 100%;
-    overflow-y: hidden;
-    overflow-x: auto;
-    box-shadow: 5px 5px 0 #FFF;
-    /* If you don't want the tab size changing whenever a tab is changed
-    you can set a fixed height */
-
-    /* height:200px; */
-
-    /* If you set a fix height set overflow to auto and you will get a
-    scrollbar when necessary */
-
-    /* overflow:auto; */
 }
 
 /* If desired, hide the heading since a heading is provided by the tab */
@@ -71,24 +33,14 @@ ul.tabbernav li {
     display: none;
 }
 
-/* Example of using an ID to set different styles for the tabs on the page */
-.tabberlive#tab1 {
-    
-}
-
-.tabberlive#tab2 {
-    
-}
-
-.tabberlive#tab2 .tabbertab {
-    height: 200px;
-    overflow: auto;
-}
+/*--------------------------------------------------
+  Scroll Status in the Table
+  --------------------------------------------------*/
 
 tabbertab.scroll {
-    width: 100px;
-    height: 100px;
-    overflow: scroll;
+    width: 0px;
+    height: 10px;
+    overflow: auto;
 }
 
 ul.tabbernav {
