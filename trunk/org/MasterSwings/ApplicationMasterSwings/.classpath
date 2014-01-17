@@ -26,5 +26,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/BaseMasterSwings"/>
 	<classpathentry kind="lib" path="config"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SplashMasterSwings"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PanelMasterSwings"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/StatusMasterSwings"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
