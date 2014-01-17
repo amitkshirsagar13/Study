@@ -78,4 +78,5 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 
 		_splashScreen.closeIt();
 	}
+
 }
