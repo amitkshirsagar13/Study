@@ -19,12 +19,14 @@
 
 package org.masterswings.application;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.masterswings.base.util.BaseMasterSwingsUtil;
 import org.masterswings.base.view.BaseMasterSwingsFrame;
+import org.masterswings.status.StatusPanelMasterSwings;
 
 public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 
@@ -66,10 +68,34 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 	@Override
 	public void initialize() {
 
+		loadStatusPanel(StatusPanelMasterSwings
+				.getStatusPanelMasterSwings(new BorderLayout()));
+		//
+		// JLabel custom1 = new JLabel("AMIT");
+		// JLabel custom2 = new JLabel("Poonam");
+		//
+		// StatusPanelMasterSwings.getStatusPanelMasterSwings(new
+		// BorderLayout())
+		// .addLabelToInfoPanel(custom1);
+		// StatusPanelMasterSwings.getStatusPanelMasterSwings(new
+		// BorderLayout())
+		// .addLabelToInfoPanel(custom2);
+		//
+		// HashMap<String, JLabel> infoPanel = new HashMap<String, JLabel>();
+		//
+		// custom1.setText("Amogh");
+		// custom2.setText("Pallavi");
+		// infoPanel.put(custom1.getName(), custom1);
+		// infoPanel.put(custom2.getName(), custom2);
+		//
+		// StatusPanelMasterSwings.getStatusPanelMasterSwings(new
+		// BorderLayout())
+		// .updateInfoPanel(infoPanel);
+
 		for (int index = 0; index < 11; index++) {
 			_splashScreen.setProgress("Initilizing GUI..." + index, index * 10);
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -78,5 +104,11 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 
 		_splashScreen.closeIt();
 	}
+
+	// StatusPanelMasterSwings _statusPanel = null;
+	//
+	// public void setStatusPanel(StatusPanelMasterSwings statusPanel) {
+	// this.getContentPane().add(statusPanel, BorderLayout.SOUTH);
+	// }
 
 }
