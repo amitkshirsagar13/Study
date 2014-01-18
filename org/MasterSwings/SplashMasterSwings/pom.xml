@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>MasterSwings</groupId>
   <artifactId>SplashMasterSwings</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>SplashMasterSwings</name>
 	<url>http://poomit-PC:8080/artifactory/webapp</url>
 	<properties>
@@ -227,7 +227,7 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>central</id>
+			<id>central2</id>
 			<url>http://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
