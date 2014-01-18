@@ -19,6 +19,7 @@
 
 package org.masterswings.base.view;
 
+import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -34,6 +35,7 @@ import org.apache.log4j.Logger;
 import org.masterswings.base.actions.BaseButtonActions;
 import org.masterswings.base.actions.BaseMasterSwingsContants;
 import org.masterswings.splash.SplashScreen;
+import org.masterswings.status.StatusPanelMasterSwings;
 
 public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		MouseMotionListener, MouseListener, BaseMasterSwingsContants {
@@ -97,6 +99,20 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		_splashScreen.setAlwaysOnTop(true);
 		debug("Loaded the Properties file: "
 				+ System.getProperty(APPLICATION_PROPERTIES));
+
+		this.getContentPane().setLayout(new BorderLayout());
+
+	}
+
+	/**
+	 * Default statusPanelLoader
+	 * 
+	 * @param statusPanel
+	 */
+
+	public void loadStatusPanel(StatusPanelMasterSwings statusPanel) {
+		getContentPane().add(statusPanel, BorderLayout.SOUTH);
+		setStatusPanel(statusPanel);
 	}
 
 	/**
@@ -104,6 +120,8 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 	 */
 
 	public void initialize() {
+		loadStatusPanel(StatusPanelMasterSwings
+				.getStatusPanelMasterSwings(new BorderLayout()));
 
 		for (int index = 0; index < 11; index++) {
 			_splashScreen.setProgress("Initilizing GUI..." + index, index * 10);
@@ -171,4 +189,13 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		}
 	}
 
+	StatusPanelMasterSwings _statusPanel = null;
+
+	public void setStatusPanel(StatusPanelMasterSwings statusPanel) {
+		this._statusPanel = statusPanel;
+	}
+
+	public void setStatusBarMessage(String statusMessage) {
+		_statusPanel.setStatusBarMessage(statusMessage);
+	}
 }
