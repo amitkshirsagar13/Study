@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>MasterSwings</groupId>
 	<artifactId>BaseMasterSwings</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
 	<name>BaseMasterSwings</name>
 	<url>http://poomit-PC:8080/artifactory/webapp</url>
 	<properties>
@@ -104,7 +104,7 @@
 					<issueManagementSystems>
 						<issueManagementSystem>changes.xml</issueManagementSystem>
 					</issueManagementSystems>
-					<developmentTeam>Footnote Team</developmentTeam>
+					<developmentTeam>BaseMasterSwings Team</developmentTeam>
 					<urlDownload>http://poomit-PC:8080/artifactory/simple/masterswings-dependent</urlDownload>
 					<introduction> This is a notification email that the
 						${project.version} build of ${project.name} has been code reviewed
@@ -229,7 +229,7 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>central</id>
+			<id>central2</id>
 			<url>http://repo1.maven.org/maven2</url>
 			<snapshots>
 				<enabled>false</enabled>
