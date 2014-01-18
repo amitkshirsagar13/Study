@@ -28,4 +28,7 @@ public interface BaseMasterSwingsContants {
 	String APPHEIGHT = "APPHEIGHT";
 
 	String APPSPLASHSCREEN = "APPSPLASHSCREEN";
+
+	String EMPTY = "";
+	String SPACE = " ";
 }
