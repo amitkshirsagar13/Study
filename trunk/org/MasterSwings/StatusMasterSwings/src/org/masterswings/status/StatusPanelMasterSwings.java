@@ -56,7 +56,7 @@ public class StatusPanelMasterSwings extends BaseMasterSwingsPanel implements
 	 * @param layoutManager
 	 */
 	private StatusPanelMasterSwings(LayoutManager layoutManager) {
-		super(layoutManager);
+		super(layoutManager, null);
 	}
 
 	public static StatusPanelMasterSwings getStatusPanelMasterSwings(
@@ -145,7 +145,7 @@ public class StatusPanelMasterSwings extends BaseMasterSwingsPanel implements
 		_statusBar.addMouseListener(this);
 
 		_statusBar.setToolTipText("Status Bar Message...");
-		_statusBar.setText(" Status Bar Message...");
+		setStatusBarMessage("Status Bar Message...");
 		/**
 		 * Status Bar and info panel Populated.
 		 */
@@ -153,6 +153,10 @@ public class StatusPanelMasterSwings extends BaseMasterSwingsPanel implements
 
 	public void setStatusBarMessage(String statusMessage) {
 		_statusBar.setText(getFormatedStatusMessage(statusMessage));
+	}
+
+	public void setProgressStatus(int progressStatus) {
+		_progressBar.setValue(progressStatus);
 	}
 
 	public String getFormatedStatusMessage(String statusMessage) {
