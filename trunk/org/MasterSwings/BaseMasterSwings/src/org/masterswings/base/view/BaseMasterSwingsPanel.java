@@ -19,17 +19,26 @@
 
 package org.masterswings.base.view;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.LayoutManager;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 import org.masterswings.base.actions.BaseComponantActions;
 import org.masterswings.base.actions.BaseMasterSwingsContants;
+import org.masterswings.builder.ButtonBuilder;
+import org.masterswings.builder.LabelBuilder;
+import org.masterswings.builder.TextBoxBuilder;
+import org.masterswings.componants.Button;
+import org.masterswings.componants.Label;
+import org.masterswings.componants.TextBox;
 
-public abstract class BaseMasterSwingsPanel extends BaseComponantActions
-		implements MouseMotionListener, MouseListener, BaseMasterSwingsContants {
+public class BaseMasterSwingsPanel extends BaseComponantActions implements
+		BaseMasterSwingsContants, Runnable {
 
 	Logger _log = Logger.getLogger(BaseMasterSwingsPanel.class.getName());
 
@@ -45,53 +54,127 @@ public abstract class BaseMasterSwingsPanel extends BaseComponantActions
 		_log.debug(message);
 	}
 
+	private BaseMasterSwingsFrame _mainFrame = null;
+
 	/**
 	 * @param applicationName
 	 */
-	public BaseMasterSwingsPanel(LayoutManager layoutManager) {
+	public BaseMasterSwingsPanel(LayoutManager layoutManager,
+			BaseMasterSwingsFrame mainFrame) {
 		super(layoutManager);
+		_mainFrame = mainFrame;
+	}
+
+	public JPanel getTab() {
+		return this;
+	}
+
+	private JPanel _infoPanel = null;
+	private JPanel _centerPanel = null;
+	private JPanel _buttonPanel = null;
+
+	public void buildForm() {
+		loadInfoPanel();
+		loadCenterPanel();
+		loadButtonPanel();
+	}
+
+	public void loadInfoPanel() {
+		_infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 25));
+
+		List<Label> labelList = LabelBuilder
+				.getLabelsForPanel("BASEMASTERSWINGSPANEL");
+		LabelBuilder.addLabelsToPanel(_infoPanel, labelList, this);
+
+		this.add(_infoPanel, BorderLayout.NORTH);
+	}
+
+	public void loadCenterPanel() {
+		_centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 25));
+		_centerPanel.setBorder(BorderFactory.createLoweredBevelBorder());
+
+		List<TextBox> textBoxList = TextBoxBuilder
+				.getTextBoxsForPanel("BASEMASTERSWINGSPANEL");
+
+		TextBoxBuilder.addTextBoxsToPanel(_centerPanel, textBoxList, this);
+
+		this.add(_centerPanel, BorderLayout.CENTER);
+	}
+
+	public void loadButtonPanel() {
+
+		_buttonPanel = new JPanel(new FlowLayout());
+		List<Button> buttonList = ButtonBuilder
+				.getButtonsForPanel("BASEMASTERSWINGSPANEL");
+
+		ButtonBuilder.addButtonsToPanel(_buttonPanel, buttonList, this);
+
+		this.add(_buttonPanel, BorderLayout.SOUTH);
+	}
+
+	private String executingCommand = "Executing Command: ";
+
+	@Override
+	public void executeOk() {
+		debug(executingCommand + OK);
+		setStatusBarMessage(executingCommand + OK);
+		setProgressStatus(50);
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void executeCancel() {
+		debug(executingCommand + CANCEL);
+		setStatusBarMessage(executingCommand + CANCEL);
+		setProgressStatus(25);
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void executeReset() {
+		debug(executingCommand + RESET);
+		setStatusBarMessage(executingCommand + RESET);
+		setProgressStatus(0);
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void executeSubmit() {
+		debug(executingCommand + SUBMIT);
+		setStatusBarMessage(executingCommand + SUBMIT);
+		setProgressStatus(100);
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void executeAdd() {
+		debug(executingCommand + ADD);
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void executeRemove() {
+		debug(executingCommand + REMOVE);
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void executeDuplicate() {
+		debug(executingCommand + DUPLICATE);
+	}
+
+	public void setStatusBarMessage(String statusMessage) {
+		_mainFrame.setStatusBarMessage(statusMessage);
+		debug(statusMessage);
 
 	}
 
+	public void setProgressStatus(int progressStatus) {
+		_mainFrame.setProgressStatus(progressStatus);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+	public void run() {
+		debug("Running Some Thing...");
+		waitSomeTime();
 	}
-
 }

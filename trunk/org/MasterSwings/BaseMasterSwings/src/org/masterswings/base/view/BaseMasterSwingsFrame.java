@@ -20,6 +20,7 @@
 package org.masterswings.base.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -30,6 +31,7 @@ import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import org.apache.log4j.Logger;
 import org.masterswings.base.actions.BaseButtonActions;
@@ -56,14 +58,34 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 
 	static {
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				System.out.println(info.getName());
+				if (info.getName().equalsIgnoreCase(NIMBUS)) {
+					UIManager.setLookAndFeel(info.getClassName());
+					UIManager.put("nimbusOrange", new Color(40, 150, 255));
+					break;
+				} else if (info.getName().equalsIgnoreCase(METAL)) {
+					UIManager.setLookAndFeel(info.getClassName());
+					// break;
+				} else if (info.getName().equalsIgnoreCase(CDEMOTIF)) {
+					UIManager.setLookAndFeel(info.getClassName());
+					// break;
+				} else if (info.getName().equalsIgnoreCase(WINDOWS)) {
+					UIManager.setLookAndFeel(info.getClassName());
+					// break;
+				} else if (info.getName().equalsIgnoreCase(WINDOWSCLASSIC)) {
+					UIManager.setLookAndFeel(info.getClassName());
+					// break;
+				}
+			}
 		} catch (Exception e) {
-			// Not important
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
 		}
 	}
 	protected SplashScreen _splashScreen = null;
 
-	public BaseMasterSwingsFrame(String applicationName) {
+	protected BaseMasterSwingsFrame(String applicationName) {
 		super(applicationName);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -99,9 +121,7 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		_splashScreen.setAlwaysOnTop(true);
 		debug("Loaded the Properties file: "
 				+ System.getProperty(APPLICATION_PROPERTIES));
-
 		this.getContentPane().setLayout(new BorderLayout());
-
 	}
 
 	/**
@@ -134,6 +154,23 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		}
 
 		_splashScreen.closeIt();
+	}
+
+	private BaseMasterSwingsPanel _mainFrameCenterPanel = null;
+
+	public void loadToolBarPanel() {
+
+	}
+
+	public void loadMainFrameCenterPanel() {
+		_mainFrameCenterPanel = new BaseMasterSwingsPanel(new BorderLayout(),
+				this);
+		_mainFrameCenterPanel.buildForm();
+		this.add(_mainFrameCenterPanel, BorderLayout.CENTER);
+	}
+
+	public void loadActionButtons() {
+		// CompBuilderMastarSwings.getJButton(OK, OK, _mainFrameCenterPanel);
 	}
 
 	@Override
@@ -198,4 +235,9 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 	public void setStatusBarMessage(String statusMessage) {
 		_statusPanel.setStatusBarMessage(statusMessage);
 	}
+
+	public void setProgressStatus(int progressStatus) {
+		_statusPanel.setProgressStatus(progressStatus);
+	}
+
 }

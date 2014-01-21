@@ -31,4 +31,19 @@ public interface BaseMasterSwingsContants {
 
 	String EMPTY = "";
 	String SPACE = " ";
+
+	String NIMBUS = "Nimbus";
+	String METAL = "Metal";
+	String CDEMOTIF = "CDE/Motif";
+	String WINDOWS = "Windows";
+	String WINDOWSCLASSIC = "Windows Classic";
+
+	// Button Action Commands
+	String OK = "OK";
+	String RESET = "RESET";
+	String CANCEL = "CANCEL";
+	String SUBMIT = "SUBMIT";
+	String ADD = "ADD";
+	String REMOVE = "REMOVE";
+	String DUPLICATE = "DUPLICATE";
 }

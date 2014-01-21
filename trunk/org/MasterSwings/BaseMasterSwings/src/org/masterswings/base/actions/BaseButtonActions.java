@@ -26,7 +26,8 @@ import javax.swing.JFrame;
 
 import org.apache.log4j.Logger;
 
-public abstract class BaseButtonActions extends JFrame implements ActionListener {
+public abstract class BaseButtonActions extends JFrame implements
+		ActionListener, BaseMasterSwingsContants {
 
 	Logger _log = Logger.getLogger(BaseButtonActions.class.getName());
 
@@ -42,42 +43,84 @@ public abstract class BaseButtonActions extends JFrame implements ActionListener
 		_log.debug(message);
 	}
 
-	public BaseButtonActions(String applicationName){
+	public BaseButtonActions(String applicationName) {
 		super(applicationName);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String actionName = e.getActionCommand();
-		System.out.println(actionName);
+		final String actionName = e.getActionCommand();
 
+		Thread execThread = new Thread();
+		Runnable execRunner = new Runnable() {
+
+			@Override
+			public void run() {
+				switch (actionName) {
+				case OK:
+					executeOk();
+					break;
+				case RESET:
+					executeReset();
+					break;
+				case SUBMIT:
+					executeSubmit();
+					break;
+				case CANCEL:
+					executeCancel();
+					break;
+				case ADD:
+					executeAdd();
+					break;
+				case REMOVE:
+					executeRemove();
+					break;
+				case DUPLICATE:
+					executeDuplicate();
+					break;
+				default:
+					break;
+				}
+			}
+		};
 	}
 
-	public void executeOk() {
+	public void waitSomeTime() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	private String executingCommand = "Executing Command: ";
+
+	public void executeOk() {
+		debug(executingCommand + OK);
 	}
 
 	public void executeCancel() {
-
+		debug(executingCommand + CANCEL);
 	}
 
 	public void executeReset() {
-
+		debug(executingCommand + RESET);
 	}
 
 	public void executeSubmit() {
-
+		debug(executingCommand + SUBMIT);
 	}
 
 	public void executeAdd() {
-
+		debug(executingCommand + ADD);
 	}
 
 	public void executeRemove() {
-
+		debug(executingCommand + REMOVE);
 	}
 
 	public void executeDuplicate() {
-
+		debug(executingCommand + DUPLICATE);
 	}
 }

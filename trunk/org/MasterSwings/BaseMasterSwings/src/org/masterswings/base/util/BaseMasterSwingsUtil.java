@@ -36,9 +36,9 @@ public final class BaseMasterSwingsUtil {
 	private void debug(String message) {
 		_log.debug(message);
 	}
-	
-	public static int getIntegerFromString(String input){
+
+	public static int getIntegerFromString(String input) {
 		return Integer.parseInt(input);
 	}
-}
 
+}
