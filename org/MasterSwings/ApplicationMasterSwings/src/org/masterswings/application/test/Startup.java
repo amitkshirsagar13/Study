@@ -40,17 +40,23 @@ public class Startup {
 		_log.debug(message);
 	}
 
+	public static ApplicationMainFrame _mainFrame = null;
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
-			ApplicationMainFrame mainFrame = new ApplicationMainFrame("MyMasterSwingsApplication");
-			mainFrame.setVisible(true);			
+			_mainFrame = new ApplicationMainFrame("MyMasterSwingsApplication");
+			_mainFrame.setVisible(true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-}
 
+	public static void logMessage(String statusMessage, int progressStatus) {
+		_mainFrame.setStatusBarMessage(statusMessage);
+		_mainFrame.setProgressStatus(progressStatus);
+	}
+}
