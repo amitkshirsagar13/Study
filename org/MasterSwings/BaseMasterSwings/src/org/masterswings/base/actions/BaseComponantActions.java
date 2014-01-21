@@ -57,7 +57,6 @@ public class BaseComponantActions extends JPanel implements
 	public void actionPerformed(ActionEvent e) {
 		final String actionName = e.getActionCommand();
 
-		Thread execThread = new Thread();
 		Runnable execRunner = new Runnable() {
 
 			@Override
@@ -89,6 +88,9 @@ public class BaseComponantActions extends JPanel implements
 				}
 			}
 		};
+
+		Thread execThread = new Thread(execRunner);
+		execThread.start();
 
 	}
 

@@ -51,7 +51,6 @@ public abstract class BaseButtonActions extends JFrame implements
 	public void actionPerformed(ActionEvent e) {
 		final String actionName = e.getActionCommand();
 
-		Thread execThread = new Thread();
 		Runnable execRunner = new Runnable() {
 
 			@Override
@@ -83,6 +82,10 @@ public abstract class BaseButtonActions extends JFrame implements
 				}
 			}
 		};
+
+		Thread execThread = new Thread(execRunner);
+		execThread.start();
+
 	}
 
 	public void waitSomeTime() {

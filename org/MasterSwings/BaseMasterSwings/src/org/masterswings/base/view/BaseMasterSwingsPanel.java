@@ -118,7 +118,7 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 	public void executeOk() {
 		debug(executingCommand + OK);
 		setStatusBarMessage(executingCommand + OK);
-		executeOk();
+		waitSomeTime();
 		setProgressStatus(50);
 	}
 
