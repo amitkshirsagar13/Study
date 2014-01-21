@@ -59,6 +59,7 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 				.getProperty(XAPP)), BaseMasterSwingsUtil
 				.getIntegerFromString(_properties.getProperty(YAPP)));
 		initialize();
+
 	}
 
 	/**
@@ -70,6 +71,8 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 
 		loadStatusPanel(StatusPanelMasterSwings
 				.getStatusPanelMasterSwings(new BorderLayout()));
+		loadMainFrameCenterPanel();
+		loadActionButtons();
 		//
 		// JLabel custom1 = new JLabel("AMIT");
 		// JLabel custom2 = new JLabel("Poonam");
