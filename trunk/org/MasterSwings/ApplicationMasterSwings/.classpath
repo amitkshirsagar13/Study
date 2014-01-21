@@ -28,5 +28,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/SplashMasterSwings"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/InvoiceMasterSwings"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/StatusMasterSwings"/>
+	<classpathentry kind="lib" path="/BaseMasterSwings/target/BaseMasterSwings-0.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
