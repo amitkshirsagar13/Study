@@ -22,6 +22,7 @@ package org.masterswings.base.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -107,7 +108,12 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 		List<Button> buttonList = ButtonBuilder
 				.getButtonsForPanel("BASEMASTERSWINGSPANEL");
 
-		ButtonBuilder.addButtonsToPanel(_buttonPanel, buttonList, this);
+		try {
+			ButtonBuilder.addButtonsToPanel(_buttonPanel, buttonList, this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.add(_buttonPanel, BorderLayout.SOUTH);
 	}
