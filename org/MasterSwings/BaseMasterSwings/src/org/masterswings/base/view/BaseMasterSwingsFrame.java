@@ -21,6 +21,7 @@ package org.masterswings.base.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -38,6 +39,7 @@ import org.masterswings.base.actions.BaseButtonActions;
 import org.masterswings.base.actions.BaseMasterSwingsContants;
 import org.masterswings.splash.SplashScreen;
 import org.masterswings.status.StatusPanelMasterSwings;
+import org.masterswings.toolsbar.ToolsPanelMasterSwings;
 
 public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		MouseMotionListener, MouseListener, BaseMasterSwingsContants {
@@ -158,10 +160,6 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 
 	private BaseMasterSwingsPanel _mainFrameCenterPanel = null;
 
-	public void loadToolBarPanel() {
-
-	}
-
 	public void loadMainFrameCenterPanel() {
 		_mainFrameCenterPanel = new BaseMasterSwingsPanel(new BorderLayout(),
 				this);
@@ -170,7 +168,14 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 	}
 
 	public void loadActionButtons() {
-		// CompBuilderMastarSwings.getJButton(OK, OK, _mainFrameCenterPanel);
+
+	}
+
+	public void loadToolsBarPanel() {
+		ToolsPanelMasterSwings toolsPanel = new ToolsPanelMasterSwings(
+				new FlowLayout(FlowLayout.LEFT), this);
+		toolsPanel.loadToolBarButtons();
+		this.add(toolsPanel, BorderLayout.NORTH);
 	}
 
 	@Override
