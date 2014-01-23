@@ -1,6 +1,18 @@
 <?xml version="1.0" ?>
 <application>
 	<frame>
+		<panel panelName="BASEMASTERSWINGSFRAME" subPanelName="TOOLSBARPANEL">
+			<button buttonName="OK" buttonAction="OK" buttonImage="button1.png">
+				<buttonToolTip>Sample Button with OK</buttonToolTip>
+			</button>
+			<button buttonName="CANCEL" buttonAction="CANCEL">
+				<buttonToolTip>Sample Button with CANCEL</buttonToolTip>
+			</button>
+			<button buttonName="RESET" buttonAction="RESET"
+				buttonDisabled="Disabled">
+				<buttonToolTip>Sample Button with RESET</buttonToolTip>
+			</button>
+		</panel>
 		<panel panelName="BASEMASTERSWINGSPANEL" subPanelName="INFOPANEL">
 			<label labelName="infoLabel" labelAction="DOUBLECLICK"
 				labelToolTip="InfoLabel...">
