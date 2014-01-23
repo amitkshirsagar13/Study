@@ -73,27 +73,8 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 				.getStatusPanelMasterSwings(new BorderLayout()));
 		loadMainFrameCenterPanel();
 		loadActionButtons();
-		//
-		// JLabel custom1 = new JLabel("AMIT");
-		// JLabel custom2 = new JLabel("Poonam");
-		//
-		// StatusPanelMasterSwings.getStatusPanelMasterSwings(new
-		// BorderLayout())
-		// .addLabelToInfoPanel(custom1);
-		// StatusPanelMasterSwings.getStatusPanelMasterSwings(new
-		// BorderLayout())
-		// .addLabelToInfoPanel(custom2);
-		//
-		// HashMap<String, JLabel> infoPanel = new HashMap<String, JLabel>();
-		//
-		// custom1.setText("Amogh");
-		// custom2.setText("Pallavi");
-		// infoPanel.put(custom1.getName(), custom1);
-		// infoPanel.put(custom2.getName(), custom2);
-		//
-		// StatusPanelMasterSwings.getStatusPanelMasterSwings(new
-		// BorderLayout())
-		// .updateInfoPanel(infoPanel);
+
+		loadToolsBarPanel();
 
 		for (int index = 0; index < 11; index++) {
 			_splashScreen.setProgress("Initilizing GUI..." + index, index * 10);
@@ -107,11 +88,5 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 
 		_splashScreen.closeIt();
 	}
-
-	// StatusPanelMasterSwings _statusPanel = null;
-	//
-	// public void setStatusPanel(StatusPanelMasterSwings statusPanel) {
-	// this.getContentPane().add(statusPanel, BorderLayout.SOUTH);
-	// }
 
 }
