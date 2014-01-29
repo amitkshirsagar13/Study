@@ -23,7 +23,7 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-public class BaseMasterSwingsTableRecord {
+public abstract class BaseMasterSwingsTableRecord {
 
 	Logger _log = Logger.getLogger(BaseMasterSwingsTableRecord.class.getName());
 
@@ -41,7 +41,5 @@ public class BaseMasterSwingsTableRecord {
 
 	protected Vector<String> _baseRecordVector = new Vector<String>();
 
-	public Vector<String> getRecordVector() {
-		return _baseRecordVector;
-	}
+	public abstract Vector<String> getRecordVector();
 }

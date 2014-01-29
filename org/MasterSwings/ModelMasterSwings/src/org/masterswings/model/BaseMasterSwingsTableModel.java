@@ -47,12 +47,14 @@ public class BaseMasterSwingsTableModel extends DefaultTableModel {
 	 */
 	public BaseMasterSwingsTableModel(
 			Vector<BaseMasterSwingsTableRecord> recordsVector,
-			Vector columnVector) {
+			Vector<String> columnVector) {
 		super();
 		Vector<Vector> vectoredRecords = new Vector<Vector>();
 		for (BaseMasterSwingsTableRecord record : recordsVector) {
 			vectoredRecords.add(record.getRecordVector());
+			debug(record.getRecordVector().toString());
 		}
-		this.setDataVector(vectoredRecords, columnVector);
+		super.setDataVector(vectoredRecords, columnVector);
+
 	}
 }
