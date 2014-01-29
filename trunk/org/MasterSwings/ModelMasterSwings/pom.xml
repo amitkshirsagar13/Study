@@ -28,11 +28,6 @@
 			<artifactId>junit</artifactId>
 			<version>LATEST</version>
 		</dependency>
-		<dependency>
-			<groupId>MasterSwings</groupId>
-			<artifactId>BaseMasterSwings</artifactId>
-			<version>0.0.1</version>
-		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
