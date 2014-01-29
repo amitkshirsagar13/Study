@@ -24,6 +24,7 @@ import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -37,6 +38,10 @@ import org.masterswings.builder.TextBoxBuilder;
 import org.masterswings.componants.Button;
 import org.masterswings.componants.Label;
 import org.masterswings.componants.TextBox;
+import org.masterswings.model.BaseMasterSwingsScrollTable;
+import org.masterswings.model.BaseMasterSwingsTableModel;
+import org.masterswings.model.store.BaseMasterSwingsTableRecord;
+import org.masterswings.model.store.SamplePersonMasterSwings;
 
 public class BaseMasterSwingsPanel extends BaseComponantActions implements
 		BaseMasterSwingsContants, Runnable {
@@ -99,6 +104,27 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 
 		TextBoxBuilder.addTextBoxsToPanel(_centerPanel, textBoxList, this);
 
+		Vector<String> columnVector = new Vector<String>();
+
+		columnVector.add("ID");
+		columnVector.add("Name");
+		columnVector.add("Place");
+		columnVector.add("Role");
+
+		Vector<BaseMasterSwingsTableRecord> recordsVector = new Vector<BaseMasterSwingsTableRecord>();
+		recordsVector.add(new SamplePersonMasterSwings("1", "Amit", "Pune",
+				"Admin"));
+		recordsVector.add(new SamplePersonMasterSwings("2", "Amogh", "Pune",
+				"User"));
+		recordsVector.add(new SamplePersonMasterSwings("3", "Poonam", "Pune",
+				"User"));
+
+		BaseMasterSwingsTableModel tableModel = new BaseMasterSwingsTableModel(
+				recordsVector, columnVector);
+
+		BaseMasterSwingsScrollTable scrollTable = new BaseMasterSwingsScrollTable(
+				tableModel, _centerPanel);
+		scrollTable.setTableModel(tableModel);
 		this.add(_centerPanel, BorderLayout.CENTER);
 	}
 
