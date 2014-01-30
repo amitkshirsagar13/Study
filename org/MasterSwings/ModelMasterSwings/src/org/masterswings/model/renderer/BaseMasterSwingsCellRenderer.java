@@ -57,13 +57,17 @@ public class BaseMasterSwingsCellRenderer extends DefaultTableCellRenderer {
 		Component cell = super.getTableCellRendererComponent(table, obj,
 				isSelected, hasFocus, row, column);
 		if (isSelected) {
-			cell.setBackground(Color.BLUE);
+			// cell.setBackground(Color.BLUE);
 		} else {
 			if (row % 2 == 0) {
 				cell.setBackground(Color.WHITE);
 			} else {
-				cell.setBackground(Color.LIGHT_GRAY);
+				cell.setBackground(new Color(242, 242, 242));
 			}
+		}
+		// Set tool tip if desired
+		if (obj != null) {
+			setToolTipText(obj.toString());
 		}
 		return cell;
 	}

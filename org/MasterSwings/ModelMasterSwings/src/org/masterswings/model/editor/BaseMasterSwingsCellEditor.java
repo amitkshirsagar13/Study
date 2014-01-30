@@ -5,7 +5,7 @@
  *
  *
  * <pre>
- * Creation date: Jan 29, 2014
+ * Creation date: Jan 30, 2014
  * @author Amit Kshirsagar
  * @email amit.kshirsagar.13@gmail.com
  * @version 1.0
@@ -17,15 +17,16 @@
  * </pre>
  */
 
-package org.masterswings.model.store;
+package org.masterswings.model.editor;
 
-import java.util.Vector;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 
 import org.apache.log4j.Logger;
 
-public abstract class BaseMasterSwingsTableRecord {
+public class BaseMasterSwingsCellEditor extends DefaultCellEditor {
 
-	Logger _log = Logger.getLogger(BaseMasterSwingsTableRecord.class.getName());
+	Logger _log = Logger.getLogger(BaseMasterSwingsCellEditor.class.getName());
 
 	private void logMessage(String message, Throwable exception) {
 		if (exception != null) {
@@ -39,7 +40,10 @@ public abstract class BaseMasterSwingsTableRecord {
 		_log.debug(message);
 	}
 
-	protected Vector<Object> _baseRecordVector = new Vector<Object>();
-
-	public abstract Vector<Object> getRecordVector();
+	/**
+	 * @param arg0
+	 */
+	public BaseMasterSwingsCellEditor(String[] items) {
+		super(new JComboBox(items));
+	}
 }

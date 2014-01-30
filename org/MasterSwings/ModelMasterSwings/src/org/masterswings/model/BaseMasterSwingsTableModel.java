@@ -55,6 +55,10 @@ public class BaseMasterSwingsTableModel extends DefaultTableModel {
 			debug(record.getRecordVector().toString());
 		}
 		super.setDataVector(vectoredRecords, columnVector);
+	}
 
+	@Override
+	public Class<?> getColumnClass(int column) {
+		return (getValueAt(0, column).getClass());
 	}
 }

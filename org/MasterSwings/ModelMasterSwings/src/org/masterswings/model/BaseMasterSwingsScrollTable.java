@@ -19,12 +19,14 @@
 
 package org.masterswings.model;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.log4j.Logger;
+import org.masterswings.model.editor.BaseMasterSwingsCellEditor;
 import org.masterswings.model.renderer.BaseMasterSwingsCellRenderer;
 
 public class BaseMasterSwingsScrollTable extends JScrollPane {
@@ -50,9 +52,25 @@ public class BaseMasterSwingsScrollTable extends JScrollPane {
 		super();
 		_reportTable = new JTable(tableModel);
 		this.getViewport().add(_reportTable);
+
+		String[] items = { "Admin", "User" };
+
 		for (int i = 0; i < _reportTable.getColumnCount(); i++) {
-			_reportTable.getColumnModel().getColumn(i)
-					.setCellRenderer(new BaseMasterSwingsCellRenderer());
+			if (i == 4) {
+				((JComponent) _reportTable.getDefaultRenderer(Boolean.class))
+						.setOpaque(true);
+			} else {
+				_reportTable.getColumnModel().getColumn(i)
+						.setCellRenderer(new BaseMasterSwingsCellRenderer());
+				if (i == 3) {
+					_reportTable
+							.getColumnModel()
+							.getColumn(i)
+							.setCellEditor(
+									new BaseMasterSwingsCellEditor(items));
+				}
+			}
+
 		}
 		root.add(this);
 	}
