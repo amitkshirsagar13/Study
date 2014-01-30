@@ -110,14 +110,15 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 		columnVector.add("Name");
 		columnVector.add("Place");
 		columnVector.add("Role");
+		columnVector.add("Check");
 
 		Vector<BaseMasterSwingsTableRecord> recordsVector = new Vector<BaseMasterSwingsTableRecord>();
 		recordsVector.add(new SamplePersonMasterSwings("1", "Amit", "Pune",
-				"Admin"));
+				"Admin", true));
 		recordsVector.add(new SamplePersonMasterSwings("2", "Amogh", "Pune",
-				"User"));
+				"User", true));
 		recordsVector.add(new SamplePersonMasterSwings("3", "Poonam", "Pune",
-				"User"));
+				"User", false));
 
 		BaseMasterSwingsTableModel tableModel = new BaseMasterSwingsTableModel(
 				recordsVector, columnVector);

@@ -65,6 +65,12 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 				if (info.getName().equalsIgnoreCase(NIMBUS)) {
 					UIManager.setLookAndFeel(info.getClassName());
 					UIManager.put("nimbusOrange", new Color(40, 150, 255));
+					UIManager.put("Table.background", Color.WHITE);
+					UIManager.put("Table.alternateRowColor", Color.BLUE);
+					UIManager.put("nimbusSelectionBackground", new Color(220,
+							220, 220));
+					UIManager.put("List[Selected].textBackground", new Color(
+							220, 220, 220));
 					break;
 				} else if (info.getName().equalsIgnoreCase(METAL)) {
 					UIManager.setLookAndFeel(info.getClassName());
