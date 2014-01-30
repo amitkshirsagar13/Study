@@ -46,18 +46,20 @@ public class SamplePersonMasterSwings extends BaseMasterSwingsTableRecord {
 	 * @param role
 	 */
 	public SamplePersonMasterSwings(String id, String name, String place,
-			String role) {
+			String role, boolean checked) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.place = place;
 		this.role = role;
+		this.checked = checked;
 	}
 
 	private String id = null;
 	private String name = null;
 	private String place = null;
 	private String role = null;
+	private boolean checked = false;
 
 	/**
 	 * @return the id
@@ -127,11 +129,12 @@ public class SamplePersonMasterSwings extends BaseMasterSwingsTableRecord {
 	 * ()
 	 */
 	@Override
-	public Vector<String> getRecordVector() {
+	public Vector<Object> getRecordVector() {
 		_baseRecordVector.add(id);
 		_baseRecordVector.add(name);
 		_baseRecordVector.add(place);
 		_baseRecordVector.add(role);
+		_baseRecordVector.add(checked);
 		return _baseRecordVector;
 	}
 }
