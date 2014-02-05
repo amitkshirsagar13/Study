@@ -25,7 +25,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.HashMap;
 
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -51,6 +54,23 @@ public class BaseComponantActions extends JPanel implements
 
 	public BaseComponantActions(LayoutManager layoutManager) {
 		super(layoutManager);
+	}
+
+	protected HashMap<String, JButton> buttonMap = new HashMap<String, JButton>();
+	protected HashMap<String, JComponent> formMap = new HashMap<String, JComponent>();
+
+	/**
+	 * @return the formMap
+	 */
+	public HashMap<String, JComponent> getFormMap() {
+		return formMap;
+	}
+
+	/**
+	 * @return the buttonMap
+	 */
+	public HashMap<String, JButton> getButtonMap() {
+		return buttonMap;
 	}
 
 	@Override
