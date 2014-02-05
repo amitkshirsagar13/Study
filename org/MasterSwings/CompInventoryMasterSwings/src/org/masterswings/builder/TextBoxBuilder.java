@@ -6,12 +6,7 @@ package org.masterswings.builder;
  * @date Jan 20, 2014
  */
 
-import java.awt.event.MouseListener;
-import java.util.EventListener;
 import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 import org.masterswings.componants.TextBox;
@@ -49,21 +44,4 @@ public class TextBoxBuilder extends CompBuilderMastarSwings {
 		return labelList;
 	}
 
-	/**
-	 * @param controlPanel
-	 * @param buttonList
-	 */
-	public static void addTextBoxsToPanel(JPanel controlPanel,
-			List<TextBox> labelList, EventListener eventLister) {
-		for (int i = 0; i < labelList.size(); i++) {
-			TextBox label = labelList.get(i);
-			JTextField jTextBox = new JTextField(label.getTextBoxName());
-			jTextBox.setText(label.getTextBoxToolTip());
-			jTextBox.addMouseListener((MouseListener) eventLister);
-			jTextBox.setToolTipText(label.getTextBoxToolTip());
-
-			controlPanel.add(jTextBox);
-		}
-
-	}
 }
