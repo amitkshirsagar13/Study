@@ -24,6 +24,8 @@ import java.awt.LayoutManager;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 import org.apache.log4j.Logger;
 import org.masterswings.base.view.BaseMasterSwingsFrame;
 import org.masterswings.base.view.BaseMasterSwingsPanel;
@@ -61,7 +63,7 @@ public class ToolsPanelMasterSwings extends BaseMasterSwingsPanel {
 				.getName());
 
 		try {
-			ButtonBuilder.addButtonsToPanel(this, buttonList, this);
+			addButtonsToPanel((JPanel) this, buttonList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
