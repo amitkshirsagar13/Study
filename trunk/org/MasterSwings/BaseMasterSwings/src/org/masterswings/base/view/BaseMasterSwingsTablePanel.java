@@ -22,15 +22,12 @@ package org.masterswings.base.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
-import java.util.List;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
-import org.masterswings.builder.TextBoxBuilder;
-import org.masterswings.componants.TextBox;
 import org.masterswings.model.BaseMasterSwingsScrollTable;
 import org.masterswings.model.BaseMasterSwingsTableModel;
 import org.masterswings.model.store.BaseMasterSwingsTableRecord;
@@ -66,11 +63,6 @@ public class BaseMasterSwingsTablePanel extends BaseMasterSwingsPanel {
 	public void loadCenterPanel() {
 		_centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		_centerPanel.setBorder(BorderFactory.createLoweredBevelBorder());
-
-		List<TextBox> textBoxList = TextBoxBuilder
-				.getTextBoxsForPanel("BASEMASTERSWINGSPANEL");
-
-		addTextBoxsToPanel(_centerPanel, textBoxList);
 
 		Vector<String> columnVector = new Vector<String>();
 
