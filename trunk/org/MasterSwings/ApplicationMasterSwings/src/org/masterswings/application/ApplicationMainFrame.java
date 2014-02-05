@@ -23,9 +23,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.io.IOException;
 
+import javax.swing.JTabbedPane;
+
 import org.apache.log4j.Logger;
 import org.masterswings.base.util.BaseMasterSwingsUtil;
 import org.masterswings.base.view.BaseMasterSwingsFrame;
+import org.masterswings.base.view.BaseMasterSwingsPanel;
 import org.masterswings.status.StatusPanelMasterSwings;
 
 public class ApplicationMainFrame extends BaseMasterSwingsFrame {
@@ -71,7 +74,26 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 
 		loadStatusPanel(StatusPanelMasterSwings
 				.getStatusPanelMasterSwings(new BorderLayout()));
-		loadMainFrameCenterPanel();
+
+		JTabbedPane tabbedPanel = new JTabbedPane();
+
+		// loadMainFrameCenterPanel();
+		_mainFrameCenterPanel = new BaseMasterSwingsPanel(new BorderLayout(),
+				this);
+		_mainFrameCenterPanel.add(tabbedPanel, BorderLayout.CENTER);
+		this.add(_mainFrameCenterPanel, BorderLayout.CENTER);
+
+		ReportPanel reportPanel = new ReportPanel(new BorderLayout(), this);
+		reportPanel.buildForm();
+		// reportPanel.loadCenterPanel();
+		// reportPanel.loadButtonPanel();
+
+		BaseMasterSwingsPanel basePanel = new BaseMasterSwingsPanel(
+				new BorderLayout(), this);
+		basePanel.buildForm();
+		tabbedPanel.addTab("BasePanel", basePanel);
+		tabbedPanel.addTab("ReportPanel", reportPanel);
+
 		loadActionButtons();
 
 		loadToolsBarPanel();
