@@ -9,16 +9,9 @@ package org.masterswings.builder;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.EventListener;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 import org.masterswings.componants.Button;
@@ -54,37 +47,7 @@ public class ButtonBuilder extends CompBuilderMastarSwings {
 		return buttonList;
 	}
 
-	/**
-	 * @param controlPanel
-	 * @param buttonList
-	 * @throws IOException
-	 */
-	public static void addButtonsToPanel(JPanel controlPanel,
-			List<Button> buttonList, EventListener eventLister)
-			throws IOException {
-		for (int i = 0; i < buttonList.size(); i++) {
-			Button button = buttonList.get(i);
-			JButton jButton = new JButton();
-			jButton.setActionCommand(button.getButtonAction());
-			jButton.addActionListener((ActionListener) eventLister);
-			if (button.getButtonImage() != null) {
-				jButton.setIcon(getScaledIcon(
-						ImageIO.read(new File("./images/"
-								+ button.getButtonImage())), 0.5));
-			} else {
-				jButton.setText(button.getButtonName());
-			}
-			jButton.setToolTipText(button.getButtonToolTip().toString());
-			if (button.getButtonDisabled() != null
-					&& button.getButtonDisabled().equalsIgnoreCase("Disabled")) {
-				jButton.setEnabled(false);
-			}
-			controlPanel.add(jButton);
-		}
-
-	}
-
-	private static ImageIcon getScaledIcon(final Image image, final double scale) {
+	public static ImageIcon getScaledIcon(final Image image, final double scale) {
 		ImageIcon scaledIcon = new ImageIcon(image) {
 			@Override
 			public int getIconWidth() {
