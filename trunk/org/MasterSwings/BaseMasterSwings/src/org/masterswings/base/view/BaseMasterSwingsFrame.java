@@ -164,7 +164,7 @@ public abstract class BaseMasterSwingsFrame extends BaseButtonActions implements
 		_splashScreen.closeIt();
 	}
 
-	private BaseMasterSwingsPanel _mainFrameCenterPanel = null;
+	protected BaseMasterSwingsPanel _mainFrameCenterPanel = null;
 
 	public void loadMainFrameCenterPanel() {
 		_mainFrameCenterPanel = new BaseMasterSwingsPanel(new BorderLayout(),

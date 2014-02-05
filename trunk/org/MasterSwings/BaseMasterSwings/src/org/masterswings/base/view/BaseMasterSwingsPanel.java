@@ -22,12 +22,15 @@ package org.masterswings.base.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
 import org.masterswings.base.actions.BaseComponantActions;
@@ -38,10 +41,6 @@ import org.masterswings.builder.TextBoxBuilder;
 import org.masterswings.componants.Button;
 import org.masterswings.componants.Label;
 import org.masterswings.componants.TextBox;
-import org.masterswings.model.BaseMasterSwingsScrollTable;
-import org.masterswings.model.BaseMasterSwingsTableModel;
-import org.masterswings.model.store.BaseMasterSwingsTableRecord;
-import org.masterswings.model.store.SamplePersonMasterSwings;
 
 public class BaseMasterSwingsPanel extends BaseComponantActions implements
 		BaseMasterSwingsContants, Runnable {
@@ -75,9 +74,9 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 		return this;
 	}
 
-	private JPanel _infoPanel = null;
-	private JPanel _centerPanel = null;
-	private JPanel _buttonPanel = null;
+	protected JPanel _infoPanel = null;
+	protected JPanel _centerPanel = null;
+	protected JPanel _buttonPanel = null;
 
 	public void buildForm() {
 		loadInfoPanel();
@@ -96,36 +95,14 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 	}
 
 	public void loadCenterPanel() {
-		_centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 25));
+		_centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		_centerPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 
 		List<TextBox> textBoxList = TextBoxBuilder
 				.getTextBoxsForPanel("BASEMASTERSWINGSPANEL");
 
-		TextBoxBuilder.addTextBoxsToPanel(_centerPanel, textBoxList, this);
+		addTextBoxsToPanel(_centerPanel, textBoxList);
 
-		Vector<String> columnVector = new Vector<String>();
-
-		columnVector.add("ID");
-		columnVector.add("Name");
-		columnVector.add("Place");
-		columnVector.add("Role");
-		columnVector.add("Check");
-
-		Vector<BaseMasterSwingsTableRecord> recordsVector = new Vector<BaseMasterSwingsTableRecord>();
-		recordsVector.add(new SamplePersonMasterSwings("1", "Amit", "Pune",
-				"Admin", true));
-		recordsVector.add(new SamplePersonMasterSwings("2", "Amogh", "Pune",
-				"User", true));
-		recordsVector.add(new SamplePersonMasterSwings("3", "Poonam", "Pune",
-				"User", false));
-
-		BaseMasterSwingsTableModel tableModel = new BaseMasterSwingsTableModel(
-				recordsVector, columnVector);
-
-		BaseMasterSwingsScrollTable scrollTable = new BaseMasterSwingsScrollTable(
-				tableModel, _centerPanel);
-		scrollTable.setTableModel(tableModel);
 		this.add(_centerPanel, BorderLayout.CENTER);
 	}
 
@@ -136,13 +113,66 @@ public class BaseMasterSwingsPanel extends BaseComponantActions implements
 				.getButtonsForPanel("BASEMASTERSWINGSPANEL");
 
 		try {
-			ButtonBuilder.addButtonsToPanel(_buttonPanel, buttonList, this);
+			addButtonsToPanel(_buttonPanel, buttonList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		this.add(_buttonPanel, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * @param controlPanel
+	 * @param buttonList
+	 * @throws IOException
+	 */
+	public void addButtonsToPanel(JPanel controlPanel, List<Button> buttonList)
+			throws IOException {
+		for (int i = 0; i < buttonList.size(); i++) {
+			Button button = buttonList.get(i);
+			if (!buttonMap.containsKey(button.getButtonName())) {
+				JButton jButton = new JButton(button.getButtonName());
+				jButton.setName(button.getButtonName());
+				jButton.setActionCommand(button.getButtonAction());
+				jButton.addActionListener(this);
+				if (button.getButtonImage() != null) {
+					jButton.setIcon(ButtonBuilder.getScaledIcon(
+							ImageIO.read(new File("./images/"
+									+ button.getButtonImage())), 0.5));
+				} else {
+					jButton.setText(button.getButtonName());
+				}
+				jButton.setToolTipText(button.getButtonToolTip().toString());
+				if (button.getButtonDisabled() != null
+						&& button.getButtonDisabled().equalsIgnoreCase(
+								"Disabled")) {
+					jButton.setEnabled(false);
+				}
+				buttonMap.put(jButton.getName(), jButton);
+				controlPanel.add(jButton);
+			}
+		}
+	}
+
+	/**
+	 * @param controlPanel
+	 * @param buttonList
+	 */
+	public void addTextBoxsToPanel(JPanel controlPanel, List<TextBox> labelList) {
+		for (int i = 0; i < labelList.size(); i++) {
+			TextBox textBox = labelList.get(i);
+			if (!formMap.containsKey(textBox.getTextBoxName())) {
+				JTextField jTextBox = new JTextField(textBox.getTextBoxName());
+				jTextBox.setName(textBox.getTextBoxName());
+				jTextBox.setText(textBox.getTextBoxToolTip());
+				jTextBox.addMouseListener(this);
+				jTextBox.setToolTipText(textBox.getTextBoxToolTip());
+				formMap.put(jTextBox.getName(), jTextBox);
+				controlPanel.add(jTextBox);
+			}
+		}
+
 	}
 
 	private String executingCommand = "Executing Command: ";
