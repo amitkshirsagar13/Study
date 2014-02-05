@@ -29,6 +29,7 @@ import org.apache.log4j.Logger;
 import org.masterswings.base.util.BaseMasterSwingsUtil;
 import org.masterswings.base.view.BaseMasterSwingsFrame;
 import org.masterswings.base.view.BaseMasterSwingsPanel;
+import org.masterswings.base.view.BaseMasterSwingsTablePanel;
 import org.masterswings.status.StatusPanelMasterSwings;
 
 public class ApplicationMainFrame extends BaseMasterSwingsFrame {
@@ -91,7 +92,13 @@ public class ApplicationMainFrame extends BaseMasterSwingsFrame {
 		BaseMasterSwingsPanel basePanel = new BaseMasterSwingsPanel(
 				new BorderLayout(), this);
 		basePanel.buildForm();
+
+		BaseMasterSwingsTablePanel baseTablePanel = new BaseMasterSwingsTablePanel(
+				new BorderLayout(), this);
+		baseTablePanel.buildForm();
+
 		tabbedPanel.addTab("BasePanel", basePanel);
+		tabbedPanel.addTab("BaseTablePanel", baseTablePanel);
 		tabbedPanel.addTab("ReportPanel", reportPanel);
 
 		loadActionButtons();
