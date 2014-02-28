@@ -6,8 +6,6 @@ package com.swings.application;
  * @date Feb 5, 2014
  */
 
-import javax.swing.JFrame;
-
 import org.apache.log4j.Logger;
 
 import com.swings.base.UtilityBaseFrame;
@@ -33,7 +31,7 @@ public class MySudokuSolver {
 
 		myApplicationFrame.setSelected("SudokuPanel");
 
-		myApplicationFrame.setExtendedState(myApplicationFrame
-				.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+		// myApplicationFrame.setExtendedState(myApplicationFrame
+		// .getExtendedState() | JFrame.MAXIMIZED_BOTH);
 	}
 }
