@@ -617,8 +617,12 @@ public class Mp3Tab extends JFrame implements FocusListener, MouseListener {
 				mp3FileObject.setComment(comment.getText());
 			}
 			ID3v1 id3v1Tag = mp3File.getId3v1Tag();
-
-			id3v1Tag.setAlbum(mp3FileObject.getAlbum());
+      
+      if (id3v1Tag==null){
+        id3v1Tag = new ID3v1Tag();
+      }
+  
+      id3v1Tag.setAlbum(mp3FileObject.getAlbum());
 			id3v1Tag.setArtist(mp3FileObject.getArtist());
 			id3v1Tag.setComment(mp3FileObject.getComment());
 			id3v1Tag.setTitle(mp3FileObject.getTitle());
