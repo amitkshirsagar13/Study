@@ -42,7 +42,6 @@ public class DatabaseConnectionTest {
 	}
 
 	public void testDb2Connection() {
-
 		Connection conn;
 		try {
 			conn = JDBCUtil.getDb2Connection();
@@ -52,7 +51,6 @@ public class DatabaseConnectionTest {
 				log4j.debug(resultSet.getString(1) + "|"
 						+ resultSet.getString(2) + "|" + resultSet.getString(3));
 			}
-
 		} catch (Exception e) {
 			log4j.error(e.getMessage(), e);
 		}
