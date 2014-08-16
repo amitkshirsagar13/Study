@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.abs.bean.Supplier" table="Suppliers">
+		<meta attribute="class-description">
+			This class contains the Supplier details.
+		</meta>
+		<id name="id" column="id" type="int">
+			<generator class="native" />
+		</id>
+		<property name="supplierName" column="supplierName" type="string" />
+		<many-to-one name="Address" class="org.abs.bean.Address"
+			column="addressId" unique="true" not-null="true" cascade="all" />
+		<many-to-one name="Customer" class="org.abs.bean.Customer"
+			column="customerId" unique="true" not-null="true" cascade="all" />
+		<property name="supplierComment" column="supplierComment" type="string" />
+		<property name="crtDate" column="crtDate" type="date" />
+		<property name="updDate" column="updDate" type="date" />
+		<set name="products" cascade="all">
+			<key column="supplierId" />
+			<one-to-many class="org.abs.bean.Product" />
+		</set>
+	</class>
+</hibernate-mapping>

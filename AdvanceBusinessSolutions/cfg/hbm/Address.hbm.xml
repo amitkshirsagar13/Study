@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.abs.bean.Address" table="Addresses">
+		<meta attribute="class-description">
+			This class contains the Address detail.
+		</meta>
+		<id name="id" type="int" column="id">
+			<generator class="native" />
+		</id>
+		<property name="firstLine" column="firstline" type="string" />
+		<property name="secondLine" column="secondline" type="string" />
+		<property name="landMark" column="landMark" type="string" />
+		<property name="city" column="city" type="string" />
+		<property name="zip" column="zip" type="int" />
+		<property name="crtDate" column="crtDate" type="date" />
+		<property name="updDate" column="updDate" type="date" />
+	</class>
+</hibernate-mapping>
