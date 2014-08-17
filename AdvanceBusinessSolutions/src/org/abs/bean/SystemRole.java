@@ -34,7 +34,7 @@ public class SystemRole extends BaseEntity implements AbsBaseConstants {
 
 	@Override
 	public String toString() {
-		return "SystemRole: " + id + CONNECTOR + roleName;
+		return "SystemRole: " + roleName;
 	}
 
 	private String roleName;
