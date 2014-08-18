@@ -49,7 +49,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
 	public ModelAndView newLoginForm(ModelMap model) {
-		return new ModelAndView("login", "command", new SystemUser());
+		return new ModelAndView("loginForm", "command", new SystemUser());
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -62,7 +62,7 @@ public class LoginController {
 			model.addAttribute("loginMessage", "System User not found...");
 		}
 		model.addAttribute("systemUser", systemUser);
-		return "Welcome";
+		return "welcome";
 	}
 
 	@RequestMapping(value = "/getSystemUserList", method = RequestMethod.GET)
@@ -73,6 +73,12 @@ public class LoginController {
 		List<SystemUser> systemUserList = systemUserService
 				.getSystemUserList(systemUser);
 		model.addAttribute("systemUserList", systemUserList);
-		return "Welcome";
+		return "welcome";
+	}
+
+	@RequestMapping("/belcome")
+	public String belcome() {
+		System.out.println("Belcoming");
+		return "belcome";
 	}
 }
