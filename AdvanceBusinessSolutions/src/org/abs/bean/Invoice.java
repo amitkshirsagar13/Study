@@ -30,7 +30,7 @@ public class Invoice extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(Invoice.class);
+	protected static Logger log4j = Logger.getLogger(Invoice.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -41,17 +41,17 @@ public class Invoice extends BaseEntity implements AbsBaseConstants {
 		return "Invoice: ";
 	}
 
-	private Customer customer;
-	private float totalPrice;
-	private float discountedPrice;
-	private Date crtDate;
-	private Date updDate;
-	private SystemUser systemUser;
-	private String returnComments;
-	private int creditPoints;
-	private String barCode;
+	protected Customer customer;
+	protected float totalPrice;
+	protected float discountedPrice;
+	protected Date crtDate;
+	protected Date updDate;
+	protected SystemUser systemUser;
+	protected String returnComments;
+	protected int creditPoints;
+	protected String barCode;
 
-	private Set sales;
+	protected Set sales;
 
 	public Customer getCustomer() {
 		return customer;

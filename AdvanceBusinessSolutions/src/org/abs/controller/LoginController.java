@@ -3,7 +3,7 @@ package org.abs.controller;
 import java.util.List;
 
 import org.abs.bean.SystemUser;
-import org.abs.service.SystemUserService;
+import org.abs.service.system.SystemUserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -76,9 +76,9 @@ public class LoginController {
 		return "welcome";
 	}
 
-	@RequestMapping("/belcome")
-	public String belcome() {
+	@RequestMapping("/index")
+	public String index() {
 		System.out.println("Belcoming");
-		return "belcome";
+		return "index";
 	}
 }

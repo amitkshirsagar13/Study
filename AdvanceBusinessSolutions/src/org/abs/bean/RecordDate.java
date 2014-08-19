@@ -27,7 +27,7 @@ public class RecordDate extends BaseEntity {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(RecordDate.class);
+	protected static Logger log4j = Logger.getLogger(RecordDate.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -38,8 +38,8 @@ public class RecordDate extends BaseEntity {
 		return "RecordDate: ";
 	}
 
-	private Date crtDate;
-	private Date updDate;
+	protected Date crtDate;
+	protected Date updDate;
 
 	public Date getCrtDate() {
 		return crtDate;

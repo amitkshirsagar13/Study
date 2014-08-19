@@ -28,7 +28,7 @@ public class Address extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(Address.class);
+	protected static Logger log4j = Logger.getLogger(Address.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -40,13 +40,13 @@ public class Address extends BaseEntity implements AbsBaseConstants {
 				+ landMark + CONNECTOR + city + CONNECTOR + zip;
 	}
 
-	private String firstLine;
-	private String secondLine;
-	private String landMark;
-	private String city;
-	private int zip;
-	private Date crtDate;
-	private Date updDate;
+	protected String firstLine;
+	protected String secondLine;
+	protected String landMark;
+	protected String city;
+	protected int zip;
+	protected Date crtDate;
+	protected Date updDate;
 
 	public String getFirstLine() {
 		return firstLine;

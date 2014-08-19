@@ -26,7 +26,7 @@ public class Discount extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(Discount.class);
+	protected static Logger log4j = Logger.getLogger(Discount.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -37,9 +37,9 @@ public class Discount extends BaseEntity implements AbsBaseConstants {
 		return "Discount: ";
 	}
 
-	private String description;
-	private int severity;
-	private int discount;
+	protected String description;
+	protected int severity;
+	protected int discount;
 
 	public String getDescription() {
 		return description;

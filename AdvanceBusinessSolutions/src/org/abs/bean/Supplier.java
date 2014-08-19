@@ -30,7 +30,7 @@ public class Supplier extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(Supplier.class);
+	protected static Logger log4j = Logger.getLogger(Supplier.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -41,13 +41,13 @@ public class Supplier extends BaseEntity implements AbsBaseConstants {
 		return "Supplier: ";
 	}
 
-	private String supplierName;
-	private Customer customer;
-	private Address address;
-	private String supplierComment;
-	private Date crtDate;
-	private Date updDate;
-	private Set products;
+	protected String supplierName;
+	protected Customer customer;
+	protected Address address;
+	protected String supplierComment;
+	protected Date crtDate;
+	protected Date updDate;
+	protected Set products;
 
 	public String getSupplierName() {
 		return supplierName;

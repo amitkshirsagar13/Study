@@ -26,7 +26,7 @@ public class SaftyIndex extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(SaftyIndex.class);
+	protected static Logger log4j = Logger.getLogger(SaftyIndex.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -45,7 +45,7 @@ public class SaftyIndex extends BaseEntity implements AbsBaseConstants {
 		this.saftyIndexName = saftyIndexName;
 	}
 
-	private String saftyIndexName;
+	protected String saftyIndexName;
 
 	public String getSaftyIndexName() {
 		return saftyIndexName;

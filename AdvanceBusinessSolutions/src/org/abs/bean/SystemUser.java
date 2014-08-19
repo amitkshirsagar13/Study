@@ -28,7 +28,7 @@ public class SystemUser extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(SystemUser.class);
+	protected static Logger log4j = Logger.getLogger(SystemUser.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -39,13 +39,13 @@ public class SystemUser extends BaseEntity implements AbsBaseConstants {
 		return "SystemUser: " + id + CONNECTOR + name + CONNECTOR + systemRole;
 	}
 
-	private String name;
-	private String emailId;
-	private SystemRole systemRole;
-	private String status;
-	private String password;
-	private Date crtDate;
-	private Date updDate;
+	protected String name;
+	protected String emailId;
+	protected SystemRole systemRole;
+	protected String status;
+	protected String password;
+	protected Date crtDate;
+	protected Date updDate;
 
 	public SystemUser() {
 	}

@@ -26,7 +26,7 @@ public class SystemRole extends BaseEntity implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(SystemRole.class);
+	protected static Logger log4j = Logger.getLogger(SystemRole.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -37,7 +37,7 @@ public class SystemRole extends BaseEntity implements AbsBaseConstants {
 		return "SystemRole: " + roleName;
 	}
 
-	private String roleName;
+	protected String roleName;
 
 	public SystemRole() {
 	}

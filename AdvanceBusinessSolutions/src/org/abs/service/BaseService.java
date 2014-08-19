@@ -1,7 +1,12 @@
 package org.abs.service;
 
-import org.abs.service.dbutil.DatabaseConnectionProvider;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+import org.abs.util.dbutil.DatabaseConnectionProvider;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -50,5 +55,17 @@ public class BaseService {
 		if (session == null || !session.isOpen()) {
 			session = DatabaseConnectionProvider.openSession();
 		}
+	}
+
+	public Query getQueryParameterized(Query query,
+			Map<String, Object> parameterMap) {
+		Set<String> keys = parameterMap.keySet();
+		for (Iterator<String> iterator = keys.iterator(); iterator.hasNext();) {
+			String key = iterator.next();
+			log4j.debug("Setting Parameter: " + key + "|"
+					+ parameterMap.get(key));
+			query.setParameter(key, parameterMap.get(key));
+		}
+		return query;
 	}
 }

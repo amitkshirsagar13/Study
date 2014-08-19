@@ -1,8 +1,10 @@
-package org.abs.service;
+package org.abs.service.system;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.abs.bean.SystemUser;
+import org.abs.service.BaseService;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -48,8 +50,9 @@ public class SystemUserService extends BaseService {
 		String sql = "FROM SystemUser where emailId=:emailId and password=:password";
 
 		Query query = session.createQuery(sql);
-		query.setParameter("emailId", systemUser.getEmailId());
-		query.setParameter("password", systemUser.getPassword());
+
+		query = getQueryParameterized(query, systemUser.getFieldValueMap());
+
 		List<SystemUser> results = query.list();
 		if (results.size() == 1) {
 			systemUser = results.get(0);
@@ -69,10 +72,28 @@ public class SystemUserService extends BaseService {
 		// query.add(Restrictions.like("password", systemUser.getPassword(),
 		// MatchMode.START));
 		List<SystemUser> results = query.list();
-		for (int index = 0; index < results.size(); index++) {
-			System.out.println(results.get(index));
-		}
 		closeSession();
 		return results;
+	}
+
+	public void saveOrMergeSystemUser(SystemUser systemUser) {
+		openSession();
+		session.merge(systemUser);
+		closeSession();
+	}
+
+	public void saveOrMergeSystemUsers(List<SystemUser> systemUserList) {
+		openSession();
+		for (Iterator iterator = systemUserList.iterator(); iterator.hasNext();) {
+			SystemUser systemUser = (SystemUser) iterator.next();
+			session.merge(systemUser);
+		}
+		closeSession();
+	}
+
+	public void deleteSystemUser(SystemUser systemUser) {
+		openSession();
+		session.delete(systemUser);
+		closeSession();
 	}
 }

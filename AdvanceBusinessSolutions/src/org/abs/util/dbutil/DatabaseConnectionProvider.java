@@ -1,4 +1,4 @@
-package org.abs.service.dbutil;
+package org.abs.util.dbutil;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

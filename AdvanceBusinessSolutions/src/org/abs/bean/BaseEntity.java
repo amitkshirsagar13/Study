@@ -1,5 +1,11 @@
 package org.abs.bean;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -48,5 +54,40 @@ public class BaseEntity {
 
 	public boolean isNew() {
 		return (this.id == null);
+	}
+
+	private Map<String, Object> fieldValueMap = new HashMap<String, Object>();
+
+	private List<String> ignoreTypeList = null;
+
+	private void populateIgnoreTypeList() {
+		if (ignoreTypeList == null) {
+			ignoreTypeList = new ArrayList<String>();
+			ignoreTypeList.add("org.apache.log4j.Logger");
+			ignoreTypeList.add("java.util.Map");
+			ignoreTypeList.add("java.util.List");
+			ignoreTypeList.add("java.util.Set");
+		}
+	}
+
+	public Map<String, Object> getFieldValueMap() {
+		fieldValueMap.clear();
+		populateIgnoreTypeList();
+		Field[] fields = this.getClass().getDeclaredFields();
+		for (int i = 0; i < fields.length; i++) {
+			if (!ignoreTypeList.contains(fields[i].getType().getName())) {
+				try {
+					if (fields[i].get(this) != null) {
+						fieldValueMap.put(fields[i].getName(),
+								fields[i].get(this));
+					}
+				} catch (IllegalArgumentException e) {
+					log4j.error(e.getMessage(), e);
+				} catch (IllegalAccessException e) {
+					log4j.error(e.getMessage(), e);
+				}
+			}
+		}
+		return fieldValueMap;
 	}
 }

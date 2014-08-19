@@ -28,7 +28,7 @@ public class Customer extends RecordDate implements AbsBaseConstants {
 	 * Initiate the log4j Logger for debugging purposes.
 	 * 
 	 */
-	private static Logger log4j = Logger.getLogger(Customer.class);
+	protected static Logger log4j = Logger.getLogger(Customer.class);
 
 	/**
 	 * Print object values by default. Add required attributes of the object.
@@ -39,18 +39,18 @@ public class Customer extends RecordDate implements AbsBaseConstants {
 		return "Customer: ";
 	}
 
-	private String firstName;
-	private String lastName;
-	private Address address;
-	private String contactNumber;
-	private String emailId;
-	private String occupation;
-	private Date birthDate;
-	private SaftyIndex saftyIndex;
-	private String barCode;
-	private int creditPoints;
-	private Date crtDate;
-	private Date updDate;
+	protected String firstName;
+	protected String lastName;
+	protected Address address;
+	protected String contactNumber;
+	protected String emailId;
+	protected String occupation;
+	protected Date birthDate;
+	protected SaftyIndex saftyIndex;
+	protected String barCode;
+	protected int creditPoints;
+	protected Date crtDate;
+	protected Date updDate;
 
 	public String getFirstName() {
 		return firstName;
