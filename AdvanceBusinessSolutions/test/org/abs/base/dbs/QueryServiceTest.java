@@ -8,6 +8,9 @@ import org.abs.bean.SystemUser;
 import org.abs.service.BaseService;
 import org.abs.service.system.SystemUserService;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
 
 /**
  * <p>
@@ -83,5 +86,26 @@ public class QueryServiceTest extends BaseService {
 		for (Product product1 : productList) {
 			log4j.debug(product1);
 		}
+
+		log4j.debug("======================================================");
+		Session session = systemUserService.getSession();
+		systemUserList = session.createCriteria(SystemUser.class, "30").list();
+		for (SystemUser systemUser1 : systemUserList) {
+			log4j.debug(systemUser1);
+		}
+		log4j.debug("======================================================");
+
+		address = new Address();
+		address.setCity("Pune");
+		address.setZip(411033);
+		Example addressExample = Example.create(address);
+		Criteria criteria = session.createCriteria(Address.class).add(
+				addressExample);
+		addressList = criteria.list();
+		for (Address address1 : addressList) {
+			log4j.debug(address1);
+		}
+		log4j.debug("======================================================");
+
 	}
 }

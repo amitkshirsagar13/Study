@@ -61,6 +61,13 @@ public class BaseService {
 		}
 	}
 
+	public Session getSession() {
+		if (session == null || !session.isOpen()) {
+			session = DatabaseConnectionProvider.openSession();
+		}
+		return session;
+	}
+
 	public Criteria getCriteriaParameterized(Criteria query,
 			Map<String, Object> parameterMap) {
 		Set<String> keys = parameterMap.keySet();
