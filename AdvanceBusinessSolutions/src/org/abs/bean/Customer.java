@@ -36,7 +36,10 @@ public class Customer extends RecordDate implements AbsBaseConstants {
 
 	@Override
 	public String toString() {
-		return "Customer: ";
+		return "Customer: " + firstName + CONNECTOR + lastName + CONNECTOR
+				+ CONNECTOR + address + CONNECTOR + CONNECTOR + contactNumber
+				+ CONNECTOR + emailId + CONNECTOR + occupation + CONNECTOR
+				+ birthDate + CONNECTOR + saftyIndex + CONNECTOR + creditPoints;
 	}
 
 	protected String firstName;

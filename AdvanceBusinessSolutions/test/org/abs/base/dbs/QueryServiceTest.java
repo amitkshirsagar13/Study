@@ -3,6 +3,7 @@ package org.abs.base.dbs;
 import java.util.List;
 
 import org.abs.bean.Address;
+import org.abs.bean.Product;
 import org.abs.bean.SystemUser;
 import org.abs.service.BaseService;
 import org.abs.service.system.SystemUserService;
@@ -59,20 +60,28 @@ public class QueryServiceTest extends BaseService {
 		for (SystemUser systemUser1 : systemUserList) {
 			log4j.debug(systemUser1);
 		}
-
+		log4j.debug("======================================================");
 		Address address = new Address();
-		address.setZip(413033);
+		address.setZip(413501);
 		List<Address> addressList = systemUserService
 				.getResultsForCriteria(address);
 		for (Address address1 : addressList) {
 			log4j.debug(address1);
 		}
-
+		log4j.debug("======================================================");
 		address = new Address();
 		address.setCity("Pune");
 		addressList = systemUserService.getResultsForCriteria(address);
 		for (Address address1 : addressList) {
 			log4j.debug(address1);
+		}
+		log4j.debug("======================================================");
+		Product product = new Product();
+		product.setProductName("%Dress");
+		List<Product> productList = systemUserService
+				.getResultsForCriteria(product);
+		for (Product product1 : productList) {
+			log4j.debug(product1);
 		}
 	}
 }

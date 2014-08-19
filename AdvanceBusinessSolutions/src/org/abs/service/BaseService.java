@@ -79,7 +79,7 @@ public class BaseService {
 			}
 			if (parameterMap.get(key).toString().startsWith("%")) {
 				query.add(Restrictions.like(key, parameterMap.get(key)
-						.toString(), MatchMode.END));
+						.toString().replaceAll("%", ""), MatchMode.END));
 			} else if (parameterMap.get(key).toString().endsWith("%")) {
 				query.add(Restrictions.like(key, parameterMap.get(key)
 						.toString(), MatchMode.START));
@@ -94,7 +94,7 @@ public class BaseService {
 		return query;
 	}
 
-	public void lazyInitilizeFully(List results) {
+	public void lazyInitilize(List results) {
 		for (Object resultRecord : results) {
 			log4j.debug(resultRecord);
 		}
@@ -106,7 +106,7 @@ public class BaseService {
 		log4j.debug("Query: " + baseEntity.getClass().getName());
 		query = getCriteriaParameterized(query, baseEntity.getFieldValueMap());
 		List results = query.list();
-		lazyInitilizeFully(results);
+		lazyInitilize(results);
 		return results;
 	}
 }

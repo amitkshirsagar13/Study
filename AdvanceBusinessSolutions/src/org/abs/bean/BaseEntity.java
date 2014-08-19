@@ -79,10 +79,13 @@ public class BaseEntity {
 			if (!(ignoreTypeList.contains(fields[i].getType().getName()) || ignoreTypeList
 					.contains(fields[i].getType().getPackage()))) {
 				try {
-					if (!(fields[i].get(this) == null || (fields[i].get(this)
+					if (!(fields[i].get(this) == null || ((fields[i].get(this)
 							.getClass().getName()
 							.equalsIgnoreCase("java.lang.Integer") && Integer
-							.parseInt(fields[i].get(this).toString()) == -999))) {
+							.parseInt(fields[i].get(this).toString()) == -999) || (fields[i]
+							.get(this).getClass().getName()
+							.equalsIgnoreCase("java.lang.Float") && Float
+							.parseFloat(fields[i].get(this).toString()) == -999)))) {
 						fieldValueMap.put(fields[i].getName(),
 								fields[i].get(this));
 					}

@@ -36,16 +36,19 @@ public class Product extends BaseEntity implements AbsBaseConstants {
 
 	@Override
 	public String toString() {
-		return "Product: ";
+		return "Product: " + productName + CONNECTOR + productType + CONNECTOR
+				+ lotNumber + CONNECTOR + lotSize + CONNECTOR + inventory
+				+ CONNECTOR + basePrice + CONNECTOR + margin + CONNECTOR
+				+ supplier + CONNECTOR + barCode;
 	}
 
 	protected String productName;
 	protected String productType;
-	protected int lotNumber;
-	protected int lotSize;
-	protected int inventory;
-	protected float basePrice;
-	protected int margin;
+	protected int lotNumber = -999;
+	protected int lotSize = -999;
+	protected int inventory = -999;
+	protected float basePrice = -999;
+	protected int margin = -999;
 	protected Supplier supplier;
 	protected Date crtDate;
 	protected Date updDate;

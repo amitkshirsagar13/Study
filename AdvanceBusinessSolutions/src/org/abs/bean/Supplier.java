@@ -38,7 +38,8 @@ public class Supplier extends BaseEntity implements AbsBaseConstants {
 
 	@Override
 	public String toString() {
-		return "Supplier: ";
+		return "Supplier: " + supplierName + CONNECTOR + CONNECTOR + customer
+				+ CONNECTOR + CONNECTOR + supplierComment;
 	}
 
 	protected String supplierName;
