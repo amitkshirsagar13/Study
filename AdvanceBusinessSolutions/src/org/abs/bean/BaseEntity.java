@@ -67,6 +67,7 @@ public class BaseEntity {
 			ignoreTypeList.add("java.util.Map");
 			ignoreTypeList.add("java.util.List");
 			ignoreTypeList.add("java.util.Set");
+			ignoreTypeList.add("org.abs.bean");
 		}
 	}
 
@@ -75,9 +76,13 @@ public class BaseEntity {
 		populateIgnoreTypeList();
 		Field[] fields = this.getClass().getDeclaredFields();
 		for (int i = 0; i < fields.length; i++) {
-			if (!ignoreTypeList.contains(fields[i].getType().getName())) {
+			if (!(ignoreTypeList.contains(fields[i].getType().getName()) || ignoreTypeList
+					.contains(fields[i].getType().getPackage()))) {
 				try {
-					if (fields[i].get(this) != null) {
+					if (!(fields[i].get(this) == null || (fields[i].get(this)
+							.getClass().getName()
+							.equalsIgnoreCase("java.lang.Integer") && Integer
+							.parseInt(fields[i].get(this).toString()) == -999))) {
 						fieldValueMap.put(fields[i].getName(),
 								fields[i].get(this));
 					}

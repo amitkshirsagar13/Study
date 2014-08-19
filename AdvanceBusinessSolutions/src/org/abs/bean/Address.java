@@ -44,7 +44,7 @@ public class Address extends BaseEntity implements AbsBaseConstants {
 	protected String secondLine;
 	protected String landMark;
 	protected String city;
-	protected int zip;
+	protected int zip = -999;
 	protected Date crtDate;
 	protected Date updDate;
 

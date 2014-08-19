@@ -1,13 +1,17 @@
 package org.abs.service;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.abs.bean.BaseEntity;
 import org.abs.util.dbutil.DatabaseConnectionProvider;
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * <p>
@@ -57,15 +61,52 @@ public class BaseService {
 		}
 	}
 
-	public Query getQueryParameterized(Query query,
+	public Criteria getCriteriaParameterized(Criteria query,
 			Map<String, Object> parameterMap) {
 		Set<String> keys = parameterMap.keySet();
 		for (Iterator<String> iterator = keys.iterator(); iterator.hasNext();) {
 			String key = iterator.next();
-			log4j.debug("Setting Parameter: " + key + "|"
-					+ parameterMap.get(key));
-			query.setParameter(key, parameterMap.get(key));
+
+			log4j.debug("Query Parameter: "
+					+ parameterMap.get(key).getClass().getName() + "|" + key
+					+ "|" + parameterMap.get(key));
+
+			if (parameterMap.get(key).getClass().getName()
+					.equalsIgnoreCase("java.lang.Integer")) {
+				query.add(Restrictions.eq(key,
+						Integer.parseInt(parameterMap.get(key).toString())));
+				continue;
+			}
+			if (parameterMap.get(key).toString().startsWith("%")) {
+				query.add(Restrictions.like(key, parameterMap.get(key)
+						.toString(), MatchMode.END));
+			} else if (parameterMap.get(key).toString().endsWith("%")) {
+				query.add(Restrictions.like(key, parameterMap.get(key)
+						.toString(), MatchMode.START));
+			} else if (parameterMap.get(key).toString().contains("%")) {
+				query.add(Restrictions.like(key, parameterMap.get(key)
+						.toString(), MatchMode.ANYWHERE));
+			} else {
+				query.add(Restrictions
+						.eq(key, parameterMap.get(key).toString()));
+			}
 		}
 		return query;
+	}
+
+	public void lazyInitilizeFully(List results) {
+		for (Object resultRecord : results) {
+			log4j.debug(resultRecord);
+		}
+	}
+
+	public List getResultsForCriteria(BaseEntity baseEntity) {
+		openSession();
+		Criteria query = session.createCriteria(baseEntity.getClass());
+		log4j.debug("Query: " + baseEntity.getClass().getName());
+		query = getCriteriaParameterized(query, baseEntity.getFieldValueMap());
+		List results = query.list();
+		lazyInitilizeFully(results);
+		return results;
 	}
 }

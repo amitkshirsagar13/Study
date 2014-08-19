@@ -56,7 +56,6 @@ public class LoginController {
 	public String loginSystemUser(
 			@ModelAttribute("SpringWeb") SystemUser systemUser, ModelMap model) {
 		SystemUserService systemUserService = new SystemUserService();
-		System.out.println(systemUser);
 		systemUser = systemUserService.loginSystemUser(systemUser);
 		if (systemUser == null) {
 			model.addAttribute("loginMessage", "System User not found...");

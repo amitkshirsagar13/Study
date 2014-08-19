@@ -6,10 +6,6 @@ import java.util.List;
 import org.abs.bean.SystemUser;
 import org.abs.service.BaseService;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * <p>
@@ -46,33 +42,17 @@ public class SystemUserService extends BaseService {
 	}
 
 	public SystemUser loginSystemUser(SystemUser systemUser) {
-		openSession();
-		String sql = "FROM SystemUser where emailId=:emailId and password=:password";
-
-		Query query = session.createQuery(sql);
-
-		query = getQueryParameterized(query, systemUser.getFieldValueMap());
-
-		List<SystemUser> results = query.list();
+		List<SystemUser> results = getResultsForCriteria(systemUser);
 		if (results.size() == 1) {
 			systemUser = results.get(0);
 		} else {
 			systemUser = null;
 		}
-		System.out.println(systemUser);
-		closeSession();
 		return systemUser;
 	}
 
 	public List<SystemUser> getSystemUserList(SystemUser systemUser) {
-		openSession();
-		Criteria query = session.createCriteria(SystemUser.class);
-		query.add(Restrictions.like("emailId", systemUser.getEmailId(),
-				MatchMode.END));
-		// query.add(Restrictions.like("password", systemUser.getPassword(),
-		// MatchMode.START));
-		List<SystemUser> results = query.list();
-		closeSession();
+		List<SystemUser> results = getResultsForCriteria(systemUser);
 		return results;
 	}
 
