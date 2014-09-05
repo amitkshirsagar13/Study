@@ -176,7 +176,7 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 
 	public void createReport() {
 		reportWriter = new ReportWriter(new File(reportFilePath + "/"
-				+ reportName));
+				+ reportName + ".xls"));
 		SimpleDateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 		WritableSheet memberSheet = reportWriter.getWorkSheet(reportName);
 
