@@ -25,6 +25,7 @@ public interface ReportGeneratorConstants {
 	String REPORTQUERY = "REPORTQUERY";
 	String REPORTCOLUMNS = "REPORTCOLUMNS";
 	String REPORTPARAMS = "REPORTPARAMS";
+	String REPORTDATEFORMAT = "REPORTDATEFORMAT";
 
 	String COLUMN = "COLUMN";
 	String NUMBER = "NUMBER";

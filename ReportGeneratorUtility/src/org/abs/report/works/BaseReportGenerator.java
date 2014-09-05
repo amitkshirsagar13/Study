@@ -131,6 +131,8 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 				.getProperties(reportConfig);
 		reportDb = reportProperties.getProperty(REPORTDB);
 		reportQuery = reportProperties.getProperty(REPORTQUERY);
+		dfm = new SimpleDateFormat(
+				reportProperties.getProperty(REPORTDATEFORMAT));
 		String reportParameters = reportProperties.getProperty(REPORTPARAMS);
 		log4j.debug(reportParams);
 		StringTokenizer reportParamTkn = new StringTokenizer(reportParams,
@@ -156,6 +158,7 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 	Connection conn;
 	Statement statement;
 	ResultSet resultSet;
+	SimpleDateFormat dfm = null;
 
 	public void runQuery() {
 		try {
@@ -177,7 +180,6 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 	public void createReport() {
 		reportWriter = new ReportWriter(new File(reportFilePath + "/"
 				+ reportName + ".xls"));
-		SimpleDateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 		WritableSheet memberSheet = reportWriter.getWorkSheet(reportName);
 
 		ReportRecordWriter reportRecordWriter = new ReportRecordWriter();
@@ -223,7 +225,6 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 							recordArray[i] = resultSet.getString(i + 1);
 						}
 					} else if (recordType[i].equalsIgnoreCase(DATE)) {
-						log4j.debug(resultSet.getDate(i + 1));
 						recordArray[i] = dfm.parse(
 								resultSet.getDate(i + 1).toString() + "")
 								.getTime()
