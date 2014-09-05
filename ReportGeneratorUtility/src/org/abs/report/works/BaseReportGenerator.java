@@ -178,8 +178,9 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 	ReportWriter reportWriter = null;
 
 	public void createReport() {
-		reportWriter = new ReportWriter(new File(reportFilePath + "/"
-				+ reportName + ".xls"));
+		File reportFile = new File(reportFilePath + "/" + reportName + ".xls");
+		log4j.debug("Report Ouput File:" + reportFile.getAbsolutePath());
+		reportWriter = new ReportWriter(reportFile);
 		WritableSheet memberSheet = reportWriter.getWorkSheet(reportName);
 
 		ReportRecordWriter reportRecordWriter = new ReportRecordWriter();
@@ -216,7 +217,8 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 			while (resultSet.next()) {
 				String[] recordArray = new String[columnCount];
 				for (int i = 0; i < columnCount; i++) {
-					if (recordType[i].equalsIgnoreCase(STRING)) {
+					if (recordType[i].equalsIgnoreCase(STRING)
+							&& resultSet.getString(i + 1) != null) {
 						recordArray[i] = resultSet.getString(i + 1);
 					} else if (recordType[i].equalsIgnoreCase(NUMBER)) {
 						if (resultSet.getString(i + 1) != null) {
@@ -225,10 +227,14 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 							recordArray[i] = resultSet.getString(i + 1);
 						}
 					} else if (recordType[i].equalsIgnoreCase(DATE)) {
-						recordArray[i] = dfm.parse(
-								resultSet.getDate(i + 1).toString() + "")
-								.getTime()
-								+ "";
+						if (resultSet.getString(i + 1) != null) {
+							recordArray[i] = dfm.parse(
+									resultSet.getDate(i + 1).toString() + "")
+									.getTime()
+									+ "";
+						} else {
+							recordArray[i] = resultSet.getString(i + 1);
+						}
 					}
 				}
 				record = recordCreator.createRecord(recordType, recordArray);
@@ -236,6 +242,13 @@ public class BaseReportGenerator implements ReportGeneratorConstants {
 						record, recordCounter);
 				recordCounter++;
 			}
+
+			memberSheet
+					.getCell(0, 0)
+					.getCellFeatures()
+					.setComment(
+							"Report Query:" + reportQuery + "\n" + "Param:"
+									+ reportParams);
 			reportWriter.getReportWorkbook().write();
 			reportWriter.getReportWorkbook().close();
 		} catch (Exception e) {
