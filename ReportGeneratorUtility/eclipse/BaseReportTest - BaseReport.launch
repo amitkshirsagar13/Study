@@ -17,6 +17,6 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.abs.report.test.BaseReportTest"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-r BaseReport -f ./data -c baseReport -p name='Poonam'|role='User'"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-r BaseReport -f ./data -c baseReport -p lotSize='1000'"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="ReportGeneratorUtility"/>
 </launchConfiguration>
