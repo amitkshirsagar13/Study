@@ -1,10 +1,5 @@
 package com.sample.base.startupmonitors;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.servlet.ServletContextEvent;
@@ -34,16 +29,16 @@ public class SampleWebApplicationStartup implements ServletContextListener {
 			initCtx = new InitialContext();
 
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			Session session = (Session) envCtx.lookup("mail/MailSession");
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("test.resource@tomcat.com"));
-			InternetAddress to[] = new InternetAddress[1];
-			to[0] = new InternetAddress("amit.kshirsagar.13@gmail.com");
-			message.setRecipients(Message.RecipientType.TO, to);
-			message.setSubject("Test Mail from Tomcat Resource");
-			message.setContent("This is a test mail sent from Tomcat Resource",
-					"text/plain");
-			Transport.send(message);
+			// Session session = (Session) envCtx.lookup("mail/MailSession");
+			// Message message = new MimeMessage(session);
+			// message.setFrom(new InternetAddress("test.resource@tomcat.com"));
+			// InternetAddress to[] = new InternetAddress[1];
+			// to[0] = new InternetAddress("amit.kshirsagar.13@gmail.com");
+			// message.setRecipients(Message.RecipientType.TO, to);
+			// message.setSubject("Test Mail from Tomcat Resource");
+			// message.setContent("This is a test mail sent from Tomcat Resource",
+			// "text/plain");
+			// Transport.send(message);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
