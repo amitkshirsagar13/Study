@@ -12,7 +12,7 @@
     <!-- Directory to which generated sourcefiles will be written by wsgen. -->   
     <property name="src-outdir" value="${basedir}/src/"/>   
     <!-- Directory to which generated classfiles will be written by wsgen. -->   
-    <property name="gen-classdir" value="${wsgen-outdir}/com/"/>   
+    <property name="gen-classdir" value="${class-dir}/com/"/>   
     <!-- MODIFY HERE Absolute path of the wsgen command. -->   
     <property name="wsgen-cmd"   
         value="C:\Program Files\Java\jdk1.6.0_45\bin\wsgen"/>   
