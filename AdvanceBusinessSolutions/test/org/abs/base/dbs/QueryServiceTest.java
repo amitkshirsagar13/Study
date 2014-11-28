@@ -97,8 +97,8 @@ public class QueryServiceTest extends BaseService {
 
 		address = new Address();
 		address.setCity("Pune");
-		address.setZip(411033);
-		Example addressExample = Example.create(address);
+		// address.setZip(411033);
+		Example addressExample = Example.create(address).excludeProperty("zip");
 		Criteria criteria = session.createCriteria(Address.class).add(
 				addressExample);
 		addressList = criteria.list();
