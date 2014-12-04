@@ -45,7 +45,6 @@
 				<pathelement location="${src}" />
 			</classpath>
 		</clientgen>
-		<antcall target="clean-dummy" />
 		<antcall target="eclipse-refresh" />
 		<antcall target="jar" />
 	</target>
