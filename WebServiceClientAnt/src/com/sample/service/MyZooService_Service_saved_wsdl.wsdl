@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<WL5G3N0:definitions name="MyZooService" targetNamespace="http://service.base.com/" xmlns="" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://service.base.com/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.base.com/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://service.base.com/" schemaLocation="SampleWebServiceSchema1.xsd"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getZooAnimals">
+    <WL5G3N0:part element="WL5G3N1:getZooAnimals" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getZooAnimalsResponse">
+    <WL5G3N0:part element="WL5G3N1:getZooAnimalsResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Exception">
+    <WL5G3N0:part element="WL5G3N1:Exception" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="MyZooService">
+    <WL5G3N0:operation name="getZooAnimals">
+      <WL5G3N0:input message="WL5G3N1:getZooAnimals"/>
+      <WL5G3N0:output message="WL5G3N1:getZooAnimalsResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:Exception" name="Exception"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="MyZooServicePortBinding" type="WL5G3N1:MyZooService">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getZooAnimals">
+      <WL5G3N2:operation soapAction="getZooAnimals"/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="Exception">
+        <WL5G3N2:fault name="Exception" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="MyZooService">
+    <WL5G3N0:port binding="WL5G3N1:MyZooServicePortBinding" name="MyZooServicePort">
+      <WL5G3N2:address location="REPLACE_WITH_ACTUAL_URL"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>
