@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsd:schema
-	targetNamespace="http://schemas.datacontract.org/2004/07/PaymentServices.Services"
+	targetNamespace="http://schemas.data.org/2004/07/Paymen.Services"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-	xmlns="http://schemas.datacontract.org/2004/07/PaymentServices.Services">
+	xmlns="http://schemas.data.org/2004/07/Paymen.Services">
 	<xsd:element name="SessionID">
 		<xsd:simpleType>
 			<xsd:restriction base="xsd:int">

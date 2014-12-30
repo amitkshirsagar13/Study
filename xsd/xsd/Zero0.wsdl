@@ -3,34 +3,34 @@
                   xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
                   xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
                   xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:psc="https://payment.salesinterface.com/services/">
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:psc="https://pay.sample.com/services/">
 	<wsdl:types>
 		<xsd:schema targetNamespace="http://tempuri.org/Imports">
-			<xsd:import schemaLocation="http://qaspaymentservices.servicemaster.com/Services/Shared.svc?xsd=xsd0" namespace="http://tempuri.org/"/>
-			<xsd:import schemaLocation="http://qaspaymentservices.servicemaster.com/Services/Shared.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
-			<xsd:import schemaLocation="http://qaspaymentservices.servicemaster.com/Services/Shared.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/PaymentServices.Models"/>
-			<xsd:import schemaLocation="userdetails.xsd" namespace="https://payment.salesinterface.com/services/"/>
+			<xsd:import schemaLocation="http://qaspayment.master.com/Services/Shared.svc?xsd=xsd0" namespace="http://tempuri.org/"/>
+			<xsd:import schemaLocation="http://qaspayment.master.com/Services/Shared.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			<xsd:import schemaLocation="http://qaspayment.master.com/Services/Shared.svc?xsd=xsd2" namespace="http://schemas.data.org/2004/07/Paymen.Models"/>
+			<xsd:import schemaLocation="userdetails.xsd" namespace="https://pay.sample.com/services/"/>
 		</xsd:schema>		
 	</wsdl:types>
-	<wsdl:message name="IShared_ZeroDollarAuthorization_InputMessage">
-		<wsdl:part name="parameters" element="tns:ZeroDollarAuthorization"/>
+	<wsdl:message name="IShared_ZeroRupeeAuthorization_InputMessage">
+		<wsdl:part name="parameters" element="tns:ZeroRupeeAuthorization"/>
 	</wsdl:message>
-	<wsdl:message name="IShared_ZeroDollarAuthorization_OutputMessage">
-		<wsdl:part name="parameters" element="tns:ZeroDollarAuthorizationResponse"/>
+	<wsdl:message name="IShared_ZeroRupeeAuthorization_OutputMessage">
+		<wsdl:part name="parameters" element="tns:ZeroRupeeAuthorizationResponse"/>
 	</wsdl:message>
 	<wsdl:message name="HeaderIn">
 		<wsdl:part name="UserCredentials" element="psc:UserCredentials"/>
 	</wsdl:message>
 	<wsdl:portType name="IShared">
-		<wsdl:operation name="ZeroDollarAuthorization">
-			<wsdl:input wsaw:Action="http://tempuri.org/IShared/ZeroDollarAuthorization" message="tns:IShared_ZeroDollarAuthorization_InputMessage"/>
-			<wsdl:output wsaw:Action="http://tempuri.org/IShared/ZeroDollarAuthorizationResponse" message="tns:IShared_ZeroDollarAuthorization_OutputMessage"/>
+		<wsdl:operation name="ZeroRupeeAuthorization">
+			<wsdl:input wsaw:Action="http://tempuri.org/IShared/ZeroRupeeAuthorization" message="tns:IShared_ZeroRupeeAuthorization_InputMessage"/>
+			<wsdl:output wsaw:Action="http://tempuri.org/IShared/ZeroRupeeAuthorizationResponse" message="tns:IShared_ZeroRupeeAuthorization_OutputMessage"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="BasicHttpBinding_IShared" type="tns:IShared">
 		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="ZeroDollarAuthorization">
-			<soap:operation soapAction="http://tempuri.org/IShared/ZeroDollarAuthorization" style="document"/>
+		<wsdl:operation name="ZeroRupeeAuthorization">
+			<soap:operation soapAction="http://tempuri.org/IShared/ZeroRupeeAuthorization" style="document"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 				<soap:header message="tns:HeaderIn" part="UserCredentials" use="literal">

@@ -1,6 +1,6 @@
-<xsd:schema targetNamespace="https://payment.salesinterface.com/services/" xmlns:psc2="http://schemas.datacontract.org/2004/07/PaymentServices.Services" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import schemaLocation="userdetailselements.xsd" namespace="http://schemas.datacontract.org/2004/07/PaymentServices.Services"/>
-    <xsd:include schemaLocation="userdetailselements.xsd" namespace="http://schemas.datacontract.org/2004/07/PaymentServices.Services"/>
+<xsd:schema targetNamespace="https://pay.sample.com/services/" xmlns:psc2="http://schemas.data.org/2004/07/Paymen.Services" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import schemaLocation="userdetailselements.xsd" namespace="http://schemas.data.org/2004/07/Paymen.Services"/>
+    <xsd:include schemaLocation="userdetailselements.xsd" namespace="http://schemas.data.org/2004/07/Paymen.Services"/>
 	<xsd:element name="UserCredentials">
 		<xsd:complexType>
 			<xsd:sequence>
