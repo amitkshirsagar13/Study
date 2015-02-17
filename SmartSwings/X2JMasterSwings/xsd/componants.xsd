@@ -1,0 +1,79 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="application">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="frame" type="Frame" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="Frame">
+		<xsd:sequence>
+			<xsd:element name="panel" type="Panel" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Panel">
+		<xsd:sequence>
+			<xsd:element name="label" type="Label" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="textBox" type="TextBox" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="button" type="Button" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="panelName" type="xsd:string" use="required" />
+		<xsd:attribute name="subPanelName" type="xsd:string"
+			use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Label">
+		<xsd:sequence>
+			<xsd:element name="labelToolTip" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="labelName " type="xsd:string" use="required" />
+		<xsd:attribute name="labelAction" type="xsd:string" use="required" />
+		<xsd:attribute name="labelImage" type="xsd:string" use="optional" />
+		<xsd:attribute name="labelXPos" type="xsd:string" use="optional" />
+		<xsd:attribute name="labelYPos" type="xsd:string" use="optional" />
+		<xsd:attribute name="labelListeners" type="xsd:string"
+			use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="TextBox">
+		<xsd:sequence>
+			<xsd:element name="textBoxToolTip" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="textBoxName" type="xsd:string" use="required" />
+		<xsd:attribute name="textBoxAction" type="xsd:string"
+			use="required" />
+		<xsd:attribute name="textBoxImage" type="xsd:string"
+			use="optional" />
+		<xsd:attribute name="textBoxXPos" type="xsd:string" use="optional" />
+		<xsd:attribute name="textBoxYPos" type="xsd:string" use="optional" />
+		<xsd:attribute name="textBoxDisabled" type="xsd:string"
+			use="optional" />
+		<xsd:attribute name="textBoxListeners" type="xsd:string"
+			use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="Button">
+		<xsd:sequence>
+			<xsd:element name="buttonToolTip" type="xsd:string"
+				minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="buttonName" type="xsd:string" use="required" />
+		<xsd:attribute name="buttonAction" type="xsd:string"
+			use="required" />
+		<xsd:attribute name="buttonImage" type="xsd:string" use="optional" />
+		<xsd:attribute name="buttonXPos" type="xsd:string" use="optional" />
+		<xsd:attribute name="buttonYPos" type="xsd:string" use="optional" />
+		<xsd:attribute name="buttonDisabled" type="xsd:string"
+			use="optional" />
+		<xsd:attribute name="buttonListeners" type="xsd:string"
+			use="optional" />
+	</xsd:complexType>
+</xsd:schema>
