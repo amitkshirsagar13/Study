@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JasperReportTest" default="viewDesign" basedir=".">
+
+   <import file="baseBuild.xml" />
+   <target name="viewDesign" description="Design viewer is launched
+            to preview the compiled report design.">
+      <java classname="net.sf.jasperreports.view.JasperDesignViewer"
+               fork="true">
+      <arg value="-F${file.name}.jasper" />
+      <classpath refid="classpath" />
+      </java>
+   </target>
+
+</project>
