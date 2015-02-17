@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application>
+	<frame>
+		<panel panelName="TOOLBARPANEL" subPanelName="ButtonPanel">
+			<button buttonName="OK" buttonAction="OK">
+				<buttonToolTip>OK button</buttonToolTip>
+			</button>
+			<button buttonName="RESET" buttonAction="RESET">
+				<buttonToolTip>RESET button</buttonToolTip>
+			</button>
+			<button buttonName="SUBMIT" buttonAction="SUBMIT"
+				buttonDisabled="Disabled">
+				<buttonToolTip>SUBMIT button</buttonToolTip>
+			</button>
+			<button buttonName="CANCEL" buttonAction="CANCEL"
+				buttonListeners="ActionListener|MouseListener">
+				<buttonToolTip>CANCEL button</buttonToolTip>
+			</button>
+		</panel>
+		<panel panelName="DummyPanel" subPanelName="ButtonPanel">
+			<button buttonName="OK" buttonAction="OK">
+				<buttonToolTip>OK button</buttonToolTip>
+			</button>
+			<button buttonName="RESET" buttonAction="RESET">
+				<buttonToolTip>RESET button</buttonToolTip>
+			</button>
+			<button buttonName="SUBMIT" buttonAction="SUBMIT"
+				buttonDisabled="Disabled">
+				<buttonToolTip>SUBMIT button</buttonToolTip>
+			</button>
+			<button buttonName="CANCEL" buttonAction="CANCEL"
+				buttonListeners="ActionListener|MouseListener|FocusListener">
+				<buttonToolTip>CANCEL button</buttonToolTip>
+			</button>
+		</panel>
+	</frame>
+</application>
