@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.businessadvancesolutions.businessmodel.BusinessCustomer"
+		table="businesscustomer">
+		<id column="CUSTOMERID" name="customerId" type="integer">
+			<generator class="increment" />
+		</id>
+		<property generated="never" lazy="false" name="customerFirstName">
+			<column length="256" name="CUSTOMERFIRSTNAME" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="customerLastName">
+			<column length="256" name="CUSTOMERLASTNAME" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="birthDate" type="date">
+			<column name="BIRTHDATE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="addressFirstLine">
+			<column length="256" name="ADDRESSFIRSTLINE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="addressSecondLine">
+			<column length="256" name="ADDRESSSECONDLINE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="landMark">
+			<column length="16" name="LANDMARK" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="city">
+			<column length="16" name="CITY" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="state">
+			<column length="16" name="STATE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="zip">
+			<column length="16" name="ZIP" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="contactNumber" type="long">
+			<column length="16" name="CONTACTNUMBER" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="occupation">
+			<column length="16" name="OCCUPATION" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="customerIndex">
+			<column length="16" name="CUSTOMERINDEX" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="customerBarCode">
+			<column length="16" name="CUSTOMERBARCODE" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

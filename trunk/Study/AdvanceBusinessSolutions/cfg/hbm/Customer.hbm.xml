@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="org.abs.bean.Customer" table="Customers">
+		<meta attribute="class-description">
+			This class contains the Customer details.
+		</meta>
+		<id name="id" column="id" type="int">
+			<generator class="native" />
+		</id>
+		<property name="firstName" column="firstName" type="string" />
+		<property name="lastName" column="lastName" type="string" />
+		<many-to-one name="Address" class="org.abs.bean.Address"
+			column="addressId" unique="true" not-null="true" cascade="all" />
+		<property name="contactNumber" column="contactNumber" type="string" />
+		<property name="emailId" column="emailId" type="string" />
+		<property name="occupation" column="occupation" type="string" />
+		<property name="birthDate" column="birthDate" type="date" />
+		<many-to-one name="SaftyIndex" class="org.abs.bean.SaftyIndex"
+			column="saftyIndexId" unique="true" not-null="true" cascade="all" />
+		<property name="barCode" column="barCode" type="string" />
+		<property name="creditPoints" column="creditPoints" type="int" />
+		<property name="crtDate" column="crtDate" type="date" />
+		<property name="updDate" column="updDate" type="date" />
+	</class>
+</hibernate-mapping>

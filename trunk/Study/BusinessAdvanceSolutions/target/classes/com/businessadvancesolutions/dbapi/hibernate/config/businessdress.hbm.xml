@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.businessadvancesolutions.businessmodel.BusinessDress"
+		table="businessdress">
+		<id column="DRESSID" name="dressId" type="integer">
+			<generator class="increment" />
+		</id>
+		<property generated="never" lazy="false" name="dressName">
+			<column length="256" name="DRESSNAME" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="dressColor">
+			<column length="16" name="DRESSCOLOR" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="sellPrice"
+			type="integer">
+			<column length="16" name="SELLPRICE" not-null="true" />
+		</property>
+
+		<property generated="never" lazy="false" name="supplierId"
+			type="integer">
+			<column length="16" name="SUPPLIERID" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="supplierPrice"
+			type="integer">
+			<column length="16" name="SUPPLIERPRICE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="discount">
+			<column length="16" name="DISCOUNT" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="lotNumberDate">
+			<column length="16" name="LOTNUMBERDATE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="dressBarCode">
+			<column length="16" name="DRESSBARCODE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="damageId">
+			<column length="16" name="DAMAGEID" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

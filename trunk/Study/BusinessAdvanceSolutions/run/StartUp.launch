@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/BusinessAdvanceSolutions/src/com/businessadvancesolutions/gui/startup/StartUp.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.businessadvancesolutions.gui.startup.StartUp"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="BusinessAdvanceSolutions"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DJMASTER_SPLASH_SCREEN=${workspace_loc:BusinessAdvanceSolutions}/images/zareenkhan.png -DAPP_ICON=${workspace_loc:BusinessAdvanceSolutions}/images/barcode-labels_125x125.jpg -DDATE_ICON=${workspace_loc:BusinessAdvanceSolutions}/images/dateIcon.png"/>
+</launchConfiguration>

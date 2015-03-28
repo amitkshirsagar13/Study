@@ -1,0 +1,44 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- hibernate dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+
+
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/BusinessAdvanceDatabase</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">amogh</property>
+		<property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+		<!-- Automatic schema creation (begin) === -->
+		<property name="hibernate.hbm2ddl.auto">validate</property>
+
+
+		<!-- Simple memory-only cache -->
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- ############################################ -->
+		<!-- # mapping files with external dependencies # -->
+		<!-- ############################################ -->
+
+		<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businessuser.hbm.xml" />
+		<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businesscustomer.hbm.xml" />
+		<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businessdress.hbm.xml" />
+			<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businesssell.hbm.xml" />
+			<mapping
+			resource="com\businessadvancesolutions\dbapi\hibernate\config\businessinvoice.hbm.xml" />
+		
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,21 @@
+DayOfWeek:DayDetails
+
+DayDetails Icon:7-xl.png
+DayDetails Temp:6
+DayDetails Feel:4
+DayDetails Cond:Cloudy
+DayDetails Wind:null
+DayDetails UV:2
+
+DayDetails Humi:52%
+
+DayDetails Press:1026.60 mb 
+
+DayDetails Visi:14 km
+
+DayDetails Cloud:100%
+
+DayDetails Dew:-3 °C
+
+DayDetails Presp:null
+DayDetails City:Memphis, TN

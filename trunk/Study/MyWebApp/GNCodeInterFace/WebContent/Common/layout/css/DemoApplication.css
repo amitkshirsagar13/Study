@@ -1,0 +1,188 @@
+/* Global Styles */
+body {
+	margin: 0px;
+}
+
+td {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+}
+
+a {
+	color: #FF6600;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #3366CC;
+}
+
+/* ID Styles */
+#navigation td {
+	border-bottom: 2px solid #C0DFFD;
+}
+
+#navigation a {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+	line-height: 16px;
+	letter-spacing: .1em;
+	text-decoration: none;
+	display: block;
+	padding: 8px 6px 10px 26px;
+	background: url("../../../Images/mm_arrow.gif") 14px 45% no-repeat;
+}
+
+/* This will allow to change the link in menu to display selected item */
+#navigation a:hover {
+	background: #ffffff url("../../../Images/images/vista2/btn5_blue2.gif")
+		14px 45% no-repeat;
+	background-position: 50% 50%;
+	color: #FF6600;
+}
+
+#logo {
+	font: bold 24px Verdana, Arial, Helvetica, sans-serif;
+	color: black;
+	letter-spacing: .2em;
+	line-height: 30px;
+}
+
+#tagline {
+	font: 12px Verdana, Arial, Helvetica, sans-serif;
+	color: blue;
+	letter-spacing: .4em;
+	line-height: 18px;
+}
+
+#monthformat {
+	border-bottom: 2px solid #E6F3FF;
+}
+
+#dateformat {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+	letter-spacing: .2em;
+}
+
+#dateformat a {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+	font-weight: bold;
+	letter-spacing: .1em;
+}
+
+#dateformat a:hover {
+	color: #FF6600;
+	letter-spacing: .1em;
+}
+
+/* Class Styles */
+.pageTable {
+	background-color: #C0DFFD;
+}
+
+/* This will set the back-ground color for the Menu Table */
+.menuTable {
+	background-color: #E3EDFF;
+}
+
+.bodyText {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+	line-height: 20px;
+	margin-top: 0px;
+}
+
+.pageName {
+	font: 18px Verdana, Arial, Helvetica, sans-serif;
+	color: #3366CC;
+	line-height: 18px;
+	letter-spacing: .0em;
+}
+
+.subHeader {
+	font: bold 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #3366CC;
+	line-height: 16px;
+	letter-spacing: .2em;
+}
+
+.quote {
+	font: 20px Verdana, Arial, Helvetica, sans-serif;
+	color: #759DA1;
+	line-height: 30px;
+}
+
+.smallText {
+	font: 10px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+}
+
+.navText {
+	font: 11px Verdana, Arial, Helvetica, sans-serif;
+	color: #003366;
+	line-height: 16px;
+	letter-spacing: .1em;
+	text-decoration: none;
+}
+
+.thead {
+	background: #fc9;
+}
+
+.tbody {
+	background: #9cf;
+}
+
+#highlight tr.hilight {
+	background: #c9f;
+}
+
+/* Report Style */
+.menuCell {
+	background-image: url("../../../Images/images/vista2/btn3_blue.gif");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+.menuCellSelected {
+	background-image: url("../../../Images/images/vista2/btn5_blue2.gif");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+
+.reportTable {
+	color: #555555;
+	font: bold;
+	background-color: #555555;
+	margin: 1em;
+	border: 1px groove #555555;
+	text-align: center;
+}
+
+.reportHeaders {
+	color: #FF0000;
+	font: bold;
+	background-color: #C0F7F3;
+	margin: 1em;
+	border: 1px groove #555555;
+	text-align: center;
+}
+
+.reportCells {
+	color: #555555;
+	background-color: #EFFBFB;
+	padding: .3em;
+	border: 1px #ccc solid;
+}
+
+.reportTextFieldsDisabled {
+	color: #EFFBFB;
+	background-color: #F6CECE;
+}
+
+.reportTextFields {
+	color: #000000;
+	background-color: #FFFFFF;
+}

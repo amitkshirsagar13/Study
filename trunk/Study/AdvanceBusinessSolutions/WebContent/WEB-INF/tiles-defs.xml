@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="base" template="/pages/common/ClassicLayout.jsp">
+		<put-attribute name="title" value="AdvanceBusinessSolutions" />
+		<put-attribute name="header" value="/pages/common/Header.jsp" />
+		<put-attribute name="menu" value="/pages/common/Footer.jsp" />
+		<put-attribute name="body" value="/pages/content/index.jsp" />
+		<put-attribute name="footer" value="/pages/common/Footer.jsp" />
+	</definition>
+	<definition name="index" extends="base">
+		<put-attribute name="title" value="Index" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="/pages/content/index.jsp" />
+	</definition>
+	<definition name="login" extends="base">
+		<put-attribute name="title" value="Index" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="/pages/content/login.jsp" />
+	</definition>
+	<definition name="loginForm" extends="base">
+		<put-attribute name="title" value="Index" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="/pages/content/login.jsp" />
+	</definition>
+	<definition name="welcome" extends="base">
+		<put-attribute name="title" value="Index" />
+		<put-attribute name="menu" value="" />
+		<put-attribute name="body" value="/pages/content/welcome.jsp" />
+	</definition>
+</tiles-definitions>
