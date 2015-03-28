@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application>
+	<frame>
+		<panel panelName="DummyPanel" subPanelName="ButtonPanel">
+			<button buttonName="OK" buttonAction="OK">
+				<buttonToolTip>OK button</buttonToolTip>
+			</button>
+		</panel>
+	</frame>
+</application>

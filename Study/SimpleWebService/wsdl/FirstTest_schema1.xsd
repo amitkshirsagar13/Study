@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://service.base.com/" xmlns:tns="http://service.base.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="getPersonStore" type="tns:getPersonStore"/>
+
+  <xs:element name="getPersonStoreResponse" type="tns:getPersonStoreResponse"/>
+
+  <xs:complexType name="getPersonStore">
+    <xs:sequence>
+      <xs:element name="PersonStore" type="tns:PersonStore" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PersonStore">
+    <xs:sequence>
+      <xs:element name="clientName" type="xs:string"/>
+      <xs:element name="personCount" type="xs:int"/>
+      <xs:element name="personList" type="tns:PersonList"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PersonList">
+    <xs:sequence>
+      <xs:element name="person" type="tns:Person" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Person">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="age" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="comment" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="getPersonStoreResponse">
+    <xs:sequence>
+      <xs:element name="PersonStore" type="tns:PersonStore" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

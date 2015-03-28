@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.businessadvancesolutions.businessmodel.BusinessSell"
+		table="businesssell">
+		<id column="SELLID" name="sellId" type="integer">
+			<generator class="increment" />
+		</id>
+		<property generated="never" lazy="false" name="invoiceId"
+			type="integer">
+			<column length="16" name="INVOICEID" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="dressBarCode">
+			<column length="16" name="DRESSBARCODE" not-null="true" />
+		</property>
+
+		<many-to-one name="businessDress" column="dressBarCode"
+			class="com.businessadvancesolutions.businessmodel.BusinessDress"
+			not-null="true" property-ref="dressBarCode" insert="false" update="false"></many-to-one>
+
+
+		<property generated="never" lazy="false" name="itemSrNo">
+			<column length="16" name="ITEMSRNO" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="quantity"
+			type="integer">
+			<column length="16" name="QUANTITY" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="sellPrice">
+			<column length="16" name="SELLPRICE" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="totalPrice"
+			type="integer">
+			<column length="16" name="TOTALPRICE" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

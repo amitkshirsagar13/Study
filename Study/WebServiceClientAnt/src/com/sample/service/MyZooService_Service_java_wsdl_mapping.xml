@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.sample.service</j2ee:package-type>
+    <j2ee:namespaceURI>http://service.base.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.base.service</j2ee:package-type>
+    <j2ee:namespaceURI>http://service.base.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.Exception</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:Exception</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.Zoo</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:Zoo</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>ClientName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>clientName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>AnimalCount</j2ee:java-variable-name>
+      <j2ee:xml-element-name>animalCount</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>AnimalStore</j2ee:java-variable-name>
+      <j2ee:xml-element-name>animalStore</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.Exception</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:Exception</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Message</j2ee:java-variable-name>
+      <j2ee:xml-element-name>message</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.AnimalType[]</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:AnimalStore</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.AnimalType</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:AnimalType</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Animal</j2ee:java-variable-name>
+      <j2ee:xml-element-name>animal</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Name</j2ee:java-variable-name>
+      <j2ee:xml-attribute-name>name</j2ee:xml-attribute-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.Animal</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:Animal</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>AnimalName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>animalName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Age</j2ee:java-variable-name>
+      <j2ee:xml-element-name>age</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Log</j2ee:java-variable-name>
+      <j2ee:xml-element-name>log</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Picture</j2ee:java-variable-name>
+      <j2ee:xml-element-name>picture</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Status</j2ee:java-variable-name>
+      <j2ee:xml-attribute-name>status</j2ee:xml-attribute-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Id</j2ee:java-variable-name>
+      <j2ee:xml-attribute-name>id</j2ee:xml-attribute-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.base.service.Attachment</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ser="http://service.base.com/">ser:Attachment</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>DoubledNumber</j2ee:java-variable-name>
+      <j2ee:xml-element-name>doubledNumber</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:exception-mapping>
+    <j2ee:exception-type>com.base.service.Exception</j2ee:exception-type>
+    <j2ee:wsdl-message xmlns:ser="http://service.base.com/">ser:Exception</j2ee:wsdl-message>
+    <j2ee:wsdl-message-part-name>fault</j2ee:wsdl-message-part-name>
+    <j2ee:constructor-parameter-order>
+      <j2ee:element-name>message</j2ee:element-name>
+    </j2ee:constructor-parameter-order>
+  </j2ee:exception-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>com.sample.service.MyZooService_Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:ser="http://service.base.com/">ser:MyZooService</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>MyZooServicePort</j2ee:port-name>
+      <j2ee:java-port-name>MyZooServicePort</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.sample.service.MyZooService_PortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:ser="http://service.base.com/">ser:MyZooService</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:ser="http://service.base.com/">ser:MyZooServicePortBinding</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getZooAnimals</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getZooAnimals</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.base.service.Zoo</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:ser="http://service.base.com/">ser:getZooAnimals</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>ZooAnimalStore</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.base.service.Zoo</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:ser="http://service.base.com/">ser:getZooAnimalsResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>ZooAnimalStore</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

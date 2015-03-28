@@ -1,0 +1,93 @@
+SystemUser
+	|- UserID
+	|- Name
+	|- Role
+	|- Status
+
+SystemRole
+	|- RoleID
+	|- RoleName
+
+
+InventoryDetails Tables:
+
+DressItem (Stores Type of Dresses)
+	|- DressId (PrimaryKey)
+	|- Name
+	|- Color
+	|- BasePrice
+	|- SellPrice
+	|- SupplierId
+	|- SupplierPrice
+	|- Discount
+	|- LotNumberDate
+	|- BarCodeId
+	|- DamageId
+	
+DamageDetails
+	|- DamageID
+	|- DamageDescription
+	|- Severity
+	|- Discount
+	
+SupplierDetails
+	|- SupplierID
+	|- SupplierFirstName
+	|- SupplierLastName
+	|- AddressFirstLine
+	|- AddressSecondLine
+	|- LandMark
+	|- City
+	|- State
+	|- Zip
+	|- ContactNumber
+	|- SupplierIndex
+	|- SupplierComment
+
+
+SellsTables:	
+
+BusinessSell
+	|- SellId (PrimaryKey)
+	|- ItemSrNo
+	|- InvoiceId
+	|- DressId
+	|- Quatity
+	|- SellPrice
+	|- TotalPrice
+
+BusinessInvoice
+	|- InvoiceID
+	|- CustomerID
+	|- SellID
+	|- TotalPrice
+	|- TotalDiscountPrice
+	|- SoldBy
+	|- DateTime
+
+
+CustomerTable:
+
+BusinessCustomer
+	|- CustomerID
+	|- CustomerFirstName
+	|- CustomerLastName
+	|- BirthDate
+	|- AddressFirstLine
+	|- AddressSecondLine
+	|- LandMark
+	|- City
+	|- Zip
+	|- ContactNumber
+	|- Occupation
+	|- CustomerIndex
+	|- CustomerBarcode
+
+CustomerHistory
+	|- SrNo
+	|- CustomerID
+	|- InvoiceID
+	|- ReturnOrComplaints
+
+
+

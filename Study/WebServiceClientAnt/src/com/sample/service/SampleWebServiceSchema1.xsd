@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://service.base.com/" version="1.0"
+    xmlns:tns="http://service.base.com/"
+    xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+    <xs:element name="Exception" type="tns:Exception"/>
+    <xs:element name="getZooAnimals" type="tns:getZooAnimals"/>
+    <xs:element name="getZooAnimalsResponse" type="tns:getZooAnimalsResponse"/>
+    <xs:complexType name="getZooAnimals">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ZooAnimalStore" type="tns:Zoo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Zoo">
+        <xs:sequence>
+            <xs:element name="clientName" type="xs:string"/>
+            <xs:element name="animalCount" type="xs:int"/>
+            <xs:element name="animalStore" type="tns:AnimalStore"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AnimalStore">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="animalType" nillable="true" type="tns:AnimalType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AnimalType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="animal" type="tns:Animal"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Animal">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="animalName" type="xs:string"/>
+            <xs:element minOccurs="0" name="age" type="xs:string"/>
+            <xs:element name="log" type="xs:string"/>
+            <xs:element name="picture" type="tns:Attachment"/>
+        </xs:sequence>
+        <xs:attribute name="status" type="xs:string" use="required"/>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Attachment">
+        <xs:sequence>
+            <xs:element name="doubledNumber" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="getZooAnimalsResponse">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ZooAnimalStore" type="tns:Zoo"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Exception">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

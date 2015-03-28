@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name>HibernateSampleWebService</display-name>
+	<listener>
+		<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.sample.hibernate.service.HibernateSampleListener</listener-class>
+	</listener>
+
+<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Commenting this as it is initilizing the Smapi twice and getting logs 
+		printed two times. Uncomment if RETS find this having issues while initiating 
+		module on tomcat server -->
+	<!-- context-param> <param-name>SYSMAN_CONFIG_FILE</param-name> <param-value>/SysmanConfig.xml</param-value> 
+		</context-param -->
+
+	<servlet>
+		<servlet-name>EmployeeService</servlet-name>
+		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeService</servlet-name>
+		<url-pattern>/employeeService</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<servlet-class>com.sample.hibernate.servlet.EmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<url-pattern>/EmployeeServlet.do</url-pattern>
+	</servlet-mapping>
+
+</web-app>
