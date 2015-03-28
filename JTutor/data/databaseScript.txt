@@ -1,6 +1,0 @@
-CREATE  TABLE `test`.`users` (
-  `userid` INT NOT NULL ,
-  `username` VARCHAR(45) NULL ,
-  `role` INT NULL DEFAULT 1 ,
-  PRIMARY KEY (`userid`) );
-
