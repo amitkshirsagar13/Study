@@ -34,9 +34,9 @@ public class OracleDBConnection {
 		try {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String dbUrl = "jdbc:oracle:thin:@ldap://cporaldap:389/CPCDBII,cn=OracleContext,dc=lexisnexis,dc=com";
-			String username = "kshirsac";
-			String password = "end8world";
+			String dbUrl = "jdbc:oracle:thin:@ldap://xxxxxx:389/xxxxx,cn=OracleContext,dc=xxxxxxxx,dc=xxx";
+			String username = "xxxxx";
+			String password = "xxxxx";
 			dbConnection = DriverManager.getConnection(dbUrl, username,
 					password);
 
@@ -55,7 +55,7 @@ public class OracleDBConnection {
 
 	public static void main(String[] args) {
 		String dbtime;
-		String dbUrl = "jdbc:oracle:thin:@ldap://cporaldap:389/CPCDBII,cn=OracleContext,dc=lexisnexis,dc=com";
+		String dbUrl = "jdbc:oracle:thin:@ldap://xxxxxxx:389/xxxxxx,cn=OracleContext,dc=ccccccc,dc=io";
 		String query = "Select * FROM users";
 
 		try {
