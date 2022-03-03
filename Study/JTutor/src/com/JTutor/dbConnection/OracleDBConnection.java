@@ -61,8 +61,8 @@ public class OracleDBConnection {
 		try {
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String username = "kshirsac";
-			String password = "end8world";
+			String username = "xxxxxxx";
+			String password = "xxxxxxxxx";
 			Connection con = DriverManager.getConnection(dbUrl, username,
 					password);
 			Statement stmt = con.createStatement();
